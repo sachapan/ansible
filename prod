@@ -1,0 +1,12 @@
+[ubuntu]
+ramoth.panasuik
+dmz.panasuik
+backups.panasuik
+falcon.panasuik
+
+[dmz]
+dmz.panasuik
+
+[mac]
+colosses.panasuik
+
