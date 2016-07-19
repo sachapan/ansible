@@ -1,0 +1,12 @@
+---
+- hosts: ubuntu
+
+tasks:
+
+- name: Copy sudoer_sacha file to sudoers.d directory
+    template: 
+      src: '../templates/sudoer_sacha' 
+      dest: '/etc/sudoers.d/sudoer_sacha'
+      owner: root
+      group: root
+      mode: 0644

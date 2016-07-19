@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars:
+     homebrew_installed_packages:
+        - cowsay 
+     homebrew_upgrade_all_packages: yes
+     homebrew_install_path: /usr/local
+     homebrew_brew_bin_path: /usr/local/bin
+  roles:
+     - { role: geerlingguy.homebrew }
+
