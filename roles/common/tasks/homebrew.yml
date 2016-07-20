@@ -4,6 +4,12 @@
   become_user: root
   become_method: sudo
   vars:
+     homebrew_taps:
+       - caskroom/cask
+     homebrew_cask_apps:
+       - vagrant
+       - vagrant-manager
+       - virtualbox
      homebrew_installed_packages:
        - pv
        - amazon-ecs-cli 

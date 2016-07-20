@@ -4,6 +4,11 @@ dmz.panasuik
 backups.panasuik
 falcon.panasuik
 
+[kvm_guests]
+ramoth.panasuik
+dmz.panasuik
+backups.panasuik
+
 [dmz]
 dmz.panasuik
 
