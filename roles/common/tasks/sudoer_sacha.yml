@@ -1,12 +1,15 @@
 ---
 - hosts: ubuntu
+  become: yes
 
-tasks:
+  vars_files:
+    - "../vars/sudoer.yml"
 
-- name: Copy sudoer_sacha file to sudoers.d directory
+  tasks:
+  - name: Copy sudoer file to sudoers.d directory
     template: 
-      src: '../templates/sudoer_sacha' 
-      dest: '/etc/sudoers.d/sudoer_sacha'
+      src: "{{ sudoer_file }}" 
+      dest: '/etc/sudoers.d/'
       owner: root
       group: root
-      mode: 0644
+      mode: 0440

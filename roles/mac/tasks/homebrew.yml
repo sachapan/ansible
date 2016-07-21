@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_files:
+    - ../vars/homebrew.yml
+
+  roles:
+     - { role: geerlingguy.homebrew }
+

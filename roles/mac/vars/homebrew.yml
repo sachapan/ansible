@@ -1,0 +1,23 @@
+---
+# Variables for the homebrew.yml playbook
+homebrew_taps:
+  - caskroom/cask
+homebrew_cask_apps:
+  - vagrant
+  - vagrant-manager
+  - virtualbox
+homebrew_installed_packages:
+  - pv
+  - amazon-ecs-cli 
+  - curl
+  - slackcat
+  - nmap
+  - osxutils
+  - unrar
+  - cowsay
+  - wireshark
+  - youtube-dl
+
+homebrew_upgrade_all_packages: yes
+homebrew_install_path: /usr/local
+homebrew_brew_bin_path: /usr/local/bin
