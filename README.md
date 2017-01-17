@@ -1,3 +1,3 @@
 # ansible
-# Configurations for automating configuration management
+# Concoctions for automating configuration management
 

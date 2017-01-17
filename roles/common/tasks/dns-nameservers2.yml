@@ -1,0 +1,19 @@
+---
+- hosts: ubuntu
+  become: yes
+  tasks:
+  - name: Copy tail file to /etc/resolvconf/resolv.conf.d/ directory
+    template: 
+      src: '../files/tail' 
+      dest: '/etc/resolvconf/resolv.conf.d/'
+      owner: root
+      group: root
+      mode: 0664
+    register: resolvconf
+
+  - name: Apply resolvconf configuration only if changed
+    command: resolvconf -u
+    when: resolvconf.changed
+
+
+

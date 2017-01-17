@@ -9,6 +9,9 @@ ramoth.panasuik
 dmz.panasuik
 backups.panasuik
 
+[kvm_hosts]
+falcon.panasuik
+
 [dmz]
 dmz.panasuik
 
