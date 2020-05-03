@@ -1,20 +1,24 @@
 [ubuntu]
-ramoth.panasuik
-dmz.panasuik
-backups.panasuik
-falcon.panasuik
+ramoth
+falcon
 
 [kvm_guests]
-ramoth.panasuik
-dmz.panasuik
-backups.panasuik
+ramoth
 
 [kvm_hosts]
-falcon.panasuik
+falcon
 
 [dmz]
-dmz.panasuik
 
 [mac]
-colosses.panasuik
+slave1
 
+[rasp_hosts]
+ipbx
+radiant
+
+[libreelec]
+theater 
+
+[libreelec:vars]
+ansible_ssh_user=root
