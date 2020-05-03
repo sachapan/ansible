@@ -1,8 +1,0 @@
-- hosts: ramoth
-- name: Add sudo rights for my account
-lineinfile:
-    dest: /etc/sudoers
-    regexp: '^%sacha'
-    line: 'sacha ALL=(ALL) NOPASSWD: ALL'
-    state: present
-
