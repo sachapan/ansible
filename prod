@@ -14,7 +14,7 @@ falcon
 slave1
 
 [rasp_hosts]
-ipbx
+hawk
 radiant
 
 [libreelec]

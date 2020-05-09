@@ -1,3 +1,4 @@
+---
 - hosts: ramoth
 - name: Add sudo rights for my account
   lineinfile:
@@ -5,4 +6,3 @@
     regexp: '^%sacha'
     line: 'sacha ALL=(ALL) NOPASSWD: ALL'
     state: present
-

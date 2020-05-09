@@ -1,0 +1,21 @@
+---
+# variables for initial system build
+# User creation
+user:
+    name: sacha
+    ID: 501
+    shell: /bin/zsh
+# copy ssh key from user account running the ansbile script
+copy_local_key: "{{ lookup('file', lookup('env','HOME')+'/.ssh/id_rsa.pub') }}"
+# These are the packages to install
+sys_packages:
+    - curl
+    - vim
+    - git
+    - zsh
+    - htop
+    - tmux
+    - file
+    - speedtest-cli
+    - ansible-lint
+    - python-pip

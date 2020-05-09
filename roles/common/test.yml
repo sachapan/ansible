@@ -6,4 +6,3 @@
       register: dateoutput
     - name: output from date
       debug: msg="System date command for host {{ inventory_hostname }} output is {{ dateoutput.stdout }}"
-

@@ -1,0 +1,47 @@
+---
+# Initial system setup on debian based systems
+# sachapan@gmail.com
+- hosts: all
+  become: true
+  vars_files:
+    - vars/initial_vars.yml
+  tasks:
+    - name: Install Prerequisites
+      apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
+    # Install Packages
+    - name: Update apt
+      apt: update_cache=yes
+    - name: Install required system packages
+      apt: name={{ sys_packages }} state=latest
+    # User + Key Setup
+    - name: Create a new user
+      user:
+        name: "{{ user.name }}"
+        uid: "{{ user.ID }}"
+        state: present
+        group: users
+        append: true
+        create_home: true
+        shell: "{{ user.shell }}"
+    - name: Set authorized key for remote user
+      authorized_key:
+        user: "{{ user.name }}"
+        state: present
+        key: "{{ copy_local_key }}"
+    # Sudo setup
+    - name: Grant user sudo privilege
+      lineinfile:
+        path: "/etc/sudoers.d/{{ user.name }}"
+        line: '{{ user.name }} ALL=(ALL) NOPASSWD: ALL'
+        state: present
+        create: "yes"
+        owner: root
+        group: root
+        mode: 0440
+    # sshd configuration
+    - name: Disable password authentication for root
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        state: present
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin prohibit-password'

@@ -3,12 +3,9 @@
   become: yes
   become_user: root
   become_method: sudo
-#  sudo: True
+  #  sudo: True
   tasks:
-   - name: install apt requirements
-     apt: pkg=aptitude
    - name: updates a server
      apt: update_cache=yes
    - name: upgrade a server
-     apt: upgrade=full
-
+     apt: upgrade=dist
