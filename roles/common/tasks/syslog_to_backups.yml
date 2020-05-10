@@ -2,7 +2,7 @@
 - hosts: ubuntu:!backups:raspbian
   become: yes
   vars_files:
-  - vars/rsyslog.yml
+  - ../vars/rsyslog.yml
   tasks:
   - name: Ensure rsyslog is installed
     apt:
