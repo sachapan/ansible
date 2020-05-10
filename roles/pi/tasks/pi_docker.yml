@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    docker_install_compose: false
+    docker_users:
+      - sacha
+  roles:
+    - geerlingguy.docker_arm
