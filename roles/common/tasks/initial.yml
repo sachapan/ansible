@@ -3,8 +3,25 @@
 # sachapan@gmail.com
 - hosts: all
   become: true
-  vars_files:
-    - vars/initial_vars.yml
+  vars:
+    user:
+      name: sacha
+      ID: 501
+      shell: /bin/zsh
+    copy_local_key: "{{ lookup('file', lookup('env','HOME')+'/.ssh/id_rsa.pub') }}"
+    sys_packages:
+      - curl
+      - vim
+      - git
+      - zsh
+      - htop
+      - tmux
+      - file
+      - speedtest-cli
+      - ansible
+      - ansible-lint
+      - python3-docker
+      - python-pip
   tasks:
     - name: Install Prerequisites
       apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
