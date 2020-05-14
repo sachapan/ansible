@@ -3,10 +3,56 @@
   vars:
     dotfiles: '/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
   tasks:
-  - name: Download oh_my_zsh install script
-    get_url:
-      url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-      dest: $HOME/ohmyzsh_install.sh
-      mode: 0775
-  - name: And now run the install script
-    command: '$HOME/ohmyzsh_install.sh --unattended'
+   # - name: Remove oh-my-zsh directory
+   #   file:
+   #     path: ~/.oh-my-zsh
+   #     state: absent
+    - name: Clone oh-my-zsh
+      git:
+        # repo: 'https://github.com/robbyrussell/oh-my-zsh'
+        repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
+        dest: $HOME/.oh-my-zsh
+        update: yes
+        force: yes
+    # - name: Download oh_my_zsh install script
+    # get_url:
+    #  url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    #  dest: $HOME/ohmyzsh_install.sh
+    #  mode: 0775
+    # - name: And now run the install script
+    #  command: '$HOME/ohmyzsh_install.sh --unattended'
+    - name: Add some oh-my-zsh customizations
+      git:
+        repo: 'https://github.com/zsh-users/zsh-autosuggestions'
+        dest: $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    # - name: Clone my dotfiles from git - First purge clone
+    #  file:
+    #    path: $HOME/.dotfiles.git
+    #    state: absent
+    #    recurse: yes
+    # - name: And now clone dotfiles into a bare repo
+    #  command: "{{ dotfiles }} clone --bare https://github.com/sachapan/dotfiles.git $HOME/.dotfiles.git"
+    - name: Clone dotfiles into a bare repo
+      git:
+        repo: https://github.com/sachapan/dotfiles.git
+        dest: "$HOME/.dotfiles.git"
+        bare: yes
+        clone: yes
+        update: yes
+        force: yes
+    # - name: Remove default dotfiles
+    #  file:
+    #    path: "{{ item }}"
+    #    state: absent
+    #  with_items:
+    #    - .zshrc
+    #    - .vimrc
+    #    - .profile
+    #    - .bashrc
+    #    - .tmux.conf
+    #    - .aliases
+    #    - .vim
+    - name: Don't show untracked files in this repo
+      command: "{{ dotfiles }} config --local status.showUntrackedFiles no"
+    - name: Drop in my preferred dotfiles from git
+      command: "{{ dotfiles }} checkout"

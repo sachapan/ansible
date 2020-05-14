@@ -18,11 +18,18 @@
       - tmux
       - file
       - speedtest-cli
-      - ansible
-      - ansible-lint
+      # - ansible
+      # - ansible-lint
+      - docker-ce
       - python3-docker
-      - python-pip
+      - python3-pip
+      - fonts-powerline
   tasks:
+    - name: Timezone set to Toronto
+      file:
+        src: "/usr/share/zoneinfo/America/Toronto"
+        dest: "/etc/localtime"
+        state: link
     - name: Install Prerequisites
       apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
     # Install Packages
@@ -37,6 +44,7 @@
         uid: "{{ user.ID }}"
         state: present
         group: users
+        groups: docker
         append: true
         create_home: true
         shell: "{{ user.shell }}"
@@ -55,6 +63,19 @@
         owner: root
         group: root
         mode: 0440
+    # My dotfiles configuration
+    # - name: Create initial dotfiles and pull from git
+    # git clone some zsh custom plugins I like
+    # - name: git clone .oh-my_zsh customizations
+    #  git:
+    #    repo: 'https://github.com/zsh-users/zsh-autosuggestions'
+    #    dest: /home/sacha/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    # - name: Now change file ownership
+    #  file:
+    #    path: "/home/sacha/.oh-my-zsh"
+    #    owner: "sacha"
+    #    group: "users"
+    #    recurse: yes
     # sshd configuration
     - name: Disable password authentication for root
       lineinfile:
