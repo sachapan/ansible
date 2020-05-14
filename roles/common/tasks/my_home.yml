@@ -1,0 +1,12 @@
+---
+- hosts: all
+  vars:
+    dotfiles: '/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
+  tasks:
+  - name: Download oh_my_zsh install script
+    get_url:
+      url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+      dest: $HOME/ohmyzsh_install.sh
+      mode: 0775
+  - name: And now run the install script
+    command: '$HOME/ohmyzsh_install.sh --unattended'
