@@ -13,12 +13,24 @@ falcon
 [mac]
 slave1
 
-[rasp_hosts]
+[rasps]
 hawk
 radiant
+
+[debian:children]
+ubuntu
+rasps
 
 [libreelec]
 theater 
 
 [libreelec:vars]
 ansible_ssh_user=root
+
+[win]
+slave2
+
+[win:vars]
+ansible_user=sacha
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
