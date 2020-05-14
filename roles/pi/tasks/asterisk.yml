@@ -1,0 +1,13 @@
+---
+- name: "Asterisk and FreePBX playbook"
+  hosts: hawk
+  become: yes
+  tasks:
+    - docker_container:
+        restart: yes
+        restart_policy: always
+        name: asterisk
+        image: crazyquark/freepbx:15
+        pull: yes
+        ports:
+          - '80:80'

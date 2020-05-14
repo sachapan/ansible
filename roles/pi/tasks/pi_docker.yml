@@ -1,9 +1,14 @@
 ---
-- hosts: all
+- hosts: hawk
   become: yes
   vars:
-    docker_install_compose: false
+    pip_package: python-pip
+    pip_install_packages:
+      - name: docker
+    docker_install_compose: true
     docker_users:
       - sacha
+  # name: "Install docker"
   roles:
+    - geerlingguy.pip
     - geerlingguy.docker_arm
