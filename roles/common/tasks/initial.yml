@@ -20,10 +20,12 @@
       - speedtest-cli
       # - ansible
       # - ansible-lint
-      - docker-ce
-      - python3-docker
+      # - docker-ce
+      #- docker-compose
+      #- python3-docker
       - python3-pip
       - fonts-powerline
+      - neofetch
   tasks:
     - name: Timezone set to Toronto
       file:
@@ -44,7 +46,7 @@
         uid: "{{ user.ID }}"
         state: present
         group: users
-        groups: docker
+        #groups: docker
         append: true
         create_home: true
         shell: "{{ user.shell }}"
