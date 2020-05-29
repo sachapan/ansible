@@ -25,13 +25,13 @@
       git:
         repo: 'https://github.com/zsh-users/zsh-autosuggestions'
         dest: $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-    # - name: Clone my dotfiles from git - First purge clone
-    #  file:
-    #    path: $HOME/.dotfiles.git
-    #    state: absent
-    #    recurse: yes
-    # - name: And now clone dotfiles into a bare repo
-    #  command: "{{ dotfiles }} clone --bare https://github.com/sachapan/dotfiles.git $HOME/.dotfiles.git"
+    - name: Clone my dotfiles from git - First purge clone
+      file:
+        path: $HOME/.dotfiles.git
+        state: absent
+        # recurse: yes
+    - name: And now clone dotfiles into a bare repo
+      command: "{{ dotfiles }} clone --bare https://github.com/sachapan/dotfiles.git $HOME/.dotfiles.git"
     - name: Clone dotfiles into a bare repo
       git:
         repo: https://github.com/sachapan/dotfiles.git
@@ -40,18 +40,19 @@
         clone: yes
         update: yes
         force: yes
-    # - name: Remove default dotfiles
-    #  file:
-    #    path: "{{ item }}"
-    #    state: absent
-    #  with_items:
-    #    - .zshrc
-    #    - .vimrc
-    #    - .profile
-    #    - .bashrc
-    #    - .tmux.conf
-    #    - .aliases
-    #    - .vim
+    - name: Remove default dotfiles
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - .zshrc
+        - .vimrc
+        - .profile
+        - .bashrc
+        - .tmux.conf
+        - .aliases
+        - .vim
+        - .gitconfig
     - name: Don't show untracked files in this repo
       command: "{{ dotfiles }} config --local status.showUntrackedFiles no"
     - name: Drop in my preferred dotfiles from git
