@@ -34,5 +34,5 @@
         passno: "0"
         state: mounted
         src: "deathstar:/TV Shows"
-        path: "/mnt/TV"
+        path: "/mnt/TV\ Shows"
  
