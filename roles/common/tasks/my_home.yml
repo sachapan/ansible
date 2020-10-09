@@ -30,8 +30,8 @@
         path: $HOME/.dotfiles.git
         state: absent
         # recurse: yes
-    - name: And now clone dotfiles into a bare repo
-      command: "{{ dotfiles }} clone --bare https://github.com/sachapan/dotfiles.git $HOME/.dotfiles.git"
+    # - name: And now clone dotfiles into a bare repo
+    #  command: "{{ dotfiles }} clone --bare https://github.com/sachapan/dotfiles.git $HOME/.dotfiles.git"
     - name: Clone dotfiles into a bare repo
       git:
         repo: https://github.com/sachapan/dotfiles.git
