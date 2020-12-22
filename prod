@@ -1,6 +1,7 @@
 [ubuntu]
 ramoth
 falcon
+pop-os
 
 [kvm_guests]
 ramoth
@@ -16,6 +17,7 @@ slave1
 [rasps]
 hawk
 radiant
+razor
 
 [debian:children]
 ubuntu

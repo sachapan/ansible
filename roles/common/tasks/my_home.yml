@@ -21,10 +21,14 @@
     #  mode: 0775
     # - name: And now run the install script
     #  command: '$HOME/ohmyzsh_install.sh --unattended'
-    - name: Add some oh-my-zsh customizations
+    - name: Add zsh-autosuggestions to oh-my-zsh customizations
       git:
         repo: 'https://github.com/zsh-users/zsh-autosuggestions'
         dest: $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    - name: Add zsh-syntax-highlighting to oh-my-zsh customizations
+      git:
+        repo: 'https://github.com/zsh-users/zsh-syntax-highlighting'
+        dest: $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     - name: Clone my dotfiles from git - First purge clone
       file:
         path: $HOME/.dotfiles.git
