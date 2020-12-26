@@ -6,4 +6,4 @@
       lineinfile:
         path: "/etc/network/interfaces"
         state: present
-        line: '        dns-nameservers 10.0.0.5 10.0.0.4 8.8.8.8'
+        line: '        dns-nameservers 10.0.0.5 10.0.0.125 8.8.8.8'
