@@ -1,7 +1,8 @@
 ---
-- hosts: all
+- hosts: debian
   vars:
     dotfiles: '/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
+  remote_user: sacha
   tasks:
    # - name: Remove oh-my-zsh directory
    #   file:
