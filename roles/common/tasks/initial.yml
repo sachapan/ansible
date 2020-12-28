@@ -3,29 +3,8 @@
 # sachapan@gmail.com
 - hosts: all
   become: true
-  vars:
-    user:
-      name: sacha
-      ID: 501
-      shell: /bin/zsh
-    copy_local_key: "{{ lookup('file', lookup('env','HOME')+'/.ssh/id_rsa.pub') }}"
-    sys_packages:
-      - curl
-      - vim
-      - git
-      - zsh
-      - htop
-      - tmux
-      - file
-      - speedtest-cli
-      # - ansible
-      # - ansible-lint
-      # - docker-ce
-      #- docker-compose
-      #- python3-docker
-      - python3-pip
-      - fonts-powerline
-      - neofetch
+  vars_files: 
+    - ../vars/initial.yml
   tasks:
     - name: Timezone set to Toronto
       file:
@@ -46,7 +25,7 @@
         uid: "{{ user.ID }}"
         state: present
         group: users
-        #groups: docker
+        # groups: docker
         append: true
         create_home: true
         shell: "{{ user.shell }}"
