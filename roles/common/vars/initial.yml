@@ -16,3 +16,15 @@ sys_packages:
   - python3-pip
   - fonts-powerline
   - neofetch
+#  - telegram-cli
+#  Needed to compile telegram-cli
+  - libreadline-dev
+  - libconfig-dev
+  - libssl-dev
+  - lua5.2
+  - liblua5.2-dev
+  - libevent-dev
+  - libjansson-dev
+  - libpython-dev
+  - libssl1.0-dev
+  - make
