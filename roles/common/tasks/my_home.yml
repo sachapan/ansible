@@ -10,7 +10,6 @@
    #     state: absent
     - name: Clone oh-my-zsh
       git:
-        # repo: 'https://github.com/robbyrussell/oh-my-zsh'
         repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
         dest: $HOME/.oh-my-zsh
         update: yes
@@ -40,7 +39,8 @@
     - name: Clone dotfiles into a bare repo
       git:
         repo: https://github.com/sachapan/dotfiles.git
-        dest: "$HOME/.dotfiles.git"
+        dest: '$HOME/.dotfiles.git'
+        version: main
         bare: yes
         clone: yes
         update: yes
@@ -50,6 +50,7 @@
         path: "{{ item }}"
         state: absent
       with_items:
+        - .forward
         - .zshrc
         - .vimrc
         - .profile
@@ -62,3 +63,9 @@
       command: "{{ dotfiles }} config --local status.showUntrackedFiles no"
     - name: Drop in my preferred dotfiles from git
       command: "{{ dotfiles }} checkout"
+    #- name: clone vim-flake8
+    #  git:
+    #    repo: https://github.com/nvie/vim-flake8.git
+    #    dest: "$HOME/.vim/bundle"
+    #    clone: yes
+    #    update: yes
