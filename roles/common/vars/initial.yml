@@ -16,6 +16,7 @@ sys_packages:
   - python3-pip
   - fonts-powerline
   - neofetch
+  - etckeeper
 #  - telegram-cli
 #  Needed to compile telegram-cli
   - libreadline-dev

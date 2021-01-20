@@ -2,3 +2,4 @@
 - import_playbook: tasks/initial.yml  
 - import_playbook: tasks/timezone.yml
   when: ansible_os_family == "Debian"
+- import_playbook: tasks/pip.yml
