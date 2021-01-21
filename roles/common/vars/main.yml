@@ -17,6 +17,7 @@ sys_packages:
   - fonts-powerline
   - neofetch
   - etckeeper
+  - yamllint
 #  - telegram-cli
 #  Needed to compile telegram-cli
 #  - libreadline-dev
