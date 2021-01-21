@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  vars_files:
+    - ../vars/dnf-initial-packages-vars.yml
+  tasks:
+    - name: update package lists
+      dnf: update_
+      dnf: name={{ sys_packages }} 
+           state=latest
+           update_cache=yes

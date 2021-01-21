@@ -1,0 +1,15 @@
+---
+sys_packages: 
+  - curl
+  - vim
+  - git
+  - zsh
+  - htop
+  - tmux
+  - file
+  - speedtest-cli
+  - python3-pip
+  - fonts-powerline
+  - neofetch
+  - etckeeper
+  - yamllint
