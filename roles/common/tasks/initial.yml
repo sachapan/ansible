@@ -4,21 +4,16 @@
 - hosts: all
   become: true
   vars_files: 
-    - ../vars/initial.yml
+    - ../vars/main.yml
   tasks:
-    - name: Timezone set to Toronto
-      file:
-        src: "/usr/share/zoneinfo/America/Toronto"
-        dest: "/etc/localtime"
-        state: link
-    - name: Install Prerequisites
-      apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
-    # Install Packages
+    #- name: Install Prerequisites
+    #  apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
     - name: Update apt
-      apt: update_cache=yes
+      apt: update_cache=yes state=latest
+      when: ansible_os_family == "Debian"
     - name: Install required system packages
       apt: name={{ sys_packages }} state=latest
-    # User + Key Setup
+      when: ansible_os_family == "Debian"
     - name: Create a new user
       user:
         name: "{{ user.name }}"
@@ -34,7 +29,6 @@
         user: "{{ user.name }}"
         state: present
         key: "{{ copy_local_key }}"
-    # Sudo setup
     - name: Grant user sudo privilege
       lineinfile:
         path: "/etc/sudoers.d/{{ user.name }}"
@@ -44,20 +38,6 @@
         owner: root
         group: root
         mode: 0440
-    # My dotfiles configuration
-    # - name: Create initial dotfiles and pull from git
-    # git clone some zsh custom plugins I like
-    # - name: git clone .oh-my_zsh customizations
-    #  git:
-    #    repo: 'https://github.com/zsh-users/zsh-autosuggestions'
-    #    dest: /home/sacha/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-    # - name: Now change file ownership
-    #  file:
-    #    path: "/home/sacha/.oh-my-zsh"
-    #    owner: "sacha"
-    #    group: "users"
-    #    recurse: yes
-    # sshd configuration
     - name: Disable password authentication for root
       lineinfile:
         path: /etc/ssh/sshd_config
