@@ -4,8 +4,7 @@
   vars_files:
     - ../vars/dnf-initial-packages-vars.yml
   tasks:
-    - name: update package lists
-      dnf: update_
+    - name: Install my preferred packages
       dnf: name={{ sys_packages }} 
            state=latest
            update_cache=yes

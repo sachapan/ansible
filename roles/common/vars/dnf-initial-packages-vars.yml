@@ -9,7 +9,7 @@ sys_packages:
   - file
   - speedtest-cli
   - python3-pip
-  - fonts-powerline
+  - powerline-fonts
   - neofetch
   - etckeeper
   - yamllint
