@@ -1,11 +1,9 @@
 ---
 - hosts: all
-#- import_playbook: tasks/initial.yml  
-- import_playbook: tasks/apt_initial_packages.yml
+  gather_facts: True
+- import_playbook: tasks/apt-initial-packages.yml
   when: ansible_os_family == "Debian"
-- import_playbook: tasks/dnf_initial_packages.yml
-  when ansible_os_family == "RedHat"
-# Add my_home next
+- import_playbook: tasks/dnf-initial-packages.yml
+  when: ansible_os_family == "Redhat"
 - import_playbook: tasks/timezone.yml
-  # when: ansible_os_family == "Debian"
 - import_playbook: tasks/pip.yml
