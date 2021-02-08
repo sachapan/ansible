@@ -1,8 +1,12 @@
-[ansible-hosts]
+[ansible_hosts]
 razor
 
 [ubuntu]
-pop-os
+xubuntu
+
+[ubuntu:vars]
+ansible_ssh_user=pi
+ansible_python_interpreter=/usr/bin/python3
 
 [kvm_guests]
 
@@ -20,6 +24,9 @@ razor
 [debian:children]
 ubuntu
 rasps
+
+[debian:vars]
+ansible_python_interpreter=/usr/bin/python3
 
 [redhat]
 dentv
