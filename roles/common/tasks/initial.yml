@@ -10,6 +10,7 @@
     #  apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
     - name: Update apt
       apt: update_cache=yes state=latest
+      changed_when: False
       when: ansible_os_family == "Debian"
     - name: Install required system packages
       apt: name={{ sys_packages }} state=latest
@@ -19,8 +20,7 @@
         name: "{{ user.name }}"
         uid: "{{ user.ID }}"
         state: present
-        group: users
-        # groups: docker
+        groups: "{{ user.groups }}"
         append: true
         create_home: true
         shell: "{{ user.shell }}"
