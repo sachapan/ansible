@@ -3,6 +3,7 @@ user:
   name: sacha
   ID: 501
   shell: /bin/zsh
+  groups: users
 copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
 sys_packages: 
   - curl
