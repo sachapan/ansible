@@ -60,6 +60,7 @@
         - .aliases
         - .vim
         - .gitconfig
+        - .gvimrc
     - name: Don't show untracked files in this repo
       command: "{{ dotfiles }} config --local status.showUntrackedFiles no"
     - name: Drop in my preferred dotfiles from git
