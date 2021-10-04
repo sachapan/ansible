@@ -5,6 +5,15 @@
     dotfiles: '/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
   remote_user: sacha
   tasks:
+    - name: Ensure HOME/.config exists
+      file:
+        path: $HOME/.config
+        state: directory
+    - name: Copy $HOME files not under version control
+      ansible.builtin.copy:
+        src: ../files/telegram-send.conf
+        dest: $HOME/.config/telegram-send.conf
+        # owner: "{{ remote_user }}"
    # - name: Remove oh-my-zsh directory
    #   file:
    #     path: ~/.oh-my-zsh
@@ -61,6 +70,8 @@
         - .vim
         - .gitconfig
         - .gvimrc
+        - .xscreensaver
+        - .minttyrc
     - name: Don't show untracked files in this repo
       command: "{{ dotfiles }} config --local status.showUntrackedFiles no"
     - name: Drop in my preferred dotfiles from git
