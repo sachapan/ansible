@@ -35,4 +35,12 @@
         state: mounted
         src: "deathstar:/TV Shows"
         path: "/mnt/TV\ Shows"
- 
+    - name: Mount Archive TV 
+      mount:
+        fstype: nfs
+        opts: defaults,rw,async
+        dump: "0"
+        passno: "0"
+        state: mounted
+        src: "deathstar:/Archive TV"
+        path: "/mnt/Archive\ TV"
