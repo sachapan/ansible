@@ -5,7 +5,8 @@ razor
 xubuntu
 
 [ubuntu:vars]
-ansible_ssh_user=pi
+#ansible_ssh_user=pi
+#ansible_ssh_user=root
 ansible_python_interpreter=/usr/bin/python3
 
 [kvm_guests]
@@ -21,12 +22,16 @@ slave1
 hawk
 razor
 
+[debian]
+debian1
+
 [debian:children]
 ubuntu
 rasps
 
 [debian:vars]
 ansible_python_interpreter=/usr/bin/python3
+#ansible_ssh_user=sachap
 
 [redhat]
 dentv
