@@ -1,10 +1,16 @@
 ---
+#remote_user: sacha
 user:
   name: sacha
   ID: 501
   shell: /bin/zsh
   groups: users
+config_files:
+  - { src: "../files/telegram-send.conf", dest: "$HOME/.config/telegram-send.conf", mode: "0600" }
+  - { src: "../files/ssh_config", dest: "$HOME/.ssh/config", mode: "0600" }
+#copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa_github.pub') }}"
 copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+#copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa_github') }}"
 sys_packages: 
   - curl
   - vim
@@ -19,6 +25,7 @@ sys_packages:
   - neofetch
   - etckeeper
   - yamllint
+  - smartmontools
 #  - telegram-cli
 #  Needed to compile telegram-cli
 #  - libreadline-dev
@@ -32,3 +39,4 @@ sys_packages:
 #  - libssl1.0-dev
 #  - make
 time_zone:  America/Toronto
+dotfiles: '/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
