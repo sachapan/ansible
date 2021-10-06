@@ -1,18 +1,39 @@
 ---
 - hosts: debian
-
-  vars:
-    dotfiles: '/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
-  remote_user: sacha
+  vars_files:
+        - ../vars/main.yml
+#  vars: 
+#    dotfiles: '/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
+#  Should be provided in vars file now.
+#  remote_user: sacha
   tasks:
     - name: Ensure HOME/.config exists
       file:
         path: $HOME/.config
         state: directory
     - name: Copy $HOME files not under version control
-      ansible.builtin.copy:
-        src: ../files/telegram-send.conf
-        dest: $HOME/.config/telegram-send.conf
+      copy:
+        #src: ../files/telegram-send.conf
+        #dest: $HOME/.config/telegram-send.conf
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode }}"
+      loop: "{{ config_files }}"
+      #with_items:
+      #  - { src: '../files/telegram-send.conf', dest: '$HOME/.config/telegram-send.conf', mode: '0600'}
+      #  - { src: '../files/ssh_config', dest: '$HOME/.ssh/config', mode: '0600'}
+        # Adding config and key files from ~/.ssh/
+        #- { src: '../files/telegram-send.conf', dest: '$HOME/.config/telegram-send.conf', mode: '0600'}
+        #- { src: '../files/telegram-send.conf', dest: '$HOME/.config/telegram-send.conf', mode: '0600'}
+        #- { src: '../files/telegram-send.conf', dest: '$HOME/.config/telegram-send.conf', mode: '0600'}
+    #- name: Copy ssh config
+    #  copy:
+    #    src: /home/sacha/.ssh/config
+    #    dest: $HOME/.ssh/config
+    - name: Copy github key
+      copy:
+        src: /home/sacha/.ssh/id_rsa_github
+        dest: $HOME/.ssh/id_rsa_github
         # owner: "{{ remote_user }}"
    # - name: Remove oh-my-zsh directory
    #   file:
