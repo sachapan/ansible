@@ -18,10 +18,11 @@
     #  copy:
     #    src: /home/sacha/.ssh/config
     #    dest: $HOME/.ssh/config
-    - name: Copy github key
-      copy:
-        src: /home/sacha/.ssh/id_rsa_github
-        dest: $HOME/.ssh/id_rsa_github
+    #- name: Copy github key
+    #  copy:
+    #    src: /home/sacha/.ssh/id_rsa_github
+    #    dest: $HOME/.ssh/id_rsa_github
+    #    mode: "0600"
         # owner: "{{ remote_user }}"
    # - name: Remove oh-my-zsh directory
    #   file:
@@ -33,13 +34,6 @@
         dest: $HOME/.oh-my-zsh
         update: yes
         force: yes
-    # - name: Download oh_my_zsh install script
-    # get_url:
-    #  url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    #  dest: $HOME/ohmyzsh_install.sh
-    #  mode: 0775
-    # - name: And now run the install script
-    #  command: '$HOME/ohmyzsh_install.sh --unattended'
     - name: Add zsh-autosuggestions to oh-my-zsh customizations
       git:
         repo: 'https://github.com/zsh-users/zsh-autosuggestions'
