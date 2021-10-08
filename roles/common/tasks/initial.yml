@@ -6,8 +6,6 @@
   vars_files: 
     - ../vars/main.yml
   tasks:
-    #- name: Install Prerequisites
-    #  apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
     - name: Update apt
       apt: update_cache=yes state=latest
       changed_when: False
@@ -15,7 +13,7 @@
     - name: Install required system packages
       apt: name={{ sys_packages }} state=latest
       when: ansible_os_family == "Debian"
-    - name: Create a new user
+    - name: Create my user account
       user:
         name: "{{ user.name }}"
         uid: "{{ user.ID }}"
@@ -24,12 +22,12 @@
         append: true
         create_home: true
         shell: "{{ user.shell }}"
-    - name: Set authorized key for remote user
+    - name: Set authorized key for my user 
       authorized_key:
         user: "{{ user.name }}"
         state: present
         key: "{{ copy_local_key }}"
-    - name: Grant user sudo privilege
+    - name: Grant my user sudo privilege
       lineinfile:
         path: "/etc/sudoers.d/{{ user.name }}"
         line: '{{ user.name }} ALL=(ALL) NOPASSWD: ALL'
@@ -38,7 +36,7 @@
         owner: root
         group: root
         mode: 0440
-    - name: Disable password authentication for root
+    - name: Disable ssh password authentication for root
       lineinfile:
         path: /etc/ssh/sshd_config
         state: present
