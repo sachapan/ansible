@@ -5,7 +5,7 @@
 #  vars: 
 #    dotfiles: '/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 #  Should be provided in vars file now.
-#  remote_user: sacha
+  remote_user: sacha
   tasks:
     - name: Ensure HOME/.config exists
       file:
@@ -80,26 +80,22 @@
       file:
         path: "{{ item }}"
         state: absent
-      with_items:
-        - .forward
-        - .zshrc
-        - .vimrc
-        - .profile
-        - .bashrc
-        - .tmux.conf
-        - .aliases
-        - .vim
-        - .gitconfig
-        - .gvimrc
-        - .xscreensaver
-        - .minttyrc
+ #      loop: "{{ config_files }}"
+      loop: "{{ remove_files }}"
+#      with_items:
+#        - .forward
+#        - .zshrc
+#        - .vimrc
+#        - .profile
+#        - .bashrc
+#        - .tmux.conf
+#        - .aliases
+#        - .vim
+#        - .gitconfig
+#        - .gvimrc
+#        - .xscreensaver
+#        - .minttyrc
     - name: Don't show untracked files in this repo
       command: "{{ dotfiles }} config --local status.showUntrackedFiles no"
     - name: Drop in my preferred dotfiles from git
       command: "{{ dotfiles }} checkout"
-    #- name: clone vim-flake8
-    #  git:
-    #    repo: https://github.com/nvie/vim-flake8.git
-    #    dest: "$HOME/.vim/bundle"
-    #    clone: yes
-    #    update: yes
