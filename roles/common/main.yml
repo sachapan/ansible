@@ -10,4 +10,3 @@
 - import_playbook: tasks/pip.yml
 - import_playbook: tasks/initial.yml
 - import_playbook: tasks/my_home.yml
-- import_playbook: tasks/my_ssh.yml

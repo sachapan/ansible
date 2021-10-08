@@ -2,9 +2,6 @@
 - hosts: debian
   vars_files:
         - ../vars/main.yml
-#  vars: 
-#    dotfiles: '/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
-#  Should be provided in vars file now.
   remote_user: sacha
   tasks:
     - name: Ensure HOME/.config exists
@@ -13,19 +10,10 @@
         state: directory
     - name: Copy $HOME files not under version control
       copy:
-        #src: ../files/telegram-send.conf
-        #dest: $HOME/.config/telegram-send.conf
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         mode: "{{ item.mode }}"
       loop: "{{ config_files }}"
-      #with_items:
-      #  - { src: '../files/telegram-send.conf', dest: '$HOME/.config/telegram-send.conf', mode: '0600'}
-      #  - { src: '../files/ssh_config', dest: '$HOME/.ssh/config', mode: '0600'}
-        # Adding config and key files from ~/.ssh/
-        #- { src: '../files/telegram-send.conf', dest: '$HOME/.config/telegram-send.conf', mode: '0600'}
-        #- { src: '../files/telegram-send.conf', dest: '$HOME/.config/telegram-send.conf', mode: '0600'}
-        #- { src: '../files/telegram-send.conf', dest: '$HOME/.config/telegram-send.conf', mode: '0600'}
     #- name: Copy ssh config
     #  copy:
     #    src: /home/sacha/.ssh/config
@@ -80,21 +68,7 @@
       file:
         path: "{{ item }}"
         state: absent
- #      loop: "{{ config_files }}"
       loop: "{{ remove_files }}"
-#      with_items:
-#        - .forward
-#        - .zshrc
-#        - .vimrc
-#        - .profile
-#        - .bashrc
-#        - .tmux.conf
-#        - .aliases
-#        - .vim
-#        - .gitconfig
-#        - .gvimrc
-#        - .xscreensaver
-#        - .minttyrc
     - name: Don't show untracked files in this repo
       command: "{{ dotfiles }} config --local status.showUntrackedFiles no"
     - name: Drop in my preferred dotfiles from git
