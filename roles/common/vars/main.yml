@@ -13,31 +13,31 @@ copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}
 #copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa_github') }}"
 sys_packages: 
   - curl
-  - vim
-  - git
-  - zsh
-  - htop
-  - tmux
-  - file
-  - speedtest-cli
-  - python3-pip
-  - fonts-powerline
-  - neofetch
   - etckeeper
-  - yamllint
+  - file
+  - fonts-powerline
+  - git
+  - htop
+  - neofetch
+  - python3-pip
   - smartmontools
+  - speedtest-cli
+  - tmux
+  - vim
+  - yamllint
+  - zsh
 time_zone:  America/Toronto
 dotfiles:  '/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 remove_files:
-  - .zshrc
-  - .vimrc
-  - .profile
-  - .bashrc
-  - .tmux.conf
   - .aliases
+  - .bashrc
+  - .gitconfig
+  - .gvimrc
+  - .minttyrc
+  - .profile
+  - .tmux.conf
   - .vim
   - .vimrc
-  - .gvimrc
-  - .gitconfig
+  - .vimrc
   - .xscreensaver
-  - .minttyrc
+  - .zshrc
