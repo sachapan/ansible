@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+  vars:
+    sys_packages:
+      #- minikube
+      #- kubernetes
+      #- kuberctl
+      - microk8s
+  tasks:
+    #- name: Install Prerequisites
+    #  apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
+    #- name: Update apt
+    #  apt: update_cache=yes
+    #- name: Install kubernetes system packages
+    #  apt: name={{ sys_packages }} state=latest
+    - name: Install kubernetes packages
+      community.general.snap:
+        name: microk8s
+        classic: yes
+      
