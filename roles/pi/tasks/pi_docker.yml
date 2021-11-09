@@ -1,5 +1,5 @@
 ---
-- hosts: hawk
+- hosts: rasps
   become: yes
   vars:
     pip_package: python-pip
