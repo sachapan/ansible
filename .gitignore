@@ -1,2 +1,7 @@
 *.retry
 *swp
+bin/
+lib/
+pyvenv.cfg
+roles/common/files
+
