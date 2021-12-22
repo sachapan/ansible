@@ -42,6 +42,15 @@
       git:
         repo: 'https://github.com/zsh-users/zsh-syntax-highlighting'
         dest: $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    - name: Clone my scripts
+      git:
+        repo: 'git@github.com/sachapan/scripts.git'
+        version: main
+        bare: yes
+        clone: yes
+        update: yes
+        force: yes
+        dest: $HOME/bin
     - name: Clone my dotfiles from git - First purge clone
       file:
         path: $HOME/.dotfiles.git
