@@ -6,6 +6,7 @@
     pip_package: python3-pip
     pip_install_packages:
       - name: telegram-send
-      - name: 2to3
+      #- name: 2to3
+      - name: pushbullet-cli
   roles:
     - geerlingguy.pip
