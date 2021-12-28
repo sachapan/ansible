@@ -1,0 +1,10 @@
+---
+- hosts: all
+  vars_files:
+    - ../vars/main.yml
+  tasks:
+    - name: install packages with chocolatey
+      #chocolatey.chocolatey.win_chocolately:
+      win_chocolatey:
+        name: "7zip.portable"
+        state: present

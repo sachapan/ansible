@@ -1,0 +1,5 @@
+---
+- hosts: all
+  gather_facts: True
+- import_playbook: tasks/choco_pkgs.yml
+  when: ansible_os_family == "Windows"
