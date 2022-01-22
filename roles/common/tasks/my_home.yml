@@ -44,10 +44,8 @@
         dest: $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     - name: Clone my scripts
       git:
-        repo: 'git@github.com/sachapan/scripts.git'
-        version: main
-        bare: yes
-        clone: yes
+        repo: 'git@github.com:sachapan/scripts.git'
+        #version: main
         update: yes
         force: yes
         dest: $HOME/bin
