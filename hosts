@@ -4,6 +4,7 @@ razor
 [ubuntu]
 xubuntu
 ductile
+bravo
 
 [ubuntu:vars]
 #ansible_ssh_user=pi
