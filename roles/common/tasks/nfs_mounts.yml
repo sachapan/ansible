@@ -11,7 +11,7 @@
     - name: Mount Movies
       mount:
         fstype: nfs
-        opts: defaults,rw,async
+        opts: vers=4.0,rw,async
         dump: "0"
         passno: "0"
         state: mounted
@@ -20,7 +20,7 @@
     - name: Mount Multimedia
       mount:
         fstype: nfs
-        opts: defaults,rw,async
+        opts: vers=4.0,rw,async
         dump: "0"
         passno: "0"
         state: mounted
@@ -29,7 +29,7 @@
     - name: Mount TV Shows
       mount:
         fstype: nfs
-        opts: defaults,rw,async
+        opts: vers=4.0,rw,async
         dump: "0"
         passno: "0"
         state: mounted
@@ -38,7 +38,7 @@
     - name: Mount Archive TV 
       mount:
         fstype: nfs
-        opts: defaults,rw,async
+        opts: vers=4.0,rw,async
         dump: "0"
         passno: "0"
         state: mounted
