@@ -1,0 +1,30 @@
+---
+# Create a docker group, add my user and clone my docker repo
+# sachapan@gmail.com
+- hosts: all
+  #become: true
+  gather_facts: no
+  vars_files: 
+    - ../vars/main.yml
+  remote_user: "{{ user.name }}"
+  tasks:
+    - name: Create docker group
+      become: true
+      group:
+        name: docker
+        state: present
+    - name: add my user account to the docker group
+      become: true
+      user:
+        name: "{{ user.name }}"
+        state: present
+        groups: docker
+        append: true
+    - name: Clone my docker repo
+      git:
+        repo: ssh://git@github.com/sachapan/docker.git
+        dest: '$HOME/docker'
+        version: main
+        clone: yes
+        update: yes
+
