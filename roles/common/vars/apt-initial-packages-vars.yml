@@ -9,8 +9,8 @@ sys_packages:
   - file
   - speedtest-cli
   - python3-pip
-  - python3-venv
-  - python-telegram-bot
+#  - python3-venv
+#  - python-telegram-bot
   - fonts-powerline
   - neofetch
   - etckeeper
