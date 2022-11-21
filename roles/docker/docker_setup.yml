@@ -5,7 +5,7 @@
   #become: true
   gather_facts: no
   vars_files: 
-    - ../vars/main.yml
+    - ../common/vars/main.yml
   remote_user: "{{ user.name }}"
   tasks:
     - name: Create docker group
