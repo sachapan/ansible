@@ -1,0 +1,5 @@
+---
+- hosts: all
+  gather_facts: True
+- import_playbook: docker_install.yml
+- import_playbook: docker_setup.yml
