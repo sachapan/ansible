@@ -1,15 +1,21 @@
-[ansible_hosts]
-razor
+#[ansible_hosts]
+#razor
 
 [ubuntu]
 xubuntu
 ductile
-bravo
+#bravo
 
 [ubuntu:vars]
 #ansible_ssh_user=pi
 #ansible_ssh_user=root
 ansible_python_interpreter=/usr/bin/python3
+
+[proxmox]
+prox
+
+[proxmox:vars]
+ansible_ssh_user=root
 
 [kvm_guests]
 
@@ -23,10 +29,15 @@ slave1
 [rasps]
 hawk
 razor
-garagepi
+garagepi3 ansible_ssh_user=pi
+
+[alpine]
+alpine1
 
 [debian]
 debian1
+debian2
+bravo
 
 [debian:children]
 ubuntu
