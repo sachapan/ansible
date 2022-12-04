@@ -14,6 +14,6 @@
 - import_playbook: tasks/dnf-initial-packages.yml
   when: ansible_os_family == "Redhat"
 #- import_playbook: tasks/initial.yml
-- import_playbook: tasks/myuser.yml
-- import_playbook: tasks/myhome.yml
+- import_playbook: tasks/my-user.yml
+- import_playbook: tasks/my-home.yml
 - import_playbook: tasks/disable_root_sshd_pass.yml
