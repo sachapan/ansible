@@ -1,0 +1,15 @@
+---
+sys_packages: 
+  - curl
+  - etckeeper
+  - file
+  - git
+  - htop
+  - neofetch
+  - py3-pip
+  - smartmontools
+  - speedtest-cli
+  - tmux
+  - vim
+  - yamllint
+  - zsh
