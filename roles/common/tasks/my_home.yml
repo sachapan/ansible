@@ -1,19 +1,24 @@
 ---
-- hosts: debian
+- hosts: all
   vars_files:
-        - ../vars/main.yml
+    - ../vars/main.yml
   remote_user: sacha
   tasks:
     - name: Ensure HOME/.config exists
       file:
         path: $HOME/.config
         state: directory
+        owner: sacha 
+        group: users
+        mode: 0700
+        #changed_when: false
     - name: Copy $HOME files not under version control
       copy:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         mode: "{{ item.mode }}"
       loop: "{{ config_files }}"
+      changed_when: false
     #- name: Copy ssh config
     #  copy:
     #    src: /home/sacha/.ssh/config
@@ -23,32 +28,33 @@
     #    src: /home/sacha/.ssh/id_rsa_github
     #    dest: $HOME/.ssh/id_rsa_github
     #    mode: "0600"
-        # owner: "{{ remote_user }}"
-   # - name: Remove oh-my-zsh directory
-   #   file:
-   #     path: ~/.oh-my-zsh
-   #     state: absent
+    # owner: "{{ remote_user }}"
+    # - name: Remove oh-my-zsh directory
+    #   file:
+    #     path: ~/.oh-my-zsh
+    #     state: absent
     - name: Clone oh-my-zsh
       git:
-        repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
+        repo: "https://github.com/ohmyzsh/ohmyzsh.git"
         dest: $HOME/.oh-my-zsh
         update: yes
         force: yes
     - name: Add zsh-autosuggestions to oh-my-zsh customizations
       git:
-        repo: 'https://github.com/zsh-users/zsh-autosuggestions'
+        repo: "https://github.com/zsh-users/zsh-autosuggestions"
         dest: $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
     - name: Add zsh-syntax-highlighting to oh-my-zsh customizations
       git:
-        repo: 'https://github.com/zsh-users/zsh-syntax-highlighting'
+        repo: "https://github.com/zsh-users/zsh-syntax-highlighting"
         dest: $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     - name: Clone my scripts
       git:
-        repo: 'git@github.com:sachapan/scripts.git'
+        repo: "git@github.com:sachapan/scripts.git"
         #version: main
         update: yes
         force: yes
         dest: $HOME/bin
+      changed_when: false
     - name: Clone my dotfiles from git - First purge clone
       file:
         path: $HOME/.dotfiles.git
@@ -59,7 +65,7 @@
     - name: Clone my dotfiles into a bare repo
       git:
         repo: https://github.com/sachapan/dotfiles.git
-        dest: '$HOME/.dotfiles.git'
+        dest: "$HOME/.dotfiles.git"
         version: main
         bare: yes
         clone: yes
@@ -74,3 +80,4 @@
       command: "{{ dotfiles }} config --local status.showUntrackedFiles no"
     - name: Drop in my preferred dotfiles from git
       command: "{{ dotfiles }} checkout"
+      changed_when: false
