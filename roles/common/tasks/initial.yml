@@ -1,18 +1,25 @@
 ---
-# Initial system setup on debian based systems
+# Initial system setup on debian and alpine based systems
 # sachapan@gmail.com
 - hosts: all
   become: true
-  vars_files: 
+  vars_files:
     - ../vars/main.yml
   tasks:
     - name: Update apt
       apt: update_cache=yes state=latest
-      changed_when: False
+      changed_when: false
       when: ansible_os_family == "Debian"
-    - name: Install required system packages
-      apt: name={{ sys_packages }} state=latest
+    - name: Install required system packages on Debian
+      apt: name={{ sys_packages_debian }} state=latest
       when: ansible_os_family == "Debian"
+    - name: Update apk
+      apk: update_cache=yes state=latest
+      changed_when: false
+      when: ansible_os_family == "Alpine"
+    - name: Install required system packages on Alpine
+      apk: name={{ sys_packages_alpine }} state=latest
+      when: ansible_os_family == "Alpine"
     - name: Create my user account
       user:
         name: "{{ user.name }}"
@@ -22,7 +29,7 @@
         append: true
         create_home: true
         shell: "{{ user.shell }}"
-    - name: Set authorized key for my user 
+    - name: Set authorized key for my user
       authorized_key:
         user: "{{ user.name }}"
         state: present
@@ -30,7 +37,7 @@
     - name: Grant my user sudo privilege
       lineinfile:
         path: "/etc/sudoers.d/{{ user.name }}"
-        line: '{{ user.name }} ALL=(ALL) NOPASSWD: ALL'
+        line: '{{ user.name }} ALL=(ALL) PASSED: ALL'
         state: present
         create: "yes"
         owner: root
