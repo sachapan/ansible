@@ -1,0 +1,7 @@
+skip_list:
+  - '102'  # No Jinja2 in when                 
+  - '106'
+  - '301'  # Commands should not change things if nothing needs doing                                                                                                                          
+  - '306'
+  - '401'  # Git checkouts must contain explicit version                                                                                                                                        
+  - '403'  # Package installs should not use latest
