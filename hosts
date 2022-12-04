@@ -13,6 +13,10 @@ ansible_python_interpreter=/usr/bin/python3
 
 [proxmox]
 prox
+debct1
+debct2
+debct3
+debct4
 
 [proxmox:vars]
 ansible_ssh_user=root
@@ -33,6 +37,10 @@ garagepi3 ansible_ssh_user=pi
 
 [alpine]
 alpine1
+alpine2
+alpine3
+alpine4
+alpine5
 
 [debian]
 debian1
