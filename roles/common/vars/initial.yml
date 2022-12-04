@@ -4,7 +4,7 @@ user:
   ID: 501
   shell: /bin/zsh
 copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
-sys_packages: 
+sys_packages_debian: 
   - curl
   - vim
   - git
@@ -28,4 +28,29 @@ sys_packages:
   - libjansson-dev
   - libpython-dev
   - libssl1.0-dev
+  - make
+sys_packages_alpine: 
+  - curl
+  - vim
+  - git
+  - zsh
+  - htop
+  - tmux
+  - file
+  - speedtest-cli
+  - py3-pip
+#  - fonts-powerline
+  - neofetch
+  - etckeeper
+#  - telegram-cli
+#  Needed to compile telegram-cli
+  - libreadline
+  - libconfig
+  - libssl
+  - lua5.2
+  - liblua5.2
+  - libevent
+  - libjansson
+  - libpython
+  - libssl1.0
   - make
