@@ -8,6 +8,7 @@ sys_packages:
   - tmux
   - file
   - speedtest-cli
+  - sudo
   - python3-pip
 #  - python3-venv
 #  - python-telegram-bot
