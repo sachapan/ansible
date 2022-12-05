@@ -3,12 +3,14 @@
   vars_files:
     - ../vars/main.yml
   remote_user: sacha
+  become: true
+  become_user: sacha
   tasks:
     - name: Ensure HOME/.config exists
       file:
         path: $HOME/.config
         state: directory
-        owner: sacha 
+        owner: sacha
         group: users
         mode: 0700
         #changed_when: false
