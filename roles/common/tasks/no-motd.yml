@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: nomotd
   become: true
   tasks:
     - name: Remove /etc/motd file
