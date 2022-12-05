@@ -1,7 +1,7 @@
 ---
 - hosts: all
   vars_files:
-    - ../vars/main.yml
+    - ../vars/my-home-vars.yml
   remote_user: sacha
   become: true
   become_user: sacha
@@ -13,7 +13,7 @@
         owner: sacha
         group: users
         mode: 0700
-        #changed_when: false
+        # changed_when: false
     - name: Copy $HOME files not under version control
       copy:
         src: "{{ item.src }}"
@@ -73,13 +73,13 @@
         clone: yes
         update: yes
         force: yes
-    - name: Remove default dotfiles
-      file:
-        path: "{{ item }}"
-        state: absent
-      loop: "{{ remove_files }}"
     - name: Don't show untracked files in this repo
       command: "{{ dotfiles }} config --local status.showUntrackedFiles no"
+    - name: Remove default dotfiles
+      file:
+        path: "$HOME/{{ item }}"
+        state: absent
+      loop: "{{ remove_files }}"
     - name: Drop in my preferred dotfiles from git
       command: "{{ dotfiles }} checkout"
       changed_when: false
