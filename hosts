@@ -21,6 +21,12 @@ debct4
 [proxmox:vars]
 ansible_ssh_user=root
 
+[nomotd]
+bravo
+hawk
+razor
+alpine3
+
 [kvm_guests]
 
 [kvm_hosts]
@@ -45,6 +51,9 @@ alpine5
 [debian]
 debian1
 debian2
+debct1
+debct2
+debct3
 bravo
 
 [debian:children]

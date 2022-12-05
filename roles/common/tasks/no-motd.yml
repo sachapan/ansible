@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Remove /etc/motd file
+      file:
+        path: /etc/motd
+        state: absent
