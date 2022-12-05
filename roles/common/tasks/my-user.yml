@@ -24,6 +24,8 @@
         name: "{{ user.name }}"
         uid: "{{ user.ID }}"
         state: present
+        password_lock: no
+        password: "*"
         groups: "{{ user.groups }}"
         append: true
         create_home: true
@@ -31,10 +33,10 @@
     - name: Check if groups exist
       shell: /usr/bin/getent group | awk -F":" '{print $1}'
       register: etc_groups
-    - name: Add secondary Groups to user
+    - name: Add user to existing secondary groups
       user: name="{{  user.name  }}" groups="{{  item  }}" append=yes
       #when: '"{{  item  }}" in etc_groups.stdout_lines'
-      when: 'item in etc_groups.stdout_lines'
+      when: "item in etc_groups.stdout_lines"
       with_items:
         - sudo
         - wheel
