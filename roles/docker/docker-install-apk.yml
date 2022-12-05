@@ -1,0 +1,20 @@
+---
+- hosts: all
+  gather_facts: no
+  become: true
+
+  tasks:
+    - name: Update apk
+      apk: update_cache=yes state=latest
+      changed_when: false
+    - name: Install docker
+      apk: name={{ item }} state=latest
+      with_items:
+        - docker
+        - docker-compose
+        - openrc
+    - name: Enable and start docker daemon
+      ansible.builtin.service:
+        name: docker
+        enabled: yes
+        state: started

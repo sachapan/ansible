@@ -4,7 +4,7 @@
 - hosts: all
   #become: true
   gather_facts: no
-  vars_files: 
+  vars_files:
     - ../common/vars/main.yml
   remote_user: "{{ user.name }}"
   tasks:
@@ -21,10 +21,11 @@
         groups: docker
         append: true
     - name: Clone my docker repo
+      become: yes
+      become_user: "{{ user.name }}"
       git:
         repo: ssh://git@github.com/sachapan/docker.git
-        dest: '$HOME/docker'
+        dest: "$HOME/docker"
         version: main
         clone: yes
         update: yes
-

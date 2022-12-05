@@ -1,5 +1,8 @@
 ---
 - hosts: all
   gather_facts: True
-- import_playbook: docker_install.yml
-- import_playbook: docker_setup.yml
+- import_playbook: docker-install.yml
+  when: ansible_os_family == "Debian"
+- import_playbook: docker-install-apk.yml
+  when: ansible_os_family == "Alpine"
+- import_playbook: docker-setup.yml
