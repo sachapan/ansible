@@ -11,7 +11,7 @@ config_files:
   - { src: "../files/ssh_config", dest: "$HOME/.ssh/config", mode: "0600" }
   - { src: "../files/id_rsa_github", dest: "$HOME/.ssh/id_rsa_github", mode: "0600" }
   - { src: "../files/known_hosts", dest: "$HOME/.ssh/known_hosts", mode: "0600" }
-  - { src: "../files/.gitconfig", dest: "$HOME/.gitconfig", mode: "0600" }
+  #- { src: "../files/.gitconfig", dest: "$HOME/.gitconfig", mode: "0600" }
   - { src: "../files/authorized_keys", dest: "$HOME/.ssh/authorized_keys", mode: "0600" }
 
 #
