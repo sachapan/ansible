@@ -1,0 +1,14 @@
+---
+- hosts: all 
+  become: yes
+  tasks:
+    - name: vim as default EDITOR for root 
+      lineinfile:
+        path: "/root/.bashrc"
+        state: present
+        line: 'export EDITOR=vim'
+    - name: add alias to nobc
+      lineinfile:
+        path: "/root/.bashrc"
+        state: present
+        line: 'alias nobc=~sacha/bin/nobc'

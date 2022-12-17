@@ -4,12 +4,15 @@
 [ubuntu]
 xubuntu
 ductile
-#bravo
+shinobi2
 
 [ubuntu:vars]
 #ansible_ssh_user=pi
 #ansible_ssh_user=root
 ansible_python_interpreter=/usr/bin/python3
+
+#[shinobi2:vars]
+#ansible_ssh_user=root
 
 [proxmox]
 prox
@@ -70,6 +73,9 @@ dentv
 [redhat:vars]
 ansible_ssh_user=root
 ansible_python_interpreter=/usr/bin/python3
+
+[bsd]
+freebsd
 
 [libreelec]
 theater 
