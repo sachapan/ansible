@@ -1,0 +1,13 @@
+---
+- hosts: mailrise
+  become: true
+  vars:
+    pip_package: python3-pip
+    pip_install_packages:
+      - name: mailrise
+  #roles:
+  #  - geerlingguy.pip
+  tasks:
+    - name: Install mailrise pip3 packages
+      ansible.builtin.pip:
+        name: mailrise
