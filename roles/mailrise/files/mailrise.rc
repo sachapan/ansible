@@ -1,0 +1,7 @@
+#!/sbin/openrc-run
+
+description="Mailrise notification server"
+command="/usr/bin/mailrise"
+command_args="/etc/mailrise.conf"
+command_background=true
+pidfile="/run/${RC_SVCNAME}.pid"
