@@ -15,12 +15,12 @@ ansible_python_interpreter=/usr/bin/python3
 #ansible_ssh_user=root
 
 [proxmox]
-#debct1 ansible_ssh_user=root
-alpine3 ansible_ssh_user=root
-mailrise ansible_ssh_user=root
-adguard ansible_ssh_user=root
-kali1 ansible_ssh_user=root
-bravo ansible_ssh_user=sacha
+#debct1 ansible_ssh_user=root - put this in hosts_vars instead
+alpine3
+mailrise
+adguard
+kali1
+bravo
 
 [nomotd]
 bravo
