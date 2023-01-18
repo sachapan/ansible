@@ -11,3 +11,21 @@
     - name: Install mailrise pip3 packages
       ansible.builtin.pip:
         name: mailrise
+    - name: Copy mailrise config
+      ansible.builtin.copy:
+        src: "files/mailrise.config"
+        dest: /etc/mailrise.config
+        owner: root
+        group: root
+        mode: "0644"
+    - name: Copy mailrise rc script
+      copy:
+        src: "files/rc.mailrise"
+        dest: /etc/local.d/mailrise.start
+        owner: root
+        group: root
+        mode: "0744"
+    - name: Start mailrise
+      ansible.builtin.service:
+        name: mailrise
+        state: started

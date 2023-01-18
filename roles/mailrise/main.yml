@@ -1,0 +1,4 @@
+---
+- hosts: mailrise 
+  gather_facts: True
+- import_playbook: tasks/mailrise.yml
