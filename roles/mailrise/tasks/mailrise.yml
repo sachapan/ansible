@@ -1,30 +1,40 @@
 ---
-- hosts: mailrise
+- hosts: herald
   become: true
-  vars:
-    pip_package: python3-pip
-    pip_install_packages:
-      - name: mailrise
+  #vars:
+  #  pip_package: python3-pip
+  #  pip_install_packages:
+  #    - name: mailrise
   #roles:
   #  - geerlingguy.pip
   tasks:
+    - name: Install pip3
+      ansible.builtin.apt:
+        name:
+          - python3-pip
+        state: latest
+        update_cache: true
     - name: Install mailrise pip3 packages
       ansible.builtin.pip:
         name: mailrise
     - name: Copy mailrise config
       ansible.builtin.copy:
-        src: "files/mailrise.config"
-        dest: /etc/mailrise.config
+        src: "../files/mailrise.conf"
+        dest: /etc/mailrise.conf
         owner: root
         group: root
         mode: "0644"
-    - name: Copy mailrise rc script
+    - name: Copy mailrise systemd script
       copy:
-        src: "files/rc.mailrise"
-        dest: /etc/local.d/mailrise.start
+        src: "../files/mailrise.systemd"
+        dest: /etc/systemd/system/mailrise.service
         owner: root
         group: root
-        mode: "0744"
+        mode: "0644"
+    - name: Stop postfix
+      ansible.builtin.service:
+        name: postfix
+        state: stopped
     - name: Start mailrise
       ansible.builtin.service:
         name: mailrise
