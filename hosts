@@ -1,5 +1,5 @@
-#[ansible_hosts]
-#razor
+[ansible_hosts]
+hawk
 
 [ubuntu]
 xubuntu
@@ -15,14 +15,12 @@ ansible_python_interpreter=/usr/bin/python3
 #ansible_ssh_user=root
 
 [proxmox]
-prox
-debct1
-debct2
-debct3
-debct4
-
-[proxmox:vars]
-ansible_ssh_user=root
+#debct1 ansible_ssh_user=root
+alpine3 ansible_ssh_user=root
+mailrise ansible_ssh_user=root
+adguard ansible_ssh_user=root
+kali1 ansible_ssh_user=root
+bravo ansible_ssh_user=sacha
 
 [nomotd]
 bravo
