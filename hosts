@@ -1,5 +1,5 @@
 [ansible_hosts]
-hawk
+razor
 
 [ubuntu]
 xubuntu
@@ -7,15 +7,9 @@ ductile
 shinobi2
 
 [ubuntu:vars]
-#ansible_ssh_user=pi
-#ansible_ssh_user=root
 ansible_python_interpreter=/usr/bin/python3
 
-#[shinobi2:vars]
-#ansible_ssh_user=root
-
 [proxmox]
-#debct1 ansible_ssh_user=root - put this in hosts_vars instead
 alpine3
 mailrise
 adguard
@@ -42,7 +36,7 @@ slave1
 [rasps]
 hawk
 razor
-garagepi3 ansible_ssh_user=pi
+garagepi3 
 
 [alpine]
 alpine1
@@ -66,7 +60,6 @@ rasps
 
 [debian:vars]
 ansible_python_interpreter=/usr/bin/python3
-#ansible_ssh_user=sachap
 
 [redhat]
 dentv
@@ -78,15 +71,8 @@ ansible_python_interpreter=/usr/bin/python3
 [bsd]
 freebsd
 
-[libreelec]
-theater 
-fpkodi
-
-[libreelec:vars]
-ansible_ssh_user=root
-
 [win]
-slave2
+tantive
 
 [win:vars]
 ansible_user=sacha
