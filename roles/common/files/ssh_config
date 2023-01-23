@@ -6,10 +6,15 @@ Host github.com
 Host razor
  HostName razor
  User sacha
- IdentityFile ~/.ssh/win_id_rsa
+ IdentityFile ~/.ssh/id_rsa
 
 Host hawk
  HostName hawk
  User sacha
- IdentityFile ~/.ssh/win_id_rsa
+ IdentityFile ~/.ssh/id_rsa
+
+Host bravo 
+ HostName bravo 
+ User sacha
+ IdentityFile ~/.ssh/id_rsa
 
