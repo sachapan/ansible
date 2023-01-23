@@ -58,6 +58,7 @@ debct1
 debct2
 debct3
 bravo
+prox
 
 [debian:children]
 ubuntu
