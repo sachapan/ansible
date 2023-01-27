@@ -9,6 +9,7 @@ sys_packages:
   - py3-pip
   - smartmontools
   - speedtest-cli
+  - sudo
   - tmux
   - vim
   - yamllint
