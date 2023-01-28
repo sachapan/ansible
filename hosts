@@ -24,6 +24,7 @@ bravo
 hawk
 razor
 alpine3
+sentry
 
 [kvm_guests]
 
@@ -45,6 +46,7 @@ alpine2
 alpine3
 alpine4
 alpine5
+sentry
 
 [debian]
 debian1
