@@ -1,37 +1,29 @@
----
-- hosts: trumpet
-  become: true
-  #vars:
-  #  pip_package: python3-pip
-  #  pip_install_packages:
-  #    - name: mailrise
-  #roles:
-  #  - geerlingguy.pip
-  tasks:
-    - name: Install pip3
-      ansible.builtin.apk:
-        name:
-          - py3-pip
-        state: latest
-        update_cache: true
-    - name: Install mailrise pip3 packages
-      ansible.builtin.pip:
-        name: mailrise
-    - name: Copy mailrise config
-      ansible.builtin.copy:
-        src: "../files/mailrise.conf"
-        dest: /etc/mailrise.conf
-        owner: root
-        group: root
-        mode: "0644"
-    - name: Copy mailrise startup script
-      copy:
-        src: "../files/mailrise.rc"
-        dest: /etc/init.d/mailrise
-        owner: root
-        group: root
-        mode: "0744"
-    - name: Start mailrise
-      ansible.builtin.service:
-        name: mailrise
-        state: started
+become: true
+tasks:
+  - name: Install pip3
+    ansible.builtin.apk:
+      name:
+        - py3-pip
+      state: latest
+      update_cache: true
+  - name: Install mailrise pip3 packages
+    ansible.builtin.pip:
+      name: mailrise
+  - name: Copy mailrise config
+    ansible.builtin.copy:
+      src: "../files/mailrise.conf"
+      dest: /etc/mailrise.conf
+      owner: root
+      group: root
+      mode: "0644"
+  - name: Copy mailrise startup script
+    copy:
+      src: "../files/mailrise.rc"
+      dest: /etc/init.d/mailrise
+      owner: root
+      group: root
+      mode: "0744"
+  - name: Start mailrise
+    ansible.builtin.service:
+      name: mailrise
+      state: started

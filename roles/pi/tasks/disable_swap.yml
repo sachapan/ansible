@@ -1,8 +1,7 @@
 ---
 # See https://raspberrypi.stackexchange.com/q/84390/6506
-#- hosts: hawk
 - name: Disable swap.
-  shell: >
+  ansible.builtin.shell: >
     dphys-swapfile swapoff &&
     dphys-swapfile uninstall &&
     update-rc.d -f dphys-swapfile remove
