@@ -1,4 +1,7 @@
 ---
-
 - name: Deploy mailrise apk version
   ansible.builtin.include_tasks: mailrise_apk.yml
+  when: ansible_os_family == "Alpine"
+- name: Deploy mailrise apt version
+  ansible.builtin.include_tasks: mailrise_apt.yml
+  when: ansible_os_family == "Debian"
