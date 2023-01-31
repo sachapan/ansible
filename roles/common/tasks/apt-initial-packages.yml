@@ -1,10 +1,7 @@
 ---
-- hosts: all
-  become: true
-  vars_files:
-    - ../vars/apt-initial-packages-vars.yml
-  tasks:
-    - name: Update apt
-      apt: update_cache=yes state=latest
-    - name: Install required system packages
-      apt: name={{ sys_packages }} state=latest
+- name: Install required system packages
+  ansible.builtin.apt:
+    name: "{{ sys_packages_apt }}"
+    state: present
+    update_cache: true
+  changed_when: false

@@ -1,13 +1,18 @@
 ---
-- hosts: all
-  become: true
-  vars_files:
-    - ../vars/apk-initial-packages-vars.yml
-  tasks:
-    # add task to enable community repository
-    - name: Update apk
-      apk: update_cache=yes state=latest
-      changed_when: false
-    - name: Install required system packages
-      apk: name={{ sys_packages }} state=latest
-      changed_when: false
+# add task to enable community repository
+# - name: Update apk
+#  community.general.apk:
+#    update_cache=yes
+#    state=latest
+#  changed_when: false
+- name: Install required system packages
+  community.general.apk:
+    name: "{{ sys_packages_apk }}"
+    state: present
+    update_cache: true
+  changed_when: false
+# - name: Install my preferred packages on dnf managed systems.
+#  ansible.builtin.dnf:
+#    name: "{{ sys_packages_dnf }}"
+#    state: present
+#    update_cache: true
