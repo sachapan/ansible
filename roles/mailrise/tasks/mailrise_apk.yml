@@ -1,6 +1,6 @@
 ---
 - name: Install pip3
-  ansible.builtin.apk:
+  community.general.apk:
     name: py3-pip
     state: latest
     update_cache: true
