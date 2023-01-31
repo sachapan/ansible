@@ -1,6 +1,6 @@
 Host github.com
  HostName github.com
- IdentityFile ~/.ssh/id_rsa_github
+ IdentityFile ~/.ssh/id_rsa_github2
  User git
 
 Host razor
