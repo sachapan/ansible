@@ -1,22 +1,9 @@
 ---
-- hosts: all
-  become: true
-  #vars:
-  #  sys_packages:
-  #    - ansible
-  #    - ansible-lint
-      #- python3-winrm
-  tasks:
-    - name: Install ansible packages
-      ansible.builtin.apt:
-        name:
-          - ansible
-          - ansible-lint
-        state: latest
-        update_cache: true
-  #  - name: Install Prerequisites
-  #    apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
-  #  - name: Update apt
-  #    apt: update_cache=yes
-  #  - name: Install required system packages
-  #    apt: name={{ sys_packages }} state=latest
+
+- name: Install ansible packages
+  ansible.builtin.apt:
+  name:
+    - ansible
+    - ansible-lint
+  state: latest
+  update_cache: true
