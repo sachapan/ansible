@@ -1,0 +1,3 @@
+---
+rsyslog_file: "../files/60-backups.conf"
+
