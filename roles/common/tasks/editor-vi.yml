@@ -1,8 +1,5 @@
 ---
-- hosts: debian 
-  become: true
-  tasks:
-  -  name: set vi as the default system editor with update-alternatives
-     community.general.alternatives:
-      name: editor
-      path: /usr/bin/vim
+- name: Set vi as the default system editor with update-alternatives
+  community.general.alternatives:
+    name: editor
+    path: /usr/bin/vim
