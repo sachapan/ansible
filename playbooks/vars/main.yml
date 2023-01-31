@@ -14,8 +14,13 @@ config_files:
   }
   - { src: "../files/ssh_config", dest: "$HOME/.ssh/config", mode: "0600" }
   - {
+<<<<<<< HEAD
     src: "$HOME/.ssh//id_rsa_github2",
     dest: "$HOME/.ssh/id_rsa_github2",
+=======
+    src: "$HOME/.ssh/id_rsa_github",
+    dest: "$HOME/.ssh/id_rsa_github",
+>>>>>>> 5aad4d83672578146853d635169e33c1c6b53eed
     mode: "0600",
   }
   - {

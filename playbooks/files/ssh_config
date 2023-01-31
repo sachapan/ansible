@@ -17,4 +17,3 @@ Host bravo
  HostName bravo 
  User sacha
  IdentityFile ~/.ssh/id_rsa
-
