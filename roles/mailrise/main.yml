@@ -1,4 +1,0 @@
----
-- hosts: trumpet 
-  gather_facts: True
-- import_playbook: tasks/mailrise_apk.yml
