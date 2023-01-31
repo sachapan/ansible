@@ -2,7 +2,7 @@
 - name: Install pip3
   community.general.apk:
     name: py3-pip
-    state: latest
+    state: present
     update_cache: true
 - name: Install mailrise pip3 packages
   ansible.builtin.pip:
