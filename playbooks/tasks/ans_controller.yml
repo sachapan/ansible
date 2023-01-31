@@ -1,0 +1,9 @@
+---
+
+- name: Install ansible packages
+  ansible.builtin.package:
+    name:
+      - ansible
+      - ansible-lint
+    state: present
+    update_cache: true

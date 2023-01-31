@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+    - name: check date
+      shell: date
+      register: dateoutput
+    - name: output from date
+      debug: msg="System date command for host {{ inventory_hostname }} output is {{ dateoutput.stdout }}"

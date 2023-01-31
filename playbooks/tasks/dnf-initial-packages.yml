@@ -1,0 +1,6 @@
+---
+- name: Install my preferred packages on dnf managed systems.
+  ansible.builtin.dnf:
+    name: "{{ sys_packages_dnf }}"
+    state: present
+    update_cache: true
