@@ -17,9 +17,13 @@
       when: ansible_os_family == "Redhat"
     - name: Disable ssh password login for root.
       import_tasks: tasks/disable_root_sshd_pass.yml
-    - name: Install telegram and pushbullet.
-      roles:
-        - geerlingguy.pip
+    - name: Install telegram
+      ansible.builtin.pip:
+        name: telegram-send
+      when: ansible_os_family == "Debian"
+    - name: Install pushbullet
+      ansible.builtin.pip:
+        name: pushbullet-cli
       when: ansible_os_family == "Debian"
     - name: Setup my user.
       import_tasks: tasks/my-user.yml
