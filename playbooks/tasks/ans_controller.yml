@@ -5,5 +5,5 @@
     name:
       - ansible
       - ansible-lint
-    state: present
+    state: latest
     update_cache: true
