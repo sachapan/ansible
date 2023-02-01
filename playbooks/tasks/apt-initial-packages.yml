@@ -2,6 +2,6 @@
 - name: Install required system packages
   ansible.builtin.apt:
     name: "{{ sys_packages_apt }}"
-    state: present
+    state: latest
     update_cache: true
   changed_when: false
