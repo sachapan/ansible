@@ -1,0 +1,31 @@
+---
+- hosts: all
+  gather_facts: true
+  become: true
+  tasks:
+  - name: Set timezone.
+    ansible.builtin.import.tasks: tasks/timezone.yml
+    when: ansible_os_family == "Debian"
+  - name: Install Debian packages.
+    ansible.builtin.import.tasks: tasks/apt-initial-packages.yml
+    when: ansible_os_family == "Debian"
+  - name: Install Alpine packages.
+    ansible.builtin.import.tasks: tasks/apk-initial-packages.yml
+    when: ansible_os_family == "Alpine"
+  - name: Install Redhat packages.
+    ansible.builtin.import.tasks: tasks/dnf-initial-packages.yml
+    when: ansible_os_family == "Redhat"
+  - name: Disable ssh password login for root.
+    ansible.builtin.import.tasks: tasks/disable_root_sshd_pass.yml
+  - name: Install telegram
+    ansible.builtin.pip:
+      name: telegram-send
+    when: ansible_os_family == "Debian"
+  - name: Install pushbullet
+    ansible.builtin.pip:
+      name: pushbullet-cli
+    when: ansible_os_family == "Debian"
+  - name: Setup my user.
+    ansible.builtin.import.tasks: tasks/my-user.yml
+  - name: Setup my home sweet HOME.
+    ansible.builtin.import.tasks: tasks/my-home.yml
