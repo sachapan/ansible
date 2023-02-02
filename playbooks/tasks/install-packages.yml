@@ -1,0 +1,11 @@
+---
+- name: Install required system packages
+  ansible.builtin.package:
+    name: `{{ sys_packages_ + {{ ansible_os_family }} }}`
+    state: latest
+    update_cache: true
+  changed_when: false
+- name: Print return information from the previous task
+  ansible.builtin.debug:
+    var: result
+    verbosity: 2
