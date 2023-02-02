@@ -7,7 +7,7 @@
 #  changed_when: false
 - name: Install required system packages
   community.general.apk:
-    name: "{{ sys_packages_apk }}"
+    name: "{{ sys_packages_Alpine }}"
     state: latest
     update_cache: true
   changed_when: false
