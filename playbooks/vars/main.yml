@@ -8,67 +8,67 @@ user:
     - users
 config_files:
   - {
-    src: "../files/telegram-send.conf",
+    src: "telegram-send.conf",
     dest: "$HOME/.config/telegram-send.conf",
-    mode: "0600",
+    mode: "0600"
   }
-  - { src: "../files/ssh_config", dest: "$HOME/.ssh/config", mode: "0600" }
   - {
-<<<<<<< HEAD
-    src: "$HOME/.ssh//id_rsa_github2",
+    src: "ssh_config",
+    dest: "$HOME/.ssh/config",
+    mode: "0600"
+  }
+  - {
+    src: "id_rsa_github2",
     dest: "$HOME/.ssh/id_rsa_github2",
-=======
-    src: "$HOME/.ssh/id_rsa_github",
-    dest: "$HOME/.ssh/id_rsa_github",
->>>>>>> 5aad4d83672578146853d635169e33c1c6b53eed
-    mode: "0600",
+    mode: "0600"
   }
   - {
     src: "../files/known_hosts",
     dest: "$HOME/.ssh/known_hosts",
-    mode: "0600",
+    mode: "0600"
   }
   # - {src: "../files/.gitconfig", dest: "$HOME/.gitconfig", mode: "0600"}
   - {
     src: "../files/authorized_keys",
     dest: "$HOME/.ssh/authorized_keys",
-    mode: "0600",
+    mode: "0600"
   }
 
 # copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa_github.pub') }}"
 copy_local_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"
 # copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa_github') }}"
-sys_packages_debian:
-  - curl
-  - etckeeper
-  - file
-  - fonts-powerline
-  - git
-  - htop
-  - neofetch
-  - python3-pip
-  - smartmontools
-  - speedtest-cli
-  - sudo
-  - tmux
-  - vim
-  - yamllint
-  - zsh
-sys_packages_alpine:
-  - curl
-  - etckeeper
-  - file
-  - git
-  - htop
-  - neofetch
-  - py3-pip
-  - smartmontools
-  - speedtest-cli
-  - sudo
-  - tmux
-  - vim
-  - yamllint
-  - zsh
+packages:
+  debian:
+    - curl
+    - etckeeper
+    - file
+    - fonts-powerline
+    - git
+    - htop
+    - neofetch
+    - python3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - zsh
+  alpine:
+    - curl
+    - etckeeper
+    - file
+    - git
+    - htop
+    - neofetch
+    - py3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - zsh
 time_zone: America/Toronto
 dotfiles: "/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 remove_files:
@@ -83,3 +83,4 @@ remove_files:
   - .vimrc
   - .xscreensaver
   - .zshrc
+zsh_repo: "https://github.com/ohmyzsh/ohmyzsh.git"
