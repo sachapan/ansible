@@ -64,5 +64,5 @@
     state: absent
   loop: "{{ remove_files }}"
 - name: Drop in my preferred dotfiles from git
-  ansible.builtin.command: "{{ dotfiles }} checkout"
+  ansible.builtin.command: "{{ dotfiles }} checkout -f"
   changed_when: false
