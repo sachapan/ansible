@@ -11,6 +11,7 @@ ansible_python_interpreter=/usr/bin/python3
 
 [proxmox]
 alpine3
+aptest1
 mailrise
 adguard
 kali1
@@ -46,6 +47,7 @@ alpine2
 alpine3
 alpine4
 alpine5
+aptest1
 sentry
 
 [debian]
