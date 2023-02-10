@@ -1,0 +1,12 @@
+---
+- hosts: all
+  tasks:
+
+  - name: Gather facts about the OS
+    #setup:
+    #  filter: ansible_lsb.description
+    ansible.builtin.debug:
+      msg: 
+      - "System {{ inventory_hostname }} has:"
+      - "ansible_os_family: {{ansible_os_family }}"
+
