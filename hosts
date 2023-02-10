@@ -1,6 +1,8 @@
 [ansible_hosts]
 razor
 
+127.0.0.1 ansible_connection=local
+
 [ubuntu]
 xubuntu
 ductile
@@ -68,6 +70,7 @@ ansible_python_interpreter=/usr/bin/python3
 
 [redhat]
 dentv
+rock1
 
 [redhat:vars]
 ansible_ssh_user=root
