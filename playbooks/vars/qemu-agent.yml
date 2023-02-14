@@ -1,0 +1,7 @@
+---
+vars:
+  sys_packages_debian: 
+    - qemu-guest-agent
+  sys_packages_alpine:
+    - qemu-guest-agent
+

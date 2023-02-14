@@ -1,29 +1,30 @@
 ---
-- hosts: proxmox
-  become: true
-  # vars_files:
-  #  - ../vars/proxmox-vms.yml
-  vars:
-    sys_packages_debian: 
-      - qemu-guest-agent
-    sys_packages_alpine:
-      - qemu-guest-agent
-  tasks:
-    - name: Update apt
-      apt: update_cache=yes state=latest
-      changed_when: false
-      when: ansible_os_family == "Debian"
-    - name: Install qemu system packages on Debian
-      apt: name={{ sys_packages_debian }} state=latest
-      when: ansible_os_family == "Debian"
-    - name: Update apk
-      apk: update_cache=yes state=latest
-      changed_when: false
-      when: ansible_os_family == "Alpine"
-    - name: Install qemu system packages on Alpine
-      apk: name={{ sys_packages_alpine }} state=latest
-      when: ansible_os_family == "Alpine"
-    - name: Start qemu-guest-agent service
-      ansible.builtin.service:
-        name: qemu-guest-agent
-        state: started
+#- hosts: proxmox
+#  become: true
+# vars_files:
+#  - ../vars/proxmox-vms.yml
+#  vars:
+#    sys_packages_debian: 
+#      - qemu-guest-agent
+# vars:
+#  sys_packages_alpine:
+#    - qemu-guest-agent
+#  tasks:
+- name: Update apt
+  apt: update_cache=yes state=latest
+  changed_when: false
+  when: ansible_os_family == "Debian"
+- name: Install qemu system packages on Debian
+  apt: name={{ sys_packages_debian }} state=latest
+  when: ansible_os_family == "Debian"
+- name: Update apk
+  apk: update_cache=yes state=latest
+  changed_when: false
+  when: ansible_os_family == "Alpine"
+- name: Install qemu system packages on Alpine
+  apk: name={{ sys_packages_alpine }} state=latest
+  when: ansible_os_family == "Alpine"
+- name: Start qemu-guest-agent service
+  ansible.builtin.service:
+    name: qemu-guest-agent
+    state: started
