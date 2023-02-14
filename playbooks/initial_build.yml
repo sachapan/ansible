@@ -8,12 +8,18 @@
   tasks:
     - name: Set timezone.
       ansible.builtin.import_tasks: tasks/timezone.yml
+    - name: Enable epel-release repo on Rocky
+      ansible.builtin.package:
+        name: epel-release
+        state: present
+      when: ansible_os_family == "Rocky"
     - name: Install preferred packages on Debian, Alpine
             and RedHat based systems.
-      ansible.builtin.package:
-        name: "{{ packages[ansible_os_family | lower] }}"
-        state: latest
-        update_cache: true
+      ansible.builtin.import_tasks: tasks/install-packages.yml
+      # ansible.builtin.package:
+      #  name: "{{ packages[ansible_os_family | lower] }}"
+      #  state: latest
+      #  update_cache: true
     - name: Disable ssh password login for root.
       ansible.builtin.import_tasks: tasks/disable_root_sshd_pass.yml
     # - name: Install telegram
