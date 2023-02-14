@@ -68,7 +68,23 @@ packages:
     - tmux
     - vim
     - yamllint
+  rocky:
+    - curl
+    #- etckeeper
+    - file
+    #- fonts-powerline
+    - git
+    - htop
+    - neofetch
+    - python3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
     - zsh
+   - zsh
 time_zone: America/Toronto
 dotfiles: "/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 remove_files:

@@ -10,6 +10,8 @@
   when: ansible_os_family == "Alpine"
 - import_tasks: dnf-initial-packages.yml
   when: ansible_os_family == "Redhat"
+- import_tasks: dnf_initial-apackages.yml
+  when: ansible_os_family == "Rocky"
 - import_tasks: my-user.yml
   become: true
   become_user: sacha
