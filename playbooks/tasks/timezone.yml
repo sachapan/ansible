@@ -1,6 +1,4 @@
+---
 - name: Set TimeZone to "{{ time_zone }}"
-  ansible.builtin.file:
-    src: "/usr/share/zoneinfo/{{ time_zone }}"
-    dest: "/etc/localtime"
-    state: link
-  when: ansible_os_family == "Debian"
+  timezone:
+    name: "{{ time_zone }}"
