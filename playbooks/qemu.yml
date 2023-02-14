@@ -1,0 +1,8 @@
+---
+- hosts: qemu_guests
+  become: true
+  vars_files:
+    vars/qemu-agent.yml
+  tasks:
+    - name: Install qemu agent
+      ansible.builtin.import_tasks: tasks/qemu-agent.yml
