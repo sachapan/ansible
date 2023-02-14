@@ -11,14 +11,14 @@ shinobi2
 [ubuntu:vars]
 ansible_python_interpreter=/usr/bin/python3
 
-[proxmox]
+[qemu_guests]
 alpine3
 aptest1
 mailrise
 adguard
-kali1
-bravo
-herald
+# kali1
+# bravo
+# herald
 trumpet
 sentry
 
@@ -69,7 +69,7 @@ rasps
 ansible_python_interpreter=/usr/bin/python3
 
 [redhat]
-dentv
+# dentv
 rock1
 
 [redhat:vars]
