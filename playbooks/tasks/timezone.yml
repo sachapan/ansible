@@ -1,4 +1,9 @@
 ---
+- name: Install tzdata if running on alpine
+  ansible.builtin.package:
+    name: tzdata
+    state: latest
+    update_cache: true
 - name: Set TimeZone to "{{ time_zone }}"
   timezone:
     name: "{{ time_zone }}"
