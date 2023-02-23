@@ -1,11 +1,7 @@
----
-- hosts: dragon_motd 
-  become: true
-  tasks:
-    - name: Copy dragon motd
-      copy:
-        src: "../files/dragon.motd"
-        dest: /etc/motd
-        owner: root
-        group: root
-        mode: "0644"
+- name: Copy dragon motd
+  ansible.builtin.copy:
+    src: "dragon.motd"
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: "0644"
