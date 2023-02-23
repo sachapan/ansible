@@ -1,5 +1,5 @@
 ---
-- name: Install tzdata if running on alpine
+- name: Install tzdata
   ansible.builtin.package:
     name: tzdata
     state: latest
