@@ -28,16 +28,16 @@ adguard
 trumpet
 sentry
 
-[nomotd]
+[no_motd]
 bravo
 hawk
 razor
 alpine3
 sentry
+debct1
 
 [dragon_motd]
 trumpet
-debct1
 
 [kvm_guests]
 
