@@ -11,8 +11,8 @@ rock1
 
 [ubuntu]
 xubuntu
-ductile
-shinobi2
+#ductile
+#shinobi2
 
 [ubuntu:vars]
 ansible_python_interpreter=/usr/bin/python3
@@ -35,6 +35,10 @@ razor
 alpine3
 sentry
 
+[dragon_motd]
+trumpet
+debct1
+
 [kvm_guests]
 
 [kvm_hosts]
@@ -42,7 +46,7 @@ sentry
 [dmz]
 
 [mac]
-slave1
+#slave1
 
 [rasps]
 hawk
@@ -53,14 +57,14 @@ garagepi3
 alpine1
 alpine2
 alpine3
-alpine4
-alpine5
+#alpine4
+#alpine5
 aptest1
 sentry
 
 [debian]
-debian1
-debian2
+#debian1
+#debian2
 debct1
 debct2
 debct3
