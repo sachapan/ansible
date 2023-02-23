@@ -36,6 +36,8 @@
       tags: home
     - name: Set vi as default editor.
       ansible.builtin.import_tasks: tasks/editor-vi.yml
+    - name: Set some .bashrc stuff for root user
+      ansible.builtin.import_tasks: tasks/root_bashrc.yml
     - name: Disable motd on select hosts.
       ansible.builtin.import_tasks: tasks/no-motd.yml
       when: inventory_hostname in groups["no_motd"]
@@ -43,7 +45,7 @@
       ansible.builtin.import_tasks: tasks/dragon_motd.yml
       when: inventory_hostname in groups["dragon_motd"]
     - name: Disable ssh password login for root
-      ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
+      ansible.builtin.import_tasks: tasks/disable_root_sshd_pass.yml
   handlers:
     - name: Reload sshd
       ansible.builtin.service:
