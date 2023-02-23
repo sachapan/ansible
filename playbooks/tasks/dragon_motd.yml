@@ -1,0 +1,11 @@
+---
+- hosts: dragon_motd 
+  become: true
+  tasks:
+    - name: Copy dragon motd
+      copy:
+        src: "../files/dragon.motd"
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: "0644"
