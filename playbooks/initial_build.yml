@@ -25,8 +25,6 @@
       #  name: "{{ packages[ansible_os_family | lower] }}"
       #  state: latest
       #  update_cache: true
-    - name: Disable ssh password login for root
-      ansible.builtin.import_tasks: tasks/disable_root_sshd_pass.yml
     - name: Call notifiers task book
       ansible.builtin.import_tasks: tasks/notifiers.yml
       tags: notifiers
@@ -40,5 +38,14 @@
       ansible.builtin.import_tasks: tasks/editor-vi.yml
     - name: Disable motd on select hosts.
       ansible.builtin.import_tasks: tasks/no-motd.yml
+      when: inventory_hostname in groups["no_motd"]
     - name: Enable dragon motd on select hosts.
       ansible.builtin.import_tasks: tasks/dragon_motd.yml
+      when: inventory_hostname in groups["dragon_motd"]
+    - name: Disable ssh password login for root
+      ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
+  handlers:
+    - name: Restart sshd
+      ansible.builtin.service:
+        name: sshd
+        state: restarted

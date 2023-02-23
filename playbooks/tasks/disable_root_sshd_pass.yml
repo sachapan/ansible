@@ -5,3 +5,5 @@
     state: present
     regexp: "^#?PermitRootLogin"
     line: "PermitRootLogin prohibit-password"
+  notify:
+    - Restart sshd
