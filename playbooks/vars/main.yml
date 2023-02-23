@@ -77,6 +77,7 @@ packages:
     - yamllint
     - zsh
 time_zone: America/Toronto
+locale_name: en_US.UTF-8
 dotfiles: "/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 remove_files:
   - .aliases
