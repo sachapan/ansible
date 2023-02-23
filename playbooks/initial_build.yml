@@ -3,6 +3,7 @@
   name: Initial system build and configuration.
   gather_facts: true
   become: true
+  remote_user: root
   vars_files:
     vars/main.yml
   tasks:
@@ -35,3 +36,9 @@
       ansible.builtin.import_tasks: tasks/my-home.yml
       become_user: "{{ user.name }}"
       tags: home
+    - name: Set vi as default editor.
+      ansible.builtin.import_tasks: tasks/editor-vi.yml
+    - name: Disable motd on select hosts.
+      ansible.builtin.import_tasks: tasks/no-motd.yml
+    - name: Enable dragon motd on select hosts.
+      ansible.builtin.import_tasks: tasks/dragon_motd.yml
