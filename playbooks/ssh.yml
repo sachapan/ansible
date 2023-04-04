@@ -1,0 +1,16 @@
+---
+- hosts: all
+  name: Initial system build and configuration.
+  gather_facts: true
+  become: true
+  remote_user: root
+  vars_files:
+    vars/main.yml
+  tasks:
+    - name: Disable ssh password login for root
+      ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
+  handlers:
+    - name: Restart sshd
+      ansible.builtin.service:
+        name: sshd
+        state: reloaded
