@@ -23,7 +23,7 @@ aptest1
 # mailrise
 adguard
 # kali1
-# bravo
+bravo
 # herald
 trumpet
 sentry
@@ -38,6 +38,7 @@ debct1
 
 [dragon_motd]
 trumpet
+debct2
 
 [kvm_guests]
 
