@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+  vars_files:
+    - ../vars/apt-initial-packages-vars.yml
+  tasks:
+    - name: Update apt
+      apt: update_cache=yes state=latest
+    - name: Install required system packages
+      apt: name={{ sys_packages }} state=latest

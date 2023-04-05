@@ -1,0 +1,13 @@
+---
+- name: Remove Netdata cron job
+  hosts: all
+  vars_files:
+    - "../vars/main.yml"
+  become: true
+  become_method: sudo
+
+  tasks:
+    - name: Remove file from /etc/cron.daily
+      file:
+        path: /etc/cron.daily/netdata-updater
+        state: absent

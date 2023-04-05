@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Determine what distro this node is running.
+      ansible.builtin.shell: grep "^ID=" /etc/os-release
+      register: os_release
+    - name: Determine what distro version this node is running.
+      ansible.builtin.shell: grep "^VERSION_ID=" /etc/os-release
+      register: version_id
+    #- name: Determined
+    #  ansible.builtin.debug:
+    #    msg: "{{ os_release.stdout }} {{ version_id }}"
+    - name: Install python3-minimal and aptitude deb needed for ansible
+      raw: apt -y update && apt install -y python3-minimal aptitude
+      when: os_release.stdout == 'ID="debian"' or os_release.stdout == 'ID=ubuntu'
+    - name: Install rh-python36 rpm needed for ansible
+      raw: yum install -y centos-release-scl rh-python36
+      when: os_release.stdout == 'ID="centos"' and version_id.stdout == 'VERSION_ID="7"'
+    - name: Install python3 dnf needed for ansible
+      raw: dnf install -y python3
+      when: os_release.stdout == 'ID="centos"' and version_id.stdout == 'VERSION_ID="8"'
+    - name: Install python3 apk needed for ansible
+      raw: apk add python3
+      when: os_release.stdout == 'ID="alpine"'

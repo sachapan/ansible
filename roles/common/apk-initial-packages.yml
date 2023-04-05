@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  vars_files:
+    - ../vars/apk-initial-packages-vars.yml
+  tasks:
+    # add task to enable community repository
+    - name: Update apk
+      apk: update_cache=yes state=latest
+      changed_when: false
+    - name: Install required system packages
+      apk: name={{ sys_packages }} state=latest
+      changed_when: false

@@ -1,0 +1,6 @@
+---
+- hosts: all
+  tasks:
+    - name: Obtain uptime from ansible facts
+      ansible.builtin.debug:
+        msg: Timedelta {{ now() - now().fromtimestamp(now(fmt='%s') | int - ansible_uptime_seconds) }}
