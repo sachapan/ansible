@@ -1,8 +1,5 @@
 ---
-- hosts: nomotd
-  become: true
-  tasks:
-    - name: Remove /etc/motd file
-      file:
-        path: /etc/motd
-        state: absent
+- name: Remove /etc/motd file
+  ansible.builtin.file:
+    path: /etc/motd
+    state: absent

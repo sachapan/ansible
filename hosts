@@ -3,31 +3,42 @@ razor
 
 127.0.0.1 ansible_connection=local
 
+[new_ones]
+debct1
+debct2
+alpine3
+rock1
+
 [ubuntu]
 xubuntu
-ductile
-shinobi2
+#ductile
+#shinobi2
 
 [ubuntu:vars]
 ansible_python_interpreter=/usr/bin/python3
 
-[proxmox]
+[qemu_guests]
 alpine3
 aptest1
-mailrise
+# mailrise
 adguard
-kali1
+# kali1
 bravo
-herald
+# herald
 trumpet
 sentry
 
-[nomotd]
+[no_motd]
 bravo
 hawk
 razor
 alpine3
 sentry
+debct1
+
+[dragon_motd]
+trumpet
+debct2
 
 [kvm_guests]
 
@@ -36,7 +47,7 @@ sentry
 [dmz]
 
 [mac]
-slave1
+#slave1
 
 [rasps]
 hawk
@@ -47,14 +58,14 @@ garagepi3
 alpine1
 alpine2
 alpine3
-alpine4
-alpine5
+#alpine4
+#alpine5
 aptest1
 sentry
 
 [debian]
-debian1
-debian2
+#debian1
+#debian2
 debct1
 debct2
 debct3
@@ -69,7 +80,7 @@ rasps
 ansible_python_interpreter=/usr/bin/python3
 
 [redhat]
-dentv
+# dentv
 rock1
 
 [redhat:vars]

@@ -1,0 +1,7 @@
+---
+qemu_debian:
+  - qemu-guest-agent
+qemu_alpine:
+  - qemu-guest-agent
+qemu_redhat:
+  - qemu-guest-agent

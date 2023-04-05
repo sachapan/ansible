@@ -1,52 +1,71 @@
 ---
-- name: Apply my home settings and config files.
+- hosts: all
+  vars_files:
+    - ../vars/my-home-vars.yml
+  remote_user: sacha
   become: true
-  become_user: "{{ user.name }}"
-  block:
+  become_user: sacha
+  tasks:
     - name: Ensure HOME/.config exists
-      ansible.builtin.file:
+      file:
         path: $HOME/.config
         state: directory
-        owner: "{{ user.name }}"
+        owner: sacha
         group: users
-        mode: "0700"
+        mode: 0700
         # changed_when: false
     - name: Copy $HOME files not under version control
-      ansible.builtin.copy:
+      copy:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         mode: "{{ item.mode }}"
       loop: "{{ config_files }}"
       changed_when: false
+    #- name: Copy ssh config
+    #  copy:
+    #    src: /home/sacha/.ssh/config
+    #    dest: $HOME/.ssh/config
+    #- name: Copy github key
+    #  copy:
+    #    src: /home/sacha/.ssh/id_rsa_github
+    #    dest: $HOME/.ssh/id_rsa_github
+    #    mode: "0600"
+    # owner: "{{ remote_user }}"
+    # - name: Remove oh-my-zsh directory
+    #   file:
+    #     path: ~/.oh-my-zsh
+    #     state: absent
     - name: Clone oh-my-zsh
-      ansible.builtin.git:
-        repo: "{{ zsh_repo }}"
-        # "https://github.com/ohmyzsh/ohmyzsh.git"
+      git:
+        repo: "https://github.com/ohmyzsh/ohmyzsh.git"
         dest: $HOME/.oh-my-zsh
         update: true
         force: true
     - name: Add zsh-autosuggestions to oh-my-zsh customizations
-      ansible.builtin.git:
+      git:
         repo: "https://github.com/zsh-users/zsh-autosuggestions"
         dest: $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
     - name: Add zsh-syntax-highlighting to oh-my-zsh customizations
-      ansible.builtin.git:
+      git:
         repo: "https://github.com/zsh-users/zsh-syntax-highlighting"
         dest: $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     - name: Clone my scripts
-      ansible.builtin.git:
+      git:
         repo: "git@github.com:sachapan/scripts.git"
-        # version: main
+        #version: main
         update: true
         force: true
         dest: $HOME/bin
       changed_when: false
     - name: Clone my dotfiles from git - First purge clone
-      ansible.builtin.file:
+      file:
         path: $HOME/.dotfiles.git
         state: absent
+        # recurse: yes
+    # - name: And now clone dotfiles into a bare repo
+    #  command: "{{ dotfiles }} clone --bare https://github.com/sachapan/dotfiles.git $HOME/.dotfiles.git"
     - name: Clone my dotfiles into a bare repo
-      ansible.builtin.git:
+      git:
         repo: https://github.com/sachapan/dotfiles.git
         dest: "$HOME/.dotfiles.git"
         version: main
@@ -54,19 +73,13 @@
         clone: true
         update: true
         force: true
-    # - name: Don't show untracked files in this repo
-    #  ansible.builtin.command: "{
-    #    { dotfiles }} config --local status.showUntrackedFiles no"
-    - name: Copy my git config for dotfiles.
-      ansible.builtin.copy:
-        src: "dotfiles.config"
-        dest: "$HOME/.dotfiles.git/config"
-        mode: "0600"
+    - name: Don't show untracked files in this repo
+      command: "{{ dotfiles }} config --local status.showUntrackedFiles no"
     - name: Remove default dotfiles
-      ansible.builtin.file:
+      file:
         path: "$HOME/{{ item }}"
         state: absent
       loop: "{{ remove_files }}"
     - name: Drop in my preferred dotfiles from git
-      ansible.builtin.command: "{{ dotfiles }} checkout -f"
+      command: "{{ dotfiles }} checkout"
       changed_when: false

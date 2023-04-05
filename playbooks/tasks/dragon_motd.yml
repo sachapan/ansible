@@ -1,0 +1,7 @@
+- name: Copy dragon motd
+  ansible.builtin.copy:
+    src: "dragon.motd"
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: "0644"

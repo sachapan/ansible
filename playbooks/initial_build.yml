@@ -3,33 +3,51 @@
   name: Initial system build and configuration.
   gather_facts: true
   become: true
+  remote_user: root
   vars_files:
     vars/main.yml
   tasks:
-    - name: Set timezone.
-      ansible.builtin.import_tasks: tasks/timezone.yml
+    - name: Set locale
+      ansible.builtin.import_tasks:
+        tasks/locale.yml
+    - name: Set timezone
+      ansible.builtin.import_tasks:
+        tasks/timezone.yml
+    - name: Enable epel-release repo on Rocky
+      ansible.builtin.package:
+        name: epel-release
+        state: present
+      when: ansible_os_family == "Rocky"
     - name: Install preferred packages on Debian, Alpine
             and RedHat based systems.
-      ansible.builtin.package:
-        name: "{{ packages[ansible_os_family | lower] }}"
-        state: latest
-        update_cache: true
-    - name: Disable ssh password login for root.
-      ansible.builtin.import_tasks: tasks/disable_root_sshd_pass.yml
-    # - name: Install telegram
-    #  ansible.builtin.pip:
-    #    name: telegram-send
-    #  # when: ansible_os_family == "Debian"
-    # - name: Install pushbullet
-    #  ansible.builtin.pip:
-    #    name: pushbullet-cli
-    #  # when: ansible_os_family == "Debian"
-    - name: Call notifiers playbook
+      ansible.builtin.import_tasks: tasks/install-packages.yml
+      # ansible.builtin.package:
+      #  name: "{{ packages[ansible_os_family | lower] }}"
+      #  state: latest
+      #  update_cache: true
+    - name: Call notifiers task book
       ansible.builtin.import_tasks: tasks/notifiers.yml
       tags: notifiers
-    - name: Setup my user.
+    - name: Setup my user
       ansible.builtin.import_tasks: tasks/my-user.yml
-    - name: Setup my home sweet HOME.
+    - name: Setup my home sweet HOME
       ansible.builtin.import_tasks: tasks/my-home.yml
       become_user: "{{ user.name }}"
       tags: home
+    - name: Set vi as default editor.
+      ansible.builtin.import_tasks: tasks/editor-vi.yml
+    - name: Set some .bashrc stuff for root user
+      ansible.builtin.import_tasks: tasks/root_bashrc.yml
+    - name: Disable motd on select hosts.
+      ansible.builtin.import_tasks: tasks/no-motd.yml
+      when: inventory_hostname in groups["no_motd"]
+    - name: Enable dragon motd on select hosts.
+      ansible.builtin.import_tasks: tasks/dragon_motd.yml
+      when: inventory_hostname in groups["dragon_motd"]
+    - name: Disable ssh password login for root
+      ansible.builtin.import_tasks: tasks/disable_root_sshd_pass.yml
+  handlers:
+    - name: Reload sshd
+      ansible.builtin.service:
+        name: sshd
+        state: reloaded

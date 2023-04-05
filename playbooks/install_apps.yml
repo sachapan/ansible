@@ -1,8 +1,15 @@
 ---
-- hosts: aptest1
+- hosts: rock1 
+  become: true
   vars_files:
     vars/main.yml
   tasks:
+    - name: Enable epel-release repo on RedHat distros
+      ansible.builtin.package:
+        name: epel-release
+        state: present
+      # when: ansible_distribution == "Rocky"
+      when: ansible_os_family == "RedHat"
     - name: Install apps
       # ansible.builtin.import_tasks: tasks/apk-initial-packages.yml
       ansible.builtin.import_tasks: tasks/install-packages.yml
