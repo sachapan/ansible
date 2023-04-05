@@ -7,8 +7,8 @@
 #  changed_when: false
 - name: Install required system packages
   community.general.apk:
-    name: "{{ sys_packages_apk }}"
-    state: present
+    name: "{{ sys_packages_Alpine }}"
+    state: latest
     update_cache: true
   changed_when: false
 # - name: Install my preferred packages on dnf managed systems.

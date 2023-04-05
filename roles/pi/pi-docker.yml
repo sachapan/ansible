@@ -1,6 +1,6 @@
 ---
 - hosts: rasps
-  become: yes
+  become: true
   vars:
     pip_package: python3-pip
     pip_install_packages:
@@ -8,7 +8,7 @@
     docker_install_compose: true
     docker_users:
       - sacha
-  # name: "Install docker"
+  name: "Install docker"
   roles:
     - geerlingguy.pip
     - geerlingguy.docker_arm

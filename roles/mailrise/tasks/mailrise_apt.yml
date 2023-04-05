@@ -3,7 +3,11 @@
   ansible.builtin.apt:
     name:
       - python3-pip
+<<<<<<< HEAD
     state: latest
+=======
+    state: present
+>>>>>>> 2ddc6f6839a2841fada385fc6846b101d2b25955
     update_cache: true
 - name: Install mailrise pip3 packages
   ansible.builtin.pip:

@@ -1,0 +1,19 @@
+Host github.com
+ HostName github.com
+ IdentityFile ~/.ssh/id_rsa_github2
+ User git
+
+Host razor
+ HostName razor
+ User sacha
+ IdentityFile ~/.ssh/id_rsa
+
+Host hawk
+ HostName hawk
+ User sacha
+ IdentityFile ~/.ssh/id_rsa
+
+Host bravo 
+ HostName bravo 
+ User sacha
+ IdentityFile ~/.ssh/id_rsa

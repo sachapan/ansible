@@ -1,0 +1,8 @@
+---
+- hosts: aptest1
+  vars_files:
+    vars/main.yml
+  tasks:
+    - name: Install apps
+      # ansible.builtin.import_tasks: tasks/apk-initial-packages.yml
+      ansible.builtin.import_tasks: tasks/install-packages.yml

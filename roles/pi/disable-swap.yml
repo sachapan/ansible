@@ -1,0 +1,12 @@
+---
+- hosts: rasps
+  name: Disable swap on pi
+  # See https://raspberrypi.stackexchange.com/q/84390/6506
+  tasks:
+    - name: Disable swap command.
+      ansible.builtin.shell: >
+        dphys-swapfile swapoff &&
+        dphys-swapfile uninstall &&
+        update-rc.d -f dphys-swapfile remove
+      when:
+        - ansible_swaptotal_mb > 0

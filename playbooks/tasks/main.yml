@@ -1,0 +1,26 @@
+---
+- hosts: all
+  gather_facts: true
+  become: true
+- import_tasks: timezone.yml
+  when: ansible_os_family == "Debian"
+- import_tasks: apt-initial-packages.yml
+  when: ansible_os_family == "Debian"
+- import_tasks: apk-initial-packages.yml
+  when: ansible_os_family == "Alpine"
+- import_tasks: dnf-initial-packages.yml
+  when: ansible_os_family == "Redhat"
+- import_tasks: my-user.yml
+  become: true
+  become_user: sacha
+- import_playbook: ../my-home.yml
+- become: true
+  become_user: root
+#- import_tasks: pip.yml
+#  when: ansible_os_family == "Debian"
+- import_tasks: disable_root_sshd_pass.yml
+- name: "Install telegram and pushbullet."
+  roles:
+    - geerlingguy.pip
+  when: ansible_os_family == "Debian"
+

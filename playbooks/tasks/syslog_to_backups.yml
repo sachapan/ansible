@@ -1,0 +1,30 @@
+---
+- hosts: ubuntu:!backups:raspbian
+  become: yes
+  vars_files:
+  - ../vars/rsyslog.yml
+  tasks:
+  - name: Ensure rsyslog is installed
+    apt:
+      name: rsyslog
+      state: present
+      update_cache: yes
+  - name: Copy custom rsyslog file to rsyslog.d directory
+    template:
+      src: "{{ rsyslog_file }}"
+      dest: '/etc/rsyslog.d/'
+      owner: root
+      group: root
+      mode: 0440
+    notify:
+      - restart rsyslog
+  - name: Ensure rsyslog is running
+    service:
+      name: rsyslog
+      state: started
+      enabled: yes
+  handlers:
+    - name: restart rsyslog
+      service:
+        name: rsyslog
+        state: restarted

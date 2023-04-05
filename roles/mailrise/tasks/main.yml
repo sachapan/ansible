@@ -1,4 +1,8 @@
 ---
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2ddc6f6839a2841fada385fc6846b101d2b25955
 - name: Deploy mailrise apk version
   ansible.builtin.include_tasks: mailrise_apk.yml
   when: ansible_os_family == "Alpine"

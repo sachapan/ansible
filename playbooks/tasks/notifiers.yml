@@ -1,0 +1,7 @@
+---
+- name: "Install telegram."
+  ansible.builtin.pip:
+    name: telegram-send
+- name: "Install pushbullet."
+  ansible.builtin.pip:
+    name: pushbullet-cli

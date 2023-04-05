@@ -1,0 +1,85 @@
+---
+- hosts: all
+  become: true
+  vars:
+    nfsmounts:
+      - {path: "/mnt/Movies", src: "deathstar:/Movies"}
+  tasks:
+    - name: nfs-common installed
+      apt: pkg=nfs-common state=latest
+      when: ansible_os_family == "Debian"
+    - name: nfs-utils installed
+      apk: name=nfs-utils state=latest
+      when: ansible_os_family == "Alpine"
+    - name: Ensure /mnt/Movies exists
+      file:
+        path: /mnt/Movies
+        state: directory
+        mode: 0755
+        owner: sacha
+        group: users
+    - name: Mount Movies
+      mount:
+        fstype: nfs
+        opts: vers=4.0,rw,async
+        dump: "0"
+        passno: "0"
+        state: mounted
+        src: "deathstar:/Movies"
+        path: "/mnt/Movies"
+    - name: Ensure /mnt/Multimedia exists
+      file:
+        path: /mnt/Multimedia
+        state: directory
+        mode: 0755
+        owner: sacha
+        group: users
+    - name: Mount Multimedia
+      mount:
+        fstype: nfs
+        opts: vers=4.0,rw,async
+        dump: "0"
+        passno: "0"
+        state: mounted
+        src: "deathstar:/Multimedia"
+        path: "/mnt/Multimedia"
+    - name: Ensure /mnt/TV exists
+      file:
+        path: /mnt/TV
+        state: directory
+        mode: 0755
+        owner: sacha
+        group: users
+    - name: Mount TV
+      mount:
+        fstype: nfs
+        opts: vers=4.0,rw,async
+        dump: "0"
+        passno: "0"
+        state: mounted
+        src: "deathstar:/TV"
+        path: "/mnt/TV"
+    - name: Ensure /mnt/Archive TV exists
+      file:
+        path: "/mnt/Archive\ TV"
+        state: directory
+        mode: 0755
+        owner: sacha
+        group: users
+      tags: archive
+#    - name: Ensure Archive TV mount exists in /etc/fstab
+#      lineinfile:
+#        path: "/etc/fstab"
+#        state: present
+#        line: "deathstar:/Archive\\040TV /mnt/Archive\\040TV nfs vers=4.0,rw,async 0 0"
+#      tags: archive2
+#    - name: Mount Archive TV
+#      mount:
+#        fstype: nfs
+#        opts: vers=4.0,rw,async
+#        dump: "0"
+#        passno: "0"
+#        state: mounted
+#        src: "deathstar:/Archive\ TV"
+#        path: "/mnt/Archive\ TV"
+#      tags: archive
