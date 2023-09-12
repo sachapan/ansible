@@ -3,6 +3,10 @@
   become: true
   name: Install notifiers.
   tasks:
+    - name: "Remove EXTERNALLY_MANAGED python config file on bookworm."
+      ansible.built.file:
+        path: "/usr/lib/python3.11/EXTERNALLY-MANAGED"
+        state: absent
     - name: "Install telegram."
       ansible.builtin.pip:
         name: telegram-send
