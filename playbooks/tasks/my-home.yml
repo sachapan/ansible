@@ -18,6 +18,19 @@
         mode: "{{ item.mode }}"
       loop: "{{ config_files }}"
       changed_when: false
+#    - name: Remove github.com ssh server key since it changes often
+#      ansible.builtin.known_hosts:
+#        path: $HOME/.ssh/known_hosts
+#        name: github.com
+#        state: absent
+#    - name: Obtain latest github.com ssh host key
+#      ansible.builtin.shell:
+#        cmd: ssh-keyscan github.com 2>/dev/null
+#      register: github_key
+#    - name: And stick it into known_hosts
+#      ansible.builtin.known_hosts:
+#        key: "{{ github_key }}"
+#        name: "github.com"
     - name: Clone oh-my-zsh
       ansible.builtin.git:
         repo: "{{ zsh_repo }}"
