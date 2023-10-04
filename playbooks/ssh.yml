@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  name: Initial system build and configuration.
+  name: ssh server config
   gather_facts: true
   become: true
   remote_user: root
