@@ -45,9 +45,5 @@
       ansible.builtin.import_tasks: tasks/dragon_motd.yml
       when: inventory_hostname in groups["dragon_motd"]
     - name: Disable ssh password login for root
-      ansible.builtin.import_tasks: tasks/disable_root_sshd_pass.yml
-  handlers:
-    - name: Reload sshd
-      ansible.builtin.service:
-        name: sshd
-        state: reloaded
+      include: ssh.yml
+
