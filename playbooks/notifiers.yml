@@ -4,12 +4,17 @@
   name: Install notifiers.
   tasks:
     - name: "Remove EXTERNALLY_MANAGED python config file on bookworm."
-      ansible.built.file:
+      ansible.builtin.file:
         path: "/usr/lib/python3.11/EXTERNALLY-MANAGED"
         state: absent
     - name: "Install telegram."
       ansible.builtin.pip:
         name: telegram-send
+    - name: "Apply work around for telegram-send dependancy."
+      ansible.builtin.pip:
+        name: python-telegram-bot
+        version: 13.11
+        #  install python-telegram-bot==13.11
     - name: "Install pushbullet."
       ansible.builtin.pip:
         name: pushbullet-cli
