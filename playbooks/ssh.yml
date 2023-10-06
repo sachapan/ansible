@@ -1,6 +1,5 @@
----
-- hosts: all
-  name: ssh server config
+- name: Config ssh server
+  hosts: all
   gather_facts: true
   become: true
   remote_user: root
