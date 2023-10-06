@@ -37,15 +37,18 @@
         # "https://github.com/ohmyzsh/ohmyzsh.git"
         dest: $HOME/.oh-my-zsh
         update: true
+        accept_newhostkey: yes
         force: true
     - name: Add zsh-autosuggestions to oh-my-zsh customizations
       ansible.builtin.git:
         repo: "https://github.com/zsh-users/zsh-autosuggestions"
         dest: $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        accept_newhostkey: yes
     - name: Add zsh-syntax-highlighting to oh-my-zsh customizations
       ansible.builtin.git:
         repo: "https://github.com/zsh-users/zsh-syntax-highlighting"
         dest: $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+        accept_newhostkey: yes
     - name: Clone my scripts
       ansible.builtin.git:
         repo: "git@github.com:sachapan/scripts.git"
@@ -53,6 +56,7 @@
         update: true
         force: true
         dest: $HOME/bin
+        accept_newhostkey: yes
       changed_when: false
     - name: Clone my dotfiles from git - First purge clone
       ansible.builtin.file:
@@ -67,6 +71,7 @@
         clone: true
         update: true
         force: true
+        accept_newhostkey: yes
     # - name: Don't show untracked files in this repo
     #  ansible.builtin.command: "{
     #    { dotfiles }} config --local status.showUntrackedFiles no"
