@@ -1,6 +1,7 @@
 ---
-- hosts: all
-  name: Initial system build and configuration.
+
+- name: Initial system build and configuration.
+  hosts: all
   gather_facts: true
   become: true
   remote_user: root
@@ -45,5 +46,10 @@
       ansible.builtin.import_tasks: tasks/dragon_motd.yml
       when: inventory_hostname in groups["dragon_motd"]
     - name: Disable ssh password login for root
-      include: ssh.yml
+      ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
+  handlers:
+    - name: Restart sshd
+      ansible.builtin.service:
+        name: sshd
+        state: reloaded
 
