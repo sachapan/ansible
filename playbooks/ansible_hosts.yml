@@ -1,0 +1,8 @@
+- name: Configure ansible management nodes
+  hosts: ansible_hosts 
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Call install task
+      ansible.builtin.include_tasks: tasks/ans_controller.yml
+
