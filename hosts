@@ -1,7 +1,7 @@
 [ansible_hosts]
 atat
 
-#127.0.0.1 ansible_connection=local
+127.0.0.1 ansible_connection=local
 
 [new_ones]
 debct1
