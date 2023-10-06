@@ -1,7 +1,7 @@
 [ansible_hosts]
-razor
+atat
 
-127.0.0.1 ansible_connection=local
+#127.0.0.1 ansible_connection=local
 
 [new_ones]
 debct1
@@ -22,6 +22,7 @@ alpine3
 aptest1
 # mailrise
 adguard
+atat
 # kali1
 bravo
 # herald
@@ -64,11 +65,13 @@ aptest1
 sentry
 
 [debian]
+atat
 #debian1
 #debian2
-debct1
-debct2
-debct3
+#debct1
+#debct2
+#debct3
+debct306
 bravo
 prox
 
