@@ -2,8 +2,13 @@
   hosts: ansible_hosts 
   gather_facts: true
   become: true
+  vars_files:
+    vars/main.yml
   tasks:
     - name: Call install task
       ansible.builtin.include_tasks: tasks/ans_controller.yml
     # TODO: clone my ansible repo
+    - name: Clone my ansible stuf
+      ansible.builtin.include_tasks: tasks/clone_ansible.yml
+  
 

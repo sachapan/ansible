@@ -1,0 +1,14 @@
+---
+- name: My ansible repo 
+  become: true
+  become_user: "{{ user.name }}"
+  block:
+    - name: Clone my ansible repo 
+      ansible.builtin.git:
+        repo: "git@github.com:sachapan/ansible.git"
+        # version: main
+        update: true
+        force: true
+        dest: $HOME/ansible
+        accept_newhostkey: yes
+      changed_when: false
