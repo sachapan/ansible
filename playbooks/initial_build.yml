@@ -14,11 +14,11 @@
     - name: Set timezone
       ansible.builtin.import_tasks:
         tasks/timezone.yml
-    - name: Enable epel-release repo on Rocky
-      ansible.builtin.package:
-        name: epel-release
-        state: present
-      when: ansible_os_family == "Rocky"
+    #- name: Enable epel-release repo on Rocky
+    #  ansible.builtin.package:
+    #    name: epel-release
+    #    state: present
+    #  when: ansible_os_family == "Rocky"
     - name: Install preferred packages on Debian, Alpine
             and RedHat based systems.
       ansible.builtin.import_tasks: tasks/install-packages.yml
