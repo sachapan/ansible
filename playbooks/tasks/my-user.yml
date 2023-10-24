@@ -25,11 +25,11 @@
         - sudo
         - wheel
         - docker
-    - name: Set authorized key for my user
-      ansible.posix.authorized_key:
-        user: "{{ user.name }}"
-        state: present
-        key: "{{ copy_local_key }}"
+#    - name: Set authorized key for my user
+#      ansible.posix.authorized_key:
+#        user: "{{ user.name }}"
+#        state: present
+#        key: "{{ copy_local_key }}"
     - name: Grant my user sudo privilege
       ansible.builtin.lineinfile:
         path: "/etc/sudoers.d/{{ user.name }}"
