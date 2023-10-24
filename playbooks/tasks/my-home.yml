@@ -64,7 +64,7 @@
         state: absent
     - name: Clone my dotfiles into a bare repo
       ansible.builtin.git:
-        repo: https://github.com/sachapan/dotfiles.git
+        repo: "https://github.com/sachapan/dotfiles.git"
         dest: "$HOME/.dotfiles.git"
         version: main
         bare: true
@@ -88,3 +88,11 @@
     - name: Drop in my preferred dotfiles from git
       ansible.builtin.command: "{{ dotfiles }} checkout -f"
       changed_when: false
+    - name: Clone vim-plug
+      get_url:
+        dest: "$HOME/.vim/autoload"
+        url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    - name: Clone tmux.conf from https://github.com/gpakosz/.tmux/
+      ansible.builtin.git:
+        repo: "https://github.com/gpakosz/.tmux.git"
+        dest: "$HOME/.tmux"

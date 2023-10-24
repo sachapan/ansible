@@ -8,27 +8,17 @@ user:
     - users
 config_files:
   - {
-      src: "telegram-send.conf",
+      src: "~/.config/telegram-send.conf",
       dest: "$HOME/.config/telegram-send.conf",
       mode: "0600",
     }
-  - { src: "ssh_config", dest: "$HOME/.ssh/config", mode: "0600" }
-  - { src: "id_rsa_github2", dest: "$HOME/.ssh/id_rsa_github2", mode: "0600" }
-  - {
-      src: "../files/known_hosts",
-      dest: "$HOME/.ssh/known_hosts",
-      mode: "0600",
-    }
-  # - {src: "../files/.gitconfig", dest: "$HOME/.gitconfig", mode: "0600"}
-  - {
-      src: "../files/authorized_keys",
-      dest: "$HOME/.ssh/authorized_keys",
-      mode: "0600",
-    }
+  - { src: "../files/ssh_config", dest: "$HOME/.ssh/config", mode: "0600" }
+  - { src: "~/.ssh/id_rsa_github2", dest: "$HOME/.ssh/id_rsa_github2", mode: "0600" }
+  - { src: "~/.ssh/known_hosts", dest: "$HOME/.ssh/known_hosts", mode: "0600" }
+  # - {src: "../files/.gitconfig", dest: "$HOME/.gitconfig", mode: "0600" }
+  - { src: "~/.ssh/authorized_keys", dest: "$HOME/.ssh/authorized_keys", mode: "0600" }
 
-# copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa_github.pub') }}"
 copy_local_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"
-# copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa_github') }}"
 packages:
   debian:
     - curl
