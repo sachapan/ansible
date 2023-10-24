@@ -88,3 +88,7 @@
     - name: Drop in my preferred dotfiles from git
       ansible.builtin.command: "{{ dotfiles }} checkout -f"
       changed_when: false
+    - name: Clone vim-plug
+      get_url:
+        dest: "$HOME/.vim/autoload"
+        url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
