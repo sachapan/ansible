@@ -6,6 +6,11 @@ user:
   shell: /bin/zsh
   groups:
     - users
+config_dirs:
+  - { dir: ".config", mode: "0750" }
+  - { dir: ".vim", mode: "0750" }
+  - { dir: ".vim/autoload", mode: "0750" }
+  - { dir: ".vim/bundle", mode: "0750" }
 config_files:
   - {
       src: "~/.config/telegram-send.conf",
@@ -17,6 +22,7 @@ config_files:
   - { src: "~/.ssh/known_hosts", dest: "$HOME/.ssh/known_hosts", mode: "0600" }
   # - {src: "../files/.gitconfig", dest: "$HOME/.gitconfig", mode: "0600" }
   - { src: "~/.ssh/authorized_keys", dest: "$HOME/.ssh/authorized_keys", mode: "0600" }
+  - { src: "~/.vim/autoload", dest: "$HOME/.vim/", mode: "0600" }
 
 copy_local_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"
 packages:
@@ -77,7 +83,7 @@ remove_files:
   - .minttyrc
   - .profile
   - .tmux.conf
-  - .vim
+#  - .vim
   - .vimrc
   - .xscreensaver
   - .zshrc
