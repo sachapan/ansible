@@ -1,4 +1,5 @@
 Host github.com
+ CheckHostIP no
  HostName github.com
  IdentityFile ~/.ssh/id_rsa_github2
  User git
