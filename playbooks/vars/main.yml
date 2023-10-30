@@ -8,6 +8,7 @@ user:
     - users
 config_dirs:
   - { dir: ".config", mode: "0750" }
+  - { dir: ".ssh", mode: "0700" }
   - { dir: ".vim", mode: "0750" }
   - { dir: ".vim/autoload", mode: "0750" }
   - { dir: ".vim/bundle", mode: "0750" }
@@ -34,6 +35,7 @@ packages:
     - git
     - htop
     - neofetch
+    - npm
     - python3-pip
     - smartmontools
     - speedtest-cli
@@ -41,6 +43,7 @@ packages:
     - tmux
     - vim
     - yamllint
+    - yarn
     - zsh
   alpine:
     - curl
@@ -49,6 +52,7 @@ packages:
     - git
     - htop
     - neofetch
+    - npm
     - py3-pip
     - smartmontools
     - speedtest-cli
@@ -56,6 +60,7 @@ packages:
     - tmux
     - vim
     - yamllint
+    - yarn
   redhat:
     - curl
     - etckeeper
