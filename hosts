@@ -12,6 +12,7 @@ alpine3
 rock1
 
 [ubuntu]
+tuna
 xubuntu
 #ductile
 #shinobi2
@@ -30,6 +31,7 @@ bravo
 # herald
 trumpet
 sentry
+tuna
 
 [no_motd]
 bravo
@@ -38,6 +40,7 @@ razor
 alpine3
 sentry
 debct1
+tuna
 
 [dragon_motd]
 trumpet
