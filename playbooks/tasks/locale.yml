@@ -8,10 +8,22 @@
   community.general.locale_gen:
     name: "{{ locale_name }}"
     state: present
-  when: ansible_os_family != "Alpine"
+  # when: ansible_os_family != "Alpine"
+- name: Get current locale and language configuration
+  command: localectl status
+  register: locale_status
+  changed_when: false
+- name: Parse 'LANG' from current locale and language configuration
+  set_fact:
+    locale_lang: "{{ locale_status.stdout | regex_search('LANG=([^\n]+)', '\\1') | first }}"
+- debug:
+    msg: "locale_lang has value: {{ locale_lang }}"
 - name: set the default locale
   ansible.builtin.command:
     "localectl set-locale LANG={{ locale_name }}"
+  when:
+    #"{{ locale_lang }} != {{ locale_name }}"
+    locale_lang != locale_name
     #LC_ALL={{ locale_name }}"
 # - name: set as default locale
   # command: localectl set-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
