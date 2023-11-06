@@ -28,6 +28,7 @@ config_files:
 copy_local_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"
 packages:
   debian:
+    - btop
     - curl
     - etckeeper
     - file
