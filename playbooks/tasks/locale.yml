@@ -9,5 +9,9 @@
     name: "{{ locale_name }}"
     state: present
   when: ansible_os_family != "Alpine"
+- name: set the default locale
+  ansible.builtin.command:
+    "localectl set-locale LANG={{ locale_name }}"
+    #LC_ALL={{ locale_name }}"
 # - name: set as default locale
-#  command: localectl set-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+  # command: localectl set-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8

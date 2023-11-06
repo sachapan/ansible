@@ -11,6 +11,7 @@
     - name: Set locale
       ansible.builtin.import_tasks:
         tasks/locale.yml
+      tags: locale
     - name: Set timezone
       ansible.builtin.import_tasks:
         tasks/timezone.yml
@@ -47,3 +48,10 @@
       when: inventory_hostname in groups["dragon_motd"]
     - name: Disable ssh password login for root
       ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
+#    - name: Configure ssh
+#      ansible.builtin.import_playbook: ssh.yml 
+#  handlers:
+#    - name: Restart sshd
+#      ansible.builtin.service:
+#        name: sshd
+#        state: reloaded
