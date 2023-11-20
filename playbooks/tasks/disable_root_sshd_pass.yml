@@ -6,4 +6,4 @@
     regexp: "^#?PermitRootLogin"
     line: "PermitRootLogin prohibit-password"
   notify:
-    - Reload sshd
+    - Restart sshd
