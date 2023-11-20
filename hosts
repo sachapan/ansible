@@ -10,6 +10,7 @@ debct305
 debct306
 alpine3
 rock1
+jellyfin
 
 [ubuntu]
 tuna
@@ -60,6 +61,9 @@ hawk
 razor
 garagepi3 
 
+[arch]
+arch1
+
 [alpine]
 alpine1
 alpine2
@@ -79,6 +83,7 @@ atat
 debct306
 bravo
 prox
+jellyfin
 
 [debian:children]
 ubuntu
