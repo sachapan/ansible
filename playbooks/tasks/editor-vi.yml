@@ -3,3 +3,4 @@
   community.general.alternatives:
     name: editor
     path: /usr/bin/vim
+  when: ansible_os_family != "Alpine"

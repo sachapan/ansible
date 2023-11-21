@@ -1,29 +1,37 @@
 ---
-# - name: if host is Alpine then install musl-locales package
-#  ansible.builtin.package:
-#    name: musl-locales
-#    state: present
-#  when: ansible_os_family == "Alpine"
+- name: if host is Alpine then install musl-locales packages
+  ansible.builtin.package:
+    state: latest
+    update_cache: true
+  with_items:
+    - musl-locales
+    - musl
+    - musl-utils
+    - tzdata
+  when: ansible_os_family == "Alpine"
 - name: Ensure the locale exists
   community.general.locale_gen:
     name: "{{ locale_name }}"
     state: present
-  # when: ansible_os_family != "Alpine"
+  when: ansible_os_family != "Alpine"
 - name: Get current locale and language configuration
   command: localectl status
   register: locale_status
   changed_when: false
+  when: ansible_os_family != "Alpine"
 - name: Parse 'LANG' from current locale and language configuration
   set_fact:
     locale_lang: "{{ locale_status.stdout | regex_search('LANG=([^\n]+)', '\\1') | first }}"
+  when: ansible_os_family != "Alpine"
 - debug:
     msg: "locale_lang has value: {{ locale_lang }}"
+  when: ansible_os_family != "Alpine"
 - name: set the default locale
   ansible.builtin.command:
     "localectl set-locale LANG={{ locale_name }}"
   when:
     #"{{ locale_lang }} != {{ locale_name }}"
-    locale_lang != locale_name
+    locale_lang != locale_name and ansible_os_family != "Alpine"
     #LC_ALL={{ locale_name }}"
 # - name: set as default locale
   # command: localectl set-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
