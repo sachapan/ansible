@@ -36,10 +36,12 @@
       ansible.builtin.import_tasks: tasks/my-home.yml
       become_user: "{{ user.name }}"
       tags: home
-    - name: Set vi as default editor.
-      ansible.builtin.import_tasks: tasks/editor-vi.yml
-    - name: Set some .bashrc stuff for root user
-      ansible.builtin.import_tasks: tasks/root_bashrc.yml
+    - name: Change some root defaults
+      ansible.builtin.import_tasks: tasks/fix_root.yml
+      #    - name: Set vi as default editor.
+      #      ansible.builtin.import_tasks: tasks/editor-vi.yml
+      #    - name: Set some .bashrc stuff for root user
+      #      ansible.builtin.import_tasks: tasks/root_bashrc.yml
     - name: Disable motd on select hosts.
       ansible.builtin.import_tasks: tasks/no-motd.yml
       when: inventory_hostname in groups["no_motd"]
