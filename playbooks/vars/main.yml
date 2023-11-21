@@ -35,6 +35,7 @@ packages:
     - fonts-powerline
     - git
     - htop
+    - mailutils
     - neofetch
     - npm
     - python3-pip
