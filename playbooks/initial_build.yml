@@ -12,6 +12,7 @@
       ansible.builtin.import_tasks:
         tasks/locale.yml
       tags: locale
+      when: ansible_os_family != "Alpine"
     - name: Set timezone
       ansible.builtin.import_tasks:
         tasks/timezone.yml
