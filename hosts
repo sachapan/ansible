@@ -14,7 +14,6 @@ jellyfin
 
 [ubuntu]
 tuna
-xubuntu
 #ductile
 #shinobi2
 
@@ -22,17 +21,9 @@ xubuntu
 ansible_python_interpreter=/usr/bin/python3
 
 [qemu_guests]
-alpine3
-aptest1
-# mailrise
-adguard
 atat
-# kali1
 bravo
-# herald
-trumpet
-sentry
-tuna
+mx-linux1
 
 [no_motd]
 bravo
@@ -75,12 +66,6 @@ sentry
 
 [debian]
 atat
-#debian1
-#debian2
-#debct1
-#debct2
-#debct3
-debct306
 bravo
 prox
 jellyfin
