@@ -50,8 +50,8 @@
       ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
 #    - name: Configure ssh
 #      ansible.builtin.import_playbook: ssh.yml 
-#  handlers:
-#    - name: Restart sshd
-#      ansible.builtin.service:
-#        name: sshd
-#        state: reloaded
+  handlers:
+    - name: Restart sshd
+      ansible.builtin.service:
+        name: sshd
+        state: reloaded

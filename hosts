@@ -84,6 +84,7 @@ debct306
 bravo
 prox
 jellyfin
+docker1
 
 [debian:children]
 ubuntu
