@@ -1,4 +1,9 @@
 ---
+- name: Ensure /root/.bashrc exists
+  ansible.builtin.file:
+    path: /root/.bashrc
+    state: touch
+    mode: '0500'
 - name: Set vim as default EDITOR for root
   ansible.builtin.lineinfile:
     path: "/root/.bashrc"
