@@ -4,3 +4,7 @@ handlers:
     ansible.builtin.service:
       name: sshd
       state: reloaded
+  - name: Restart postfix
+    ansible.builtin.service:
+      name: postfix
+      state: reloaded
