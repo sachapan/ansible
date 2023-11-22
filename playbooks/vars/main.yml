@@ -55,6 +55,7 @@ packages:
     - htop
     - neofetch
     - npm
+    - perl
     - py3-pip
     - smartmontools
     - speedtest-cli
@@ -63,6 +64,7 @@ packages:
     - vim
     - yamllint
     - yarn
+    - zsh
   redhat:
     - curl
     - etckeeper
