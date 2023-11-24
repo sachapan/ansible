@@ -21,8 +21,8 @@
     #    name: epel-release
     #    state: present
     #  when: ansible_os_family == "Rocky"
-    - name: Install preferred packages on Debian, Alpine
-            and RedHat based systems.
+    - name: Install preferred packages on Debian, Alpine systems.
+      #      and RedHat based systems.
       ansible.builtin.import_tasks: tasks/install-packages.yml
       # ansible.builtin.package:
       #  name: "{{ packages[ansible_os_family | lower] }}"
@@ -39,18 +39,19 @@
       tags: home
     - name: Change some root defaults
       ansible.builtin.import_tasks: tasks/fix_root.yml
-      #    - name: Set vi as default editor.
-      #      ansible.builtin.import_tasks: tasks/editor-vi.yml
-      #    - name: Set some .bashrc stuff for root user
-      #      ansible.builtin.import_tasks: tasks/root_bashrc.yml
+      tags: root
+    - name: Fix ping permission on lxc containers.
+      ansible.builtin.import_tasks: 
+        tasks/fix_ping.yml
+      when: ansible_virtualization_type == "lxc"
     - name: Disable motd on select hosts.
       ansible.builtin.import_tasks: tasks/no-motd.yml
       when: inventory_hostname in groups["no_motd"]
     - name: Enable dragon motd on select hosts.
       ansible.builtin.import_tasks: tasks/dragon_motd.yml
       when: inventory_hostname in groups["dragon_motd"]
-    - name: Disable ssh password login for root
-      ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
+#    - name: Disable ssh password login for root
+#      ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
 #    - name: Configure ssh
 #      ansible.builtin.import_playbook: ssh.yml 
   handlers:
