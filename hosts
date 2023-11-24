@@ -21,9 +21,18 @@ tuna
 ansible_python_interpreter=/usr/bin/python3
 
 [qemu_guests]
-atat
 bravo
 mx-linux1
+
+[containers]
+tuna
+atat
+debct1
+jellyfin
+
+[guests:children]
+qemu_guests
+containers
 
 [no_motd]
 bravo

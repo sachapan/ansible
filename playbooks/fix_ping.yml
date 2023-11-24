@@ -1,0 +1,27 @@
+---
+- name: Fix ping permission on lxc containers.
+  hosts: guests
+  gather_facts: true
+  remote_user: sacha
+  tasks:
+    - name: Is this an lxc container
+      #when: ansible_virtualization_type == "lxc"
+      block:
+        - name: Check if ping fails for my user
+          ansible.builtin.shell: ping C 1 localhost
+          ignore_errors: true
+            # /usr/bin/ping localhost
+          changed_when: false
+          register: pingperm
+            #- debug: var=pingperm.stderr_lines
+            #- debug: var=pingperm.stdout_lines
+        - name: Change permissions if needed
+          become: true
+          become_user: root
+          ansible.builtin.shell: setcap cap_net_raw+p /bin/ping
+            #ansible.builtin.debug:
+            #msg: Operation not permitted found in stderr.
+        #when: '"Operation not permitted in {{ pingperm.stderr_lines }}"'
+          when: pingperm.stderr_lines is search("Operation not permitted")
+      when: ansible_virtualization_type == "lxc"
+
