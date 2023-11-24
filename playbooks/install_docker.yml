@@ -1,0 +1,52 @@
+---
+- name: install Docker
+  hosts: all
+  become: true
+  tasks:
+    - name: Install apt-transport-https
+      ansible.builtin.apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - lsb-release
+          - gnupg
+        state: latest
+        update_cache: true
+
+    - name: Add signing key and repository
+      ansible.builtin.apt_key:
+        url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+        state: present
+          #      ansible.builtin.deb822_repository:
+          #        name: docker
+          #        types: [deb]
+          #        uris: "https://download.docker.com/linux/"
+          #        components: [binary]
+          #        state: present
+          #        enabled: true
+          #          #  "{{ ansible_distribution | lower }}/gpg"
+          #dest: /etc/apt/trusted.gpg.d/docker.asc
+          #mode: '0644'
+          #force: true
+    - name: Add repository into sources list
+      ansible.builtin.apt_repository:
+        #repo: "deb [arch={{ ansible_architecture }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+        repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable"
+        state: present
+
+    - name: Install Docker
+      ansible.builtin.apt:
+        name:
+          #- docker
+          #- docker.io
+          - docker-ce
+          - docker-compose
+          - docker-registry
+        state: latest
+        update_cache: true
+
+    - name: Start Docker engine
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
