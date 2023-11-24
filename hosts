@@ -23,12 +23,16 @@ ansible_python_interpreter=/usr/bin/python3
 [qemu_guests]
 bravo
 mx-linux1
+proxbackup
 
 [containers]
 tuna
 atat
 debct1
 jellyfin
+lariat
+docker1
+docker3
 
 [guests:children]
 qemu_guests
@@ -79,6 +83,7 @@ bravo
 prox
 jellyfin
 docker1
+docker3
 
 [debian:children]
 ubuntu
