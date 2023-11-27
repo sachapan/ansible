@@ -99,8 +99,10 @@ remove_files:
   - .zshrc
 zsh_repo: "https://github.com/ohmyzsh/ohmyzsh.git"
 # Pull encrypted variables in
-pushbullet-access-token : "{{ vault_PUSHBULLET_ACCESS_TOKEN }}"
-pushbullet-recipient : "{{ vault_PUSHBULLET_RECIPIENT_PUSHBULLET }}"
-netdata-claim-token : "{{ vault_netdata_claim_token }}"
-netdata-claim-rooms : "{{ vault_netdata_claim_rooms }}"
-netdata-claim-url : "{{vault_netdata_claim-url }}"
+pushbullet_access-token : "{{ vault_PUSHBULLET_ACCESS_TOKEN }}"
+pushbullet_recipient : "{{ vault_PUSHBULLET_RECIPIENT_PUSHBULLET }}"
+netdata_claim-token : "{{ vault_netdata_claim_token }}"
+netdata_claim-rooms : "{{ vault_netdata_claim_rooms }}"
+netdata_claim-url : "{{vault_netdata_claim-url }}"
+telegram_token : "{{ vault_telegram_token }}"
+telegram_chatid : "{{ vault_telegram_chat_id }}"
