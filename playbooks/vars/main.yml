@@ -16,7 +16,7 @@ config_files:
   - {
       src: "~/.config/telegram-send.conf",
       dest: "$HOME/.config/telegram-send.conf",
-      mode: "0600",
+      mode: "0600"
     }
   - { src: "../files/ssh_config", dest: "$HOME/.ssh/config", mode: "0600" }
   - { src: "~/.ssh/id_rsa_github2", dest: "$HOME/.ssh/id_rsa_github2", mode: "0600" }
@@ -98,3 +98,9 @@ remove_files:
   - .xscreensaver
   - .zshrc
 zsh_repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+# Pull encrypted variables in
+pushbullet-access-token : "{{ vault_PUSHBULLET_ACCESS_TOKEN }}"
+pushbullet-recipient : "{{ vault_PUSHBULLET_RECIPIENT_PUSHBULLET }}"
+netdata-claim-token : "{{ vault_netdata_claim_token }}"
+netdata-claim-rooms : "{{ vault_netdata_claim_rooms }}"
+netdata-claim-url : "{{vault_netdata_claim-url }}"
