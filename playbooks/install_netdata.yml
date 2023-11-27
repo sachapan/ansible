@@ -1,0 +1,42 @@
+---
+- hosts: netdata 
+  become: true
+  vars_files:
+    vars/main.yml
+  tasks:
+    - name: Install apps
+      ansible.builtin.package:
+        name: netdata
+        state: latest
+        update_cache: true
+    - name: Check if health alarm notify config exists
+      ansible.builtin.stat:
+        path: /etc/netdata/health_alarm_notify.conf
+      register: health
+    - name: Copy in a default file if one didn't already exist
+      ansible.builtin.copy:
+        src: "files/netdata/health_alarm_notify.conf"
+        dest: "/etc/netdata/health_alarm_notify.conf"
+      when: not health.stat.exists
+    - name: Configure netdata alerts to go to telegram channel - first remove default telegram config
+      ansible.builtin.lineinfile:
+        path: "/etc/netdata/health_alarm_notify.conf"
+        state: absent
+        line: "{{ item }}"
+      with_items:
+        - SEND_TELEGRAM=""
+        - TELEGRAM_BOT_TOKEN=""
+        - DEFAULT_RECIPIENT_TELEGRAM=""
+    - name: Now apply my telegram configuration
+      ansible.builtin.lineinfile:
+        path: "/etc/netdata/health_alarm_notify.conf"
+        state: present
+        line: "{{ item }}"
+      with_items:
+        - SEND_TELEGRAM="YES"
+        - "TELEGRAM_BOT_TOKEN={{ telegram_token }}"
+        - "DEFAULT_RECIPIENT_TELEGRAM={{ telegram_chatid }}"
+    - name: Restart netdata
+      ansible.builtin.service:
+        name: netdata
+        state: restarted
