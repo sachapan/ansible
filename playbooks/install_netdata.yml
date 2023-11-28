@@ -27,12 +27,14 @@
         - SEND_TELEGRAM=""
         - TELEGRAM_BOT_TOKEN=""
         - DEFAULT_RECIPIENT_TELEGRAM=""
+        - SEND_EMAIL="AUTO"
     - name: Now apply my telegram configuration
       ansible.builtin.lineinfile:
         path: "/etc/netdata/health_alarm_notify.conf"
         state: present
         line: "{{ item }}"
       with_items:
+        - SEND_EMAIL="NO"
         - SEND_TELEGRAM="YES"
         - "TELEGRAM_BOT_TOKEN={{ telegram_token }}"
         - "DEFAULT_RECIPIENT_TELEGRAM={{ telegram_chatid }}"
