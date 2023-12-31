@@ -59,27 +59,28 @@
         state: mounted
         src: "deathstar:/TV"
         path: "/mnt/TV"
-    - name: Ensure /mnt/Archive TV exists
+    - name: Ensure /mnt/archive exists
+      #Archive TV exists
       file:
-        path: "/mnt/Archive\ TV"
+        path: "/mnt/archive"
         state: directory
         mode: 0755
         owner: sacha
         group: users
       tags: archive
-#    - name: Ensure Archive TV mount exists in /etc/fstab
-#      lineinfile:
-#        path: "/etc/fstab"
-#        state: present
-#        line: "deathstar:/Archive\\040TV /mnt/Archive\\040TV nfs vers=4.0,rw,async 0 0"
-#      tags: archive2
-#    - name: Mount Archive TV
-#      mount:
-#        fstype: nfs
-#        opts: vers=4.0,rw,async
-#        dump: "0"
-#        passno: "0"
-#        state: mounted
-#        src: "deathstar:/Archive\ TV"
-#        path: "/mnt/Archive\ TV"
-#      tags: archive
+    - name: Ensure archive mount exists in /etc/fstab
+      lineinfile:
+        path: "/etc/fstab"
+        state: present
+        line: "deathstar:/Archive\\040TV /mnt/archive nfs vers=4.0,rw,async 0 0"
+      tags: archive
+    - name: Mount archive
+      mount:
+        fstype: nfs
+        opts: vers=4.0,rw,async
+        dump: "0"
+        passno: "0"
+        state: mounted
+        src: "deathstar:/Archive\ TV"
+        path: "/mnt/archive"
+      tags: archive
