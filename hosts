@@ -28,6 +28,8 @@ proxmox
 
 [ubuntu]
 tuna
+lariat
+wazup
 #ductile
 #shinobi2
 
@@ -47,6 +49,9 @@ jellyfin
 lariat
 docker1
 docker3
+
+[postfixclients]
+tuna
 
 [guests:children]
 qemu_guests
