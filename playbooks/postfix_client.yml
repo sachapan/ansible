@@ -1,0 +1,22 @@
+---
+- hosts: postfixclients
+  become: true
+  vars_files:
+    vars/main.yml
+  tasks:
+    - name: Install apps
+      ansible.builtin.package:
+        name: postfix
+        state: latest
+        update_cache: true
+    - name: set relay to hawk
+      ansible.builtin.lineinfile:
+        path: "/etc/postfix/main.cf"
+        state: present
+        line: "{{ item }}"
+      with_items:
+        - "relayhost = hawk.lan"
+    - name: restart postfix
+      ansible.builtin.service:
+        name: postfix
+        state: restarted 
