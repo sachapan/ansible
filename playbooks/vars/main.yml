@@ -1,4 +1,11 @@
 ---
+# Jellyfin user
+jellyfin:
+  name: jellyfin
+  UID: 503
+  shell: /bin/zsh
+  groups:
+    users
 # remote_user: sacha
 user:
   name: sacha
