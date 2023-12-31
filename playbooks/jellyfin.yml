@@ -1,0 +1,13 @@
+---
+
+- name: Jellyfin common setup
+  hosts: all
+  gather_facts: true
+  become: true
+  remote_user: root
+  vars_files:
+    vars/main.yml
+  tasks:
+  - name: Create user
+    ansible.builtin.import_tasks:
+      tasks/jellyfin-user.yml
