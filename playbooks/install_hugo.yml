@@ -1,0 +1,11 @@
+---
+- hosts: tuna 
+  become: true
+  vars_files:
+    vars/main.yml
+  tasks:
+    - name: Install apps
+      ansible.builtin.package:
+        name: hugo
+        state: latest
+        update_cache: true

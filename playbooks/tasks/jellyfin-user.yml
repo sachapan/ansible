@@ -1,0 +1,13 @@
+- name: Configure jellyfin account
+  block:
+    - name: Create user
+      ansible.builtin.user:
+        name: "{{ jellyfin.name}}"
+        uid: "{{ jellyfin.UID }}"
+        state: present
+        password_lock: false
+        password: "*"
+        groups: "{{ jellyfin.groups }}"
+        append: true
+        create_home: true
+        shell: "{{ jellyfin.shell }}"
