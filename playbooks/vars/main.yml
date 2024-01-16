@@ -105,6 +105,7 @@ remove_files:
   - .xscreensaver
   - .zshrc
 zsh_repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+docker_repo: "git@github.com:sachapan/docker.git"
 # Pull encrypted variables in
 pushbullet_access-token : "{{ vault_PUSHBULLET_ACCESS_TOKEN }}"
 pushbullet_recipient : "{{ vault_PUSHBULLET_RECIPIENT_PUSHBULLET }}"
