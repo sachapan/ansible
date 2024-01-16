@@ -28,6 +28,14 @@ proxmox
 [nfs_clients]
 docker1
 docker2
+jellyfin
+
+[jellies]
+jellyfin
+docker1
+docker2
+razor
+hawk
 
 [ubuntu]
 tuna
