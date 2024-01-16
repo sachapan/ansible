@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: nfs_clients
   become: true
   vars:
     nfsmounts:
