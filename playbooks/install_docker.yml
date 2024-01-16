@@ -58,3 +58,12 @@
         name: "{{ user.name }}"
         groups: docker
         append: true
+
+    - name: Clone my docker config from github
+      become_user: "{{ user.name }}"
+      ansible.builtin.git:
+        repo: "{{ docker_repo }}"
+        dest: $HOME/docker
+        update: true
+        accept_newhostkey: yes
+
