@@ -28,7 +28,10 @@ proxmox
 [nfs_clients]
 docker1
 docker2
+docker3
 jellyfin
+gazelle
+impala
 
 [jellies]
 jellyfin
@@ -36,6 +39,13 @@ docker1
 docker2
 razor
 hawk
+gazelle
+impala
+
+[docker_hosts]
+#docker1
+docker2
+docker3
 
 [ubuntu]
 tuna
