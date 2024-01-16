@@ -4,13 +4,9 @@ tuna
 127.0.0.1 ansible_connection=local
 
 [new_ones]
-debct1
-debct2
-debct305
-debct306
-alpine3
 jellyfin
 mojave
+impala
 
 [proxmox]
 prox
@@ -29,10 +25,14 @@ lariat
 [netdata:children]
 proxmox
 
+[nfs_clients]
+docker1
+docker2
+
 [ubuntu]
 tuna
 lariat
-wazup
+#wazup
 #ductile
 #shinobi2
 
@@ -41,22 +41,22 @@ ansible_python_interpreter=/usr/bin/python3
 
 [qemu_guests]
 bravo
-mx-linux1
-proxbackup
+#mx-linux1
+#proxbackup
 mojave
 
 [containers]
 tuna
 atat
-debct1
 jellyfin
 lariat
 docker1
-docker3
+docker2
 
 [postfixclients]
 tuna
 mojave
+docker2
 
 [guests:children]
 qemu_guests
@@ -66,14 +66,16 @@ containers
 bravo
 hawk
 razor
-alpine3
+#alpine3
 sentry
-debct1
+#debct1
 tuna
+docker1
+docker2
 
 [dragon_motd]
 trumpet
-debct2
+#debct2
 
 [kvm_guests]
 
@@ -89,16 +91,16 @@ hawk
 razor
 garagepi3 
 
-[arch]
-arch1
+#[arch]
+#arch1
 
-[alpine]
-alpine1
-alpine2
-alpine3
+#[alpine]
+#alpine1
+#alpine2
+#alpine3
 #alpine4
 #alpine5
-aptest1
+#aptest1
 sentry
 
 [debian]
@@ -107,7 +109,7 @@ bravo
 prox
 jellyfin
 docker1
-docker3
+docker2
 mojave
 
 [debian:children]
