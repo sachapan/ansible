@@ -2,6 +2,8 @@
 - name: install Docker
   hosts: all
   become: true
+  vars_files:
+    vars/main.yml
   tasks:
     - name: Install apt-transport-https
       ansible.builtin.apt:
@@ -50,3 +52,9 @@
         name: docker
         state: started
         enabled: true
+
+    - name: Add my user to docker group
+      ansible.builtin.user:
+        name: "{{ user.name }}"
+        groups: docker
+        append: true
