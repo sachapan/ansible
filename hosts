@@ -36,7 +36,7 @@ impala
 [jellies]
 jellyfin
 docker1
-docker2
+docker3
 razor
 hawk
 gazelle
@@ -74,7 +74,8 @@ docker2
 [postfixclients]
 tuna
 mojave
-docker2
+docker1
+docker3
 
 [guests:children]
 qemu_guests
