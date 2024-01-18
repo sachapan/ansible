@@ -32,23 +32,21 @@ docker3
 jellyfin
 gazelle
 impala
-barnacle
 
 [jellies]
 jellyfin
 docker1
+docker2
 docker3
 razor
 hawk
 gazelle
 impala
-barnacle
 
 [docker_hosts]
 #docker1
 docker2
 docker3
-barnacle
 
 [ubuntu]
 tuna
@@ -73,14 +71,14 @@ jellyfin
 lariat
 docker1
 docker2
-barnacle
+docker3
 
 [postfixclients]
 tuna
 mojave
 docker1
+docker2
 docker3
-barnacle
 
 [guests:children]
 qemu_guests
@@ -96,12 +94,11 @@ sentry
 tuna
 docker1
 docker2
-barnacle
+docker3
 
 [dragon_motd]
 trumpet
 #debct2
-barnacle
 
 [kvm_guests]
 
@@ -136,8 +133,8 @@ prox
 jellyfin
 docker1
 docker2
+docker3
 mojave
-barnacle
 
 [debian:children]
 ubuntu
