@@ -42,11 +42,13 @@ razor
 hawk
 gazelle
 impala
+bravo
 
 [docker_hosts]
 #docker1
 docker2
 docker3
+impala
 
 [ubuntu]
 tuna
