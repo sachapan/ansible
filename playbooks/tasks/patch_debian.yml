@@ -1,0 +1,13 @@
+---
+- name: Upgrade debian hosts
+  hosts: debian
+  become: yes
+    #become_user: root
+    #become_method: sudo
+  tasks:
+  - name: Update cache and upgrade all installed packages
+    ansible.builtin.apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 #one day
+
