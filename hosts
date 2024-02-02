@@ -1,5 +1,5 @@
 [ansible_hosts]
-atat
+#atat
 tuna
 127.0.0.1 ansible_connection=local
 
@@ -20,7 +20,7 @@ hawk
 razor
 bravo
 mojave
-lariat
+#lariat
 
 [netdata:children]
 proxmox
@@ -35,6 +35,7 @@ impala
 
 [jellies]
 jellyfin
+tuna
 docker1
 docker2
 docker3
@@ -52,7 +53,7 @@ impala
 
 [ubuntu]
 tuna
-lariat
+#lariat
 #wazup
 #ductile
 #shinobi2
@@ -68,9 +69,9 @@ mojave
 
 [containers]
 tuna
-atat
+#atat
 jellyfin
-lariat
+#lariat
 docker1
 docker2
 docker3
@@ -90,7 +91,7 @@ containers
 bravo
 hawk
 razor
-#alpine3
+alpine3
 sentry
 #debct1
 tuna
@@ -109,27 +110,26 @@ trumpet
 [dmz]
 
 [mac]
-#slave1
+slave1
 
 [rasps]
 hawk
 razor
-garagepi3 
 
 #[arch]
 #arch1
 
-#[alpine]
+[alpine]
 #alpine1
 #alpine2
-#alpine3
+alpine3
 #alpine4
 #alpine5
 #aptest1
 sentry
 
 [debian]
-atat
+#atat
 bravo
 prox
 jellyfin
@@ -137,6 +137,8 @@ docker1
 docker2
 docker3
 mojave
+impala
+gazelle
 
 [debian:children]
 ubuntu
@@ -145,6 +147,8 @@ rasps
 [debian:vars]
 ansible_python_interpreter=/usr/bin/python3
 
+[other]
+garagepi3 
 #[redhat]
 #rock1
 #
