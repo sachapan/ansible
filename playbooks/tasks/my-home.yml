@@ -65,6 +65,7 @@
         force: true
         dest: $HOME/bin
         accept_newhostkey: yes
+      tags: scripts
       changed_when: false
     - name: Clone my dotfiles from git - First purge clone
       ansible.builtin.file:
