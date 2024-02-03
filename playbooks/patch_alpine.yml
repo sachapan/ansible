@@ -1,8 +1,7 @@
 ---
-- hosts: alpine
+- name: Upgrade alpine hosts
+  hosts: alpine
   become: yes
-    #become_user: root
-    #become_method: sudo
   tasks:
     - name: update package cache and install all updates
       ansible.builtin.apk:
