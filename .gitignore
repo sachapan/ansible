@@ -3,6 +3,5 @@
 bin/
 lib/
 pyvenv.cfg
-roles/common/files
 .vscode
 .vault-pass
