@@ -70,3 +70,9 @@
         update: true
         accept_newhostkey: yes
 
+    - name: Copy my git config for the docker repo
+      become_user: "{{ user.name }}"
+      ansible.builtin.copy:
+        src: "files/docker_git_config"
+        dest: "$HOME/docker/.git/config"
+      tags: docker
