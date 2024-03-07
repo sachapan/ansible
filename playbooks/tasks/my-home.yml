@@ -89,6 +89,7 @@
         src: "dotfiles.config"
         dest: "$HOME/.dotfiles.git/config"
         mode: "0600"
+      tags: dotfiles_config
     - name: Remove default dotfiles
       ansible.builtin.file:
         path: "$HOME/{{ item }}"
