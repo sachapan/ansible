@@ -22,4 +22,4 @@ else
     echo "${output}"
 fi
 
-git add -A
+#git add -A
