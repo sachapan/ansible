@@ -9,8 +9,10 @@
     path: "/root/.bashrc"
     state: present
     line: 'export EDITOR=vim'
+  when: ansible_os_family != "Alpine"
 - name: Add alias to nobc
   ansible.builtin.lineinfile:
     path: "/root/.bashrc"
     state: present
     line: 'alias nobc=~sacha/bin/nobc'
+  when: ansible_os_family != "Alpine"

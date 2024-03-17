@@ -1,0 +1,11 @@
+---
+
+- name: journald limit.
+  hosts: all
+  gather_facts: true
+  become: true
+  remote_user: root
+  tasks:
+  - name: include task
+    ansible.builtin.include_tasks: tasks/journald_limit.yml
+

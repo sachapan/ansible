@@ -6,6 +6,8 @@ tuna
 jellyfin
 mojave
 impala
+alpine4
+deb12
 
 [proxmox]
 prox
@@ -68,7 +70,7 @@ mojave
 
 [containers]
 tuna
-#atat
+atat
 jellyfin
 #lariat
 docker1
@@ -122,7 +124,7 @@ razor
 #alpine1
 #alpine2
 alpine3
-#alpine4
+alpine4
 #alpine5
 #aptest1
 sentry
@@ -139,6 +141,7 @@ docker3
 mojave
 impala
 gazelle
+deb12
 
 [debian:children]
 ubuntu

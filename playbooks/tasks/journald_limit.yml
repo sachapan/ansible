@@ -1,0 +1,13 @@
+  - name: Set to 500M
+    ansible.builtin.lineinfile:
+      path: "/etc/systemd/journald.conf"
+      state: present
+      line: "{{ item }}"
+    with_items:
+        - "SystemMaxUse=500M"
+  - name: Apply configuration
+    ansible.builtin.systemd:
+      state: restarted
+      name: systemd-journald
+
+
