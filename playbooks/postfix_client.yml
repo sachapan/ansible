@@ -9,13 +9,13 @@
         name: postfix
         state: latest
         update_cache: true
-    - name: set relay to hawk
+    - name: set relay to razor
       ansible.builtin.lineinfile:
         path: "/etc/postfix/main.cf"
         state: present
         line: "{{ item }}"
       with_items:
-        - "relayhost = hawk.lan"
+        - "relayhost = razor.lan"
     - name: restart postfix
       ansible.builtin.service:
         name: postfix
