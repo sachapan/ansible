@@ -6,8 +6,6 @@ tuna
 jellyfin
 mojave
 impala
-alpine4
-deb12
 
 [proxmox]
 prox
@@ -17,11 +15,9 @@ pve1
 ansible_ssh_user=root
 
 [netdata]
-hawk
 razor
 bravo
 mojave
-#lariat
 
 [netdata:children]
 proxmox
@@ -70,9 +66,7 @@ mojave
 
 [containers]
 tuna
-atat
 jellyfin
-#lariat
 docker1
 docker2
 docker3
@@ -124,7 +118,6 @@ razor
 #alpine1
 #alpine2
 alpine3
-alpine4
 #alpine5
 #aptest1
 sentry
