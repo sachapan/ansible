@@ -75,4 +75,4 @@
       ansible.builtin.copy:
         src: "files/docker_git_config"
         dest: "$HOME/docker/.git/config"
-      tags: docker
+      tags: docker-git
