@@ -10,6 +10,7 @@ impala
 [proxmox]
 prox
 pve1
+fwpve
 
 [proxmox:vars]
 ansible_ssh_user=root
@@ -41,12 +42,14 @@ hawk
 gazelle
 impala
 bravo
+mojave
 
 [docker_hosts]
 docker1
 docker2
 docker3
 impala
+razor
 
 [ubuntu]
 tuna
