@@ -138,6 +138,7 @@ mojave
 impala
 gazelle
 deb12
+falcon
 
 [debian:children]
 ubuntu
