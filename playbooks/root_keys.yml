@@ -1,0 +1,14 @@
+---
+
+- name: Ensure root authorized_key file is current 
+  hosts: all
+  gather_facts: true
+  become: true
+  remote_user: ansible 
+  vars_files:
+    vars/main.yml
+  tasks:
+    - name: Copy authorized key for root
+      ansible.builtin.copy:
+        src: files/authorized_keys
+        dest: /root/.ssh/authorized_keys
