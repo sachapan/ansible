@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: true
+  remote_user: root
+  vars_files:
+    vars/main.yml
+  name: Monitoring account creation
+  tasks:
+  - name: Create monitoring user account
+    ansible.builtin.user:
+      name: "{{ monitoring.name }}"
+      uid: "{{ monitoring.UID }}"
+      state: present
+      password_lock: false
+      password: "*"
+      groups: "{{ monitoring.groups }}"
+      append: true
+      create_home: true
+      shell: "{{ monitoring.shell }}"
+
