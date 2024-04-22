@@ -43,6 +43,7 @@ gazelle
 impala
 bravo
 mojave
+kodi-db
 
 [docker_hosts]
 docker1
@@ -73,6 +74,16 @@ jellyfin
 docker1
 docker2
 docker3
+fred
+wilma
+barney
+betty
+
+[piholes]
+fred
+wilma
+barney
+betty
 
 [postfixclients]
 tuna
@@ -139,6 +150,8 @@ impala
 gazelle
 deb12
 falcon
+fred
+wilma
 
 [debian:children]
 ubuntu
