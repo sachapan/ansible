@@ -1,4 +1,4 @@
-  - name: Set to 500M
+  - name: Set journald max to 500M
     ansible.builtin.lineinfile:
       path: "/etc/systemd/journald.conf"
       state: present
