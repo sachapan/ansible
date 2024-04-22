@@ -6,6 +6,13 @@ jellyfin:
   shell: /bin/zsh
   groups:
     users
+# monitoring user
+monitoring:
+  name: monitor
+  UID: 504
+  shell: /bin/zsh
+  groups:
+    - users
 # remote_user: sacha
 user:
   name: sacha
