@@ -1,4 +1,5 @@
 plugin: community.general.proxmox
+#url: https://pve1:8006
 url: https://prox1.chimneylan.duckdns.org
 #http://pve1:8006
 #validate_certs: false
