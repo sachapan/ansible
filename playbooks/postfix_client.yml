@@ -9,6 +9,11 @@
         name: postfix
         state: latest
         update_cache: true
+    - name: Remove default blank relay
+      ansible.builtin.lineinfile:
+        path: "/etc/postfix/main.cf"
+        state: absent
+        line: "relayhost ="
     - name: set relay to razor
       ansible.builtin.lineinfile:
         path: "/etc/postfix/main.cf"
