@@ -1,4 +1,4 @@
-nameserver 10.0.0.4
-nameserver 8.8.8.8
-domain panasuik
-search panasuik
+nameserver 10.0.0.17
+nameserver 10.0.0.18
+domain lan
+search lan, chimneylan.duckdns.org 
