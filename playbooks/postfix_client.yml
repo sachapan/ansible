@@ -13,7 +13,7 @@
       ansible.builtin.lineinfile:
         path: "/etc/postfix/main.cf"
         state: absent
-        line: "relayhost ="
+        line: "relayhost = "
     - name: set relay to razor
       ansible.builtin.lineinfile:
         path: "/etc/postfix/main.cf"
