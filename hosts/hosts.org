@@ -3,61 +3,60 @@ tuna
 127.0.0.1 ansible_connection=local
 #comment
 [new_ones]
-jellyfin
-mojave
-impala
+jellyfin.lan
+mojave.lan
+impala.lan
 
 [proxmox]
-prox
-pve1
-pvefw
+prox.databytes.me
+pve1.databytes.me
+pvefw.databytes.me
 
 [proxmox:vars]
 ansible_ssh_user=root
 
 [netdata]
-razor
-bravo
-mojave
+razor.lan
+bravo.lan
+mojave.lan
 
 [node_exporter]
-gazelle
-pvefw
-prox
-pve1
-bravo
+gazelle.lan
+pvefw.databytes.me
+prox.databytes.me
+pve1.databytes.me
+bravo.lan
+eagle.databytes.me
 
 [netdata:children]
 proxmox
-
 [nfs_clients]
-docker1
-docker2
-docker3
-jellyfin
-gazelle
-impala
+docker1.lan
+docker2.lan
+docker3.lan
+jellyfin.lan
+gazelle.lan
+impala.lan
 
 [jellies]
-jellyfin
+jellyfin.lan
 tuna
-docker1
-docker2
-docker3
-razor
-hawk
-gazelle
-impala
-bravo
-mojave
+docker1.lan
+docker2.lan
+docker3.lan
+razor.lan
+gazelle.lan
+impala.lan
+bravo.lan
+mojave.lan
 
 [docker_hosts]
-docker1
-docker2
-docker3
-impala
-gazelle
-razor
+docker1.lan
+docker2.lan
+docker3.lan
+impala.lan
+gazelle.lan
+razor.lan
 
 [ubuntu]
 tuna
@@ -70,52 +69,56 @@ tuna
 ansible_python_interpreter=/usr/bin/python3
 
 [qemu_guests]
-bravo
+bravo.lan
 #mx-linux1
 #proxbackup
-mojave
+mojave.lan
+eagle.databytes.me
 
 [containers]
 tuna
-jellyfin
-docker1
-docker2
-docker3
-fred
-wilma
-barney
-betty
+jellyfin.lan
+docker1.lan
+docker2.lan
+docker3.lan
+fred.lan
+wilma.lan
+barney.lan
+betty.lan
 
-[piholes]
-fred
-wilma
-barney
-betty
+[piholes_guest]
+fred.lan
+wilma.lan
+[piholes_lan]
+barney.lan
+betty.lan
 
 [postfixclients]
 tuna
-mojave
-docker1
-docker2
-docker3
-impala
-gazelle
+mojave.lan
+docker1.lan
+docker2.lan
+docker3.lan
+impala.lan
+gazelle.lan
+eagle.databytes.me
+betty.lan
+barney.lan
+vulture.databytes.me
 
 [guests:children]
 qemu_guests
 containers
 
 [no_motd]
-bravo
-hawk
-razor
-alpine3
-sentry
-#debct1
-tuna
-docker1
-docker2
-docker3
+bravo.lan
+razor.lan
+alpine3.lan
+sentry.lan
+tuna.lan
+docker1.lan
+docker2.lan
+docker3.lan
 
 [dragon_motd]
 trumpet
@@ -131,9 +134,8 @@ trumpet
 slave1
 
 [rasps]
-hawk
-razor
-
+razor.lan
+vulture.databytes.me
 #[arch]
 #arch1
 
@@ -148,23 +150,22 @@ trumpet
 
 [debian]
 #atat
-bravo
-prox
-jellyfin
-docker1
-docker2
-docker3
-mojave
-impala
-gazelle
-deb12
-falcon
-fred
-wilma
+bravo.lan
+prox.databytes.me
+jellyfin.lan
+docker1.lan
+docker2.lan
+docker3.lan
+mojave.lan
+impala.lan
+gazelle.lan
+eagle.databytes.me
 
 [debian:children]
 ubuntu
 rasps
+piholes_guest
+piholes_lan
 
 [debian:vars]
 ansible_python_interpreter=/usr/bin/python3
