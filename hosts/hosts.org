@@ -10,6 +10,7 @@ impala.lan
 [proxmox]
 prox.databytes.me
 pve1.databytes.me
+pve2.databytes.me
 pvefw.databytes.me
 
 [proxmox:vars]
