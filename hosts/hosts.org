@@ -3,10 +3,10 @@ tuna
 127.0.0.1 ansible_connection=local
 #comment
 [new_ones]
-jellyfin.lan
-mojave.lan
-impala.lan
-
+jellyfin
+mojave
+impala
+catfish
 [proxmox]
 prox.databytes.me
 pve1.databytes.me
@@ -17,50 +17,55 @@ pvefw.databytes.me
 ansible_ssh_user=root
 
 [netdata]
-razor.lan
-bravo.lan
-mojave.lan
+razor
+bravo
+mojave
 
 [node_exporter]
-gazelle.lan
+gazelle
 pvefw.databytes.me
 prox.databytes.me
 pve1.databytes.me
-bravo.lan
+bravo
 eagle.databytes.me
+catfish
+thrush
 
 [netdata:children]
 proxmox
 [nfs_clients]
-docker1.lan
-docker2.lan
-docker3.lan
-jellyfin.lan
-gazelle.lan
-impala.lan
+docker1
+docker2
+docker3
+jellyfin
+gazelle
+impala
 
 [jellies]
-jellyfin.lan
+jellyfin
 tuna
-docker1.lan
-docker2.lan
-docker3.lan
-razor.lan
-gazelle.lan
-impala.lan
-bravo.lan
-mojave.lan
+docker1
+docker2
+docker3
+razor
+gazelle
+impala
+bravo
+mojave
 
 [docker_hosts]
-docker1.lan
-docker2.lan
-docker3.lan
-impala.lan
-gazelle.lan
-razor.lan
+docker1
+docker2
+docker3
+impala
+gazelle
+razor
+catfish
+thrush
 
 [ubuntu]
 tuna
+catfish
 #lariat
 #wazup
 #ductile
@@ -70,56 +75,61 @@ tuna
 ansible_python_interpreter=/usr/bin/python3
 
 [qemu_guests]
-bravo.lan
+bravo
 #mx-linux1
 #proxbackup
-mojave.lan
+mojave
 eagle.databytes.me
+catfish
+thrush
 
 [containers]
 tuna
-jellyfin.lan
-docker1.lan
-docker2.lan
-docker3.lan
-fred.lan
-wilma.lan
-barney.lan
-betty.lan
+jellyfin
+docker1
+docker2
+docker3
+fred
+wilma
+barney
+betty
 
 [piholes_guest]
-fred.lan
-wilma.lan
-[piholes_lan]
-barney.lan
-betty.lan
+fred
+wilma
+[piholes]
+barney
+betty
 
 [postfixclients]
 tuna
-mojave.lan
-docker1.lan
-docker2.lan
-docker3.lan
-impala.lan
-gazelle.lan
+mojave
+docker1
+docker2
+docker3
+impala
+gazelle
 eagle.databytes.me
-betty.lan
-barney.lan
-vulture.databytes.me
+betty
+barney
+catfish
+thrush
 
 [guests:children]
 qemu_guests
 containers
 
 [no_motd]
-bravo.lan
-razor.lan
-alpine3.lan
-sentry.lan
-tuna.lan
-docker1.lan
-docker2.lan
-docker3.lan
+bravo
+razor
+alpine3
+sentry
+tuna
+docker1
+docker2
+docker3
+catfish
+thrush
 
 [dragon_motd]
 trumpet
@@ -135,7 +145,7 @@ trumpet
 slave1
 
 [rasps]
-razor.lan
+razor
 vulture.databytes.me
 #[arch]
 #arch1
@@ -151,22 +161,23 @@ trumpet
 
 [debian]
 #atat
-bravo.lan
-prox.databytes.me
-jellyfin.lan
-docker1.lan
-docker2.lan
-docker3.lan
-mojave.lan
-impala.lan
-gazelle.lan
+bravo
+#prox.databytes.me
+jellyfin
+docker1
+docker2
+docker3
+mojave
+impala
+gazelle
 eagle.databytes.me
+thrush
 
 [debian:children]
 ubuntu
 rasps
 piholes_guest
-piholes_lan
+piholes
 
 [debian:vars]
 ansible_python_interpreter=/usr/bin/python3
