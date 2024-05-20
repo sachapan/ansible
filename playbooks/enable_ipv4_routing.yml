@@ -1,0 +1,17 @@
+---
+
+- name: Enable ipv4 routing
+  hosts: all
+  gather_facts: true
+  become: true
+  remote_user: root
+  tasks:
+  - name: Ensure configuration line in sysctl.conf
+    ansible.builtin.lineinfile:
+      path: "/etc/sysctl.conf"
+      state: present
+      line: "{{ item }}"
+    with_items:
+        - "net.ipv4.ip_forward=1"
+  - name: Apply configuration
+    ansible.builtin.shell: sysctl -p
