@@ -52,7 +52,7 @@ packages:
     - htop
     - mailutils
     - neofetch
-    - npm
+      #- npm
     - python3-pip
     - smartmontools
     - speedtest-cli
