@@ -8,6 +8,12 @@
   vars_files:
     vars/main.yml
   tasks:
+    - name: Install locales package
+      ansible.builtin.package:
+        name: "locales"
+        state: latest
+        update_cache: true
+      when: ansible_facts['distribution'] == "Ubuntu"
     - name: Set locale
       ansible.builtin.import_tasks:
         tasks/locale.yml
