@@ -13,5 +13,8 @@
       line: "{{ item }}"
     with_items:
         - "net.ipv4.ip_forward=1"
-  - name: Apply configuration
+    notify:
+      - Apply sysctl configuration
+  handlers:
+  - name: Apply sysctl configuration
     ansible.builtin.shell: sysctl -p
