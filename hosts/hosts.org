@@ -30,6 +30,7 @@ bravo
 eagle.databytes.me
 catfish
 thrush
+remora
 
 [netdata:children]
 proxmox
@@ -62,6 +63,7 @@ gazelle
 razor
 catfish
 thrush
+remora
 
 [ubuntu]
 tuna
@@ -93,6 +95,7 @@ fred
 wilma
 barney
 betty
+remora
 
 [piholes_guest]
 fred
@@ -114,6 +117,7 @@ betty
 barney
 catfish
 thrush
+remora
 
 [guests:children]
 qemu_guests
@@ -130,6 +134,7 @@ docker2
 docker3
 catfish
 thrush
+remora
 
 [dragon_motd]
 trumpet
@@ -146,7 +151,8 @@ slave1
 
 [rasps]
 razor
-vulture.databytes.me
+#vulture.databytes.me
+vulture
 #[arch]
 #arch1
 
@@ -172,6 +178,7 @@ impala
 gazelle
 eagle.databytes.me
 thrush
+remora
 
 [debian:children]
 ubuntu
