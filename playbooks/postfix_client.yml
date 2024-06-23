@@ -15,7 +15,8 @@
         state: absent
         line: "{{ item }}"
       with_items:
-        - "relayhost = "
+        - "relayhost ="
+        - "relayhost = razor"
         - "relayhost = razor.lan"
     - name: set relay to vulture
       ansible.builtin.lineinfile:
