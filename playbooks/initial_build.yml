@@ -30,6 +30,7 @@
     - name: Install preferred packages on Debian, Alpine systems.
       #      and RedHat based systems.
       ansible.builtin.import_tasks: tasks/install-packages.yml
+      tags: packages
       # ansible.builtin.package:
       #  name: "{{ packages[ansible_os_family | lower] }}"
       #  state: latest
