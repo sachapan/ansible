@@ -44,6 +44,7 @@ copy_local_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }
 packages:
   debian:
     - btop
+    - cmdtest
     - curl
     - etckeeper
     - file
@@ -52,6 +53,7 @@ packages:
     - htop
     - mailutils
     - neofetch
+    - nodejs
       #- npm
     - python3-pip
     - smartmontools
