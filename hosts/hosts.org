@@ -6,7 +6,7 @@ tuna
 jellyfin
 mojave
 impala
-catfish
+
 [proxmox]
 prox.databytes.me
 pve1.databytes.me
@@ -17,20 +17,21 @@ pvefw.databytes.me
 ansible_ssh_user=root
 
 [netdata]
-razor
 bravo
 mojave
 
 [node_exporter]
 gazelle
+impala
+docker1
+docker2
+docker3
+tuna
 pvefw.databytes.me
 prox.databytes.me
 pve1.databytes.me
 bravo
-eagle.databytes.me
-catfish
-thrush
-remora
+eagle
 
 [netdata:children]
 proxmox
@@ -48,7 +49,6 @@ tuna
 docker1
 docker2
 docker3
-razor
 gazelle
 impala
 bravo
@@ -60,14 +60,9 @@ docker2
 docker3
 impala
 gazelle
-razor
-catfish
-thrush
-remora
 
 [ubuntu]
 tuna
-catfish
 #lariat
 #wazup
 #ductile
@@ -82,8 +77,6 @@ bravo
 #proxbackup
 mojave
 eagle.databytes.me
-catfish
-thrush
 
 [containers]
 tuna
@@ -95,11 +88,11 @@ fred
 wilma
 barney
 betty
-remora
 
 [piholes_guest]
 fred
 wilma
+
 [piholes]
 barney
 betty
@@ -115,9 +108,9 @@ gazelle
 eagle.databytes.me
 betty
 barney
-catfish
-thrush
-remora
+
+[postfixclients:children]
+proxmox
 
 [guests:children]
 qemu_guests
@@ -125,16 +118,12 @@ containers
 
 [no_motd]
 bravo
-razor
 alpine3
 sentry
 tuna
 docker1
 docker2
 docker3
-catfish
-thrush
-remora
 
 [dragon_motd]
 trumpet
@@ -150,8 +139,6 @@ trumpet
 slave1
 
 [rasps]
-razor
-#vulture.databytes.me
 vulture
 #[arch]
 #arch1
@@ -177,8 +164,6 @@ mojave
 impala
 gazelle
 eagle.databytes.me
-thrush
-remora
 
 [debian:children]
 ubuntu
