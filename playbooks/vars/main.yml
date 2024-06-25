@@ -49,6 +49,7 @@ packages:
     - etckeeper
     - file
     - fonts-powerline
+    - fzf
     - git
     - htop
     - mailutils
@@ -68,6 +69,7 @@ packages:
     - curl
     - etckeeper
     - file
+    - fzf
     - git
     - htop
     - neofetch
