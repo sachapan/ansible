@@ -8,9 +8,9 @@
         path: "{{ item }}"
         state: absent
       with_items:
-        - "/usr/lib/python3/EXTERNALLY_MANAGED"
-        - "/usr/lib/python3.11/EXTERNALLY_MANAGED"
-        - "/usr/lib/python3.12/EXTERNALLY_MANAGED"
+        - "/usr/lib/python3/EXTERNALLY-MANAGED"
+        - "/usr/lib/python3.11/EXTERNALLY-MANAGED"
+        - "/usr/lib/python3.12/EXTERNALLY-MANAGED"
 
           #  - name: "Install telegram-send"
       # ansible.builtin.package:
