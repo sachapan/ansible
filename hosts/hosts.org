@@ -76,7 +76,7 @@ bravo
 #mx-linux1
 #proxbackup
 mojave
-eagle.databytes.me
+eagle
 
 [containers]
 tuna
@@ -105,7 +105,7 @@ docker2
 docker3
 impala
 gazelle
-eagle.databytes.me
+eagle
 betty
 barney
 
@@ -163,7 +163,7 @@ docker3
 mojave
 impala
 gazelle
-eagle.databytes.me
+eagle
 
 [debian:children]
 ubuntu
