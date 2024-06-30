@@ -8,10 +8,10 @@ mojave
 impala
 
 [proxmox]
-prox.databytes.me
-pve1.databytes.me
-pve2.databytes.me
-pvefw.databytes.me
+pve1
+pve2
+pve3
+pvefw
 
 [proxmox:vars]
 ansible_ssh_user=root
@@ -19,6 +19,8 @@ ansible_ssh_user=root
 [netdata]
 bravo
 mojave
+[netdata:children]
+proxmox
 
 [node_exporter]
 gazelle
@@ -28,13 +30,14 @@ docker2
 docker3
 tuna
 pvefw.databytes.me
-prox.databytes.me
-pve1.databytes.me
+pve1
+pve2
+pve3
 bravo
 eagle
+ubun2
+mojave
 
-[netdata:children]
-proxmox
 [nfs_clients]
 docker1
 docker2
@@ -42,6 +45,7 @@ docker3
 jellyfin
 gazelle
 impala
+ubun2
 
 [jellies]
 jellyfin
@@ -53,6 +57,7 @@ gazelle
 impala
 bravo
 mojave
+ubun2
 
 [docker_hosts]
 docker1
@@ -60,9 +65,12 @@ docker2
 docker3
 impala
 gazelle
+ubun2
+bravo
 
 [ubuntu]
 tuna
+ubun2
 #lariat
 #wazup
 #ductile
@@ -77,7 +85,7 @@ bravo
 #proxbackup
 mojave
 eagle
-
+ubun2
 [containers]
 tuna
 jellyfin
@@ -108,6 +116,7 @@ gazelle
 eagle
 betty
 barney
+ubun2
 
 [postfixclients:children]
 proxmox
@@ -124,6 +133,7 @@ tuna
 docker1
 docker2
 docker3
+ubun2
 
 [dragon_motd]
 trumpet
@@ -155,7 +165,6 @@ trumpet
 [debian]
 #atat
 bravo
-#prox.databytes.me
 jellyfin
 docker1
 docker2
