@@ -1,0 +1,19 @@
+---
+- name: Prune Docker
+  hosts: docker_hosts
+  become: true
+  vars_files:
+    vars/main.yml
+  tasks:
+    - name: Prune dangling bits
+      community.docker.docker_prune:
+        containers: true
+        images: true
+        images_filters:
+          dangling: false
+        networks: false
+        volumes: true
+        builder_cache: true
+    #      register: images_space_reclaimed
+    #- debug: 
+    #    var: images_space_reclaimed.output
