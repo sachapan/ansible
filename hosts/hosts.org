@@ -29,14 +29,22 @@ docker1
 docker2
 docker3
 tuna
-pvefw.databytes.me
-pve1
-pve2
-pve3
+#pvefw.databytes.me
+#pve1
+#pve2
+#pve3
 bravo
 eagle
 ubun2
 mojave
+fred
+wilma
+barney
+betty
+
+[node_exporter:children]
+proxmox
+
 
 [nfs_clients]
 docker1
