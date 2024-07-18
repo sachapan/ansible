@@ -1,11 +1,17 @@
 [ansible_hosts]
 tuna
 127.0.0.1 ansible_connection=local
-#comment
+
 [new_ones]
-jellyfin
-mojave
 impala
+
+[proxmox-cluster]
+pve1
+pve2
+pve3
+
+[proxmox-cluster:vars]
+ansible_ssh_user=root
 
 [proxmox]
 pve1
@@ -13,12 +19,16 @@ pve2
 pve3
 pvefw
 
+[proxmox:children]
+proxmox-cluster
+
 [proxmox:vars]
 ansible_ssh_user=root
 
 [netdata]
 bravo
 mojave
+
 [netdata:children]
 proxmox
 
@@ -35,16 +45,17 @@ tuna
 #pve3
 bravo
 eagle
-ubun2
 mojave
 fred
 wilma
 barney
 betty
 
+[mysqld_nodes]
+eagle
+
 [node_exporter:children]
 proxmox
-
 
 [nfs_clients]
 docker1
@@ -53,7 +64,6 @@ docker3
 jellyfin
 gazelle
 impala
-ubun2
 
 [jellies]
 jellyfin
@@ -65,7 +75,6 @@ gazelle
 impala
 bravo
 mojave
-ubun2
 
 [docker_hosts]
 docker1
@@ -73,12 +82,10 @@ docker2
 docker3
 impala
 gazelle
-ubun2
 bravo
 
 [ubuntu]
 tuna
-ubun2
 #lariat
 #wazup
 #ductile
@@ -93,7 +100,7 @@ bravo
 #proxbackup
 mojave
 eagle
-ubun2
+
 [containers]
 tuna
 jellyfin
@@ -124,7 +131,6 @@ gazelle
 eagle
 betty
 barney
-ubun2
 
 [postfixclients:children]
 proxmox
@@ -141,7 +147,6 @@ tuna
 docker1
 docker2
 docker3
-ubun2
 
 [dragon_motd]
 trumpet
