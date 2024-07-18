@@ -1,0 +1,9 @@
+---
+- hosts: proxmox
+  user: root
+  tasks:
+    - name: Install proxmoxer package
+      ansible.builtin.package:
+        name: "python3-proxmoxer"
+        state: latest
+        update_cache: true      
