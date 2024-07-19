@@ -1,0 +1,56 @@
+---
+# provision a new debian clone
+- hosts: pve2
+  vars_files:
+    vars/proxmox.yml
+  vars_prompt:
+    - name: vmname
+      prompt: Name of new vm
+      private: no
+  user: root
+  serial: 1
+  tasks:
+  - name: Clone new instance from debian-template
+    community.general.proxmox_kvm:
+      api_user: "{{ proxmox_api_user }}"
+      api_host: "{{ proxmox_api_host }}"
+      api_token_id: "{{ proxmox_api_token_id }}"
+      api_token_secret: "{{ proxmox_api_token_secret }}"
+      clone: "debian-template"
+      name: "{{ vmname }}"
+      node: pve2
+      #storage: zpool1
+      #format: qcow2
+      onboot: true
+      #clone_type: full
+      tags: cloned
+      #reboot: true
+  - name: Starting "{{ vmname }}"
+    community.general.proxmox_kvm:
+      api_user: "{{ proxmox_api_user }}"
+      api_host: "{{ proxmox_api_host }}"
+      api_token_id: "{{ proxmox_api_token_id }}"
+      api_token_secret: "{{ proxmox_api_token_secret }}"
+      name: "{{ vmname }}"
+      node: pve2
+      state: started
+  # Wait and then reboot vm since that seems to be required for DHCP to pick up hostname.
+  - name: Wait for vm to provision
+    ansible.builtin.wait_for:
+      timeout: 12
+    delegate_to: localhost
+  - name: Restart "{{ vmname }}" - Needed for DHCP to properly register hostname.
+    community.general.proxmox_kvm:
+      api_user: "{{ proxmox_api_user }}"
+      api_host: "{{ proxmox_api_host }}"
+      api_token_id: "{{ proxmox_api_token_id }}"
+      api_token_secret: "{{ proxmox_api_token_secret }}"
+      name: "{{ vmname }}"
+      node: pve2
+      state: restarted
+  - name: Wait for vm to restart.
+    ansible.builtin.wait_for:
+      timeout: 12
+    delegate_to: localhost
+ 
+
