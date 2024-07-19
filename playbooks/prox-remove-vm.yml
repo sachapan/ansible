@@ -1,0 +1,28 @@
+---
+- hosts: proxmox_cluster
+  vars_files:
+    vars/proxmox.yml
+  vars_prompt:
+    - name: vmid
+      prompt: Virtual machine ID to remove
+      private: no
+  user: root
+  serial: 1
+  tasks:
+  - name: Remove a vm instance
+    community.general.proxmox_kvm:
+      api_user: "{{ proxmox_api_user }}"
+        #root@pam
+      api_host: "{{ proxmox_api_host }}"
+        #pve2
+      api_token_id: "{{ proxmox_api_token_id }}"
+        #temp1
+      api_token_secret: "{{ proxmox_api_token_secret }}"
+        #4fcb1ee4-709a-4aa1-bf18-a6d5514010d9
+        #clone: debian-template
+        #name: debbie1
+      vmid: "{{ vmid }}"
+      state: absent
+      node: pve2
+        #storage: zpool1
+        #format: qcow2
