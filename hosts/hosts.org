@@ -2,15 +2,18 @@
 tuna
 127.0.0.1 ansible_connection=local
 
+[provision]
+debclone8
+
 [new_ones]
 impala
 
-[proxmox-cluster]
+[proxmox_cluster]
 pve1
 pve2
 pve3
 
-[proxmox-cluster:vars]
+[proxmox_cluster:vars]
 ansible_ssh_user=root
 
 [proxmox]
@@ -20,7 +23,7 @@ pve3
 pvefw
 
 [proxmox:children]
-proxmox-cluster
+proxmox_cluster
 
 [proxmox:vars]
 ansible_ssh_user=root
