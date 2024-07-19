@@ -1,0 +1,17 @@
+---
+dir: /etc/mysqld_exporter
+cert_file: /etc/mysqld_exporter/tls.cert
+key_file: /etc/mysqld_exporter/tls.key
+mysqld_exporter_tls_server_config:
+  cert_file: /etc/mysqld_exporter/tls.cert
+  csr_file: /etc/mysqld_exporter/tls.csr
+  key_file: /etc/mysqld_exporter/tls.key
+mysqld_exporter_basic_auth_users:
+  root: "{{ password }}"
+password: !vault |
+$ANSIBLE_VAULT;1.1;AES256
+34663738616337626563353033356433366563616561616438373666393464333431366138623063
+6530626236303861626161323131363935383462333730360a363461376333633162383365376665
+31353166633265623638373661666537336261383438306264663964356237373864653433326439
+3430303665656638320a613363333531303134306138623239623633363638346564303030373935
+6432
