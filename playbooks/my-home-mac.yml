@@ -1,0 +1,18 @@
+---
+
+- name: Initial system build and configuration.
+  hosts: all
+  gather_facts: true
+  become: true
+  remote_user: root
+  vars_files:
+    vars/main.yml
+  tasks:
+    - name: Setup my home sweet HOME
+      ansible.builtin.import_tasks: tasks/my-home.yml
+      become_user: "{{ user.name }}"
+      tags: home
+        #    - name: Set vi as default editor.
+        #      ansible.builtin.import_tasks: tasks/editor-vi.yml
+        #    - name: Set some .bashrc stuff for root user
+        #ansible.builtin.import_tasks: tasks/root_bashrc.yml
