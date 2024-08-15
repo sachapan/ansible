@@ -53,6 +53,7 @@ fred
 wilma
 barney
 betty
+moose
 
 [mysqld_nodes]
 eagle
@@ -67,6 +68,7 @@ docker3
 jellyfin
 gazelle
 impala
+moose
 
 [jellies]
 jellyfin
@@ -78,6 +80,7 @@ gazelle
 impala
 bravo
 mojave
+moose
 
 [docker_hosts]
 docker1
@@ -86,6 +89,7 @@ docker3
 impala
 gazelle
 bravo
+moose
 
 [ubuntu]
 tuna
@@ -103,6 +107,7 @@ bravo
 #proxbackup
 mojave
 eagle
+moose
 
 [containers]
 tuna
@@ -134,6 +139,7 @@ gazelle
 eagle
 betty
 barney
+moose
 
 [postfixclients:children]
 proxmox
@@ -189,6 +195,7 @@ mojave
 impala
 gazelle
 eagle
+moose
 
 [debian:children]
 ubuntu
