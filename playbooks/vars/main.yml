@@ -56,7 +56,7 @@ packages:
     - mailutils
     - neofetch
     - nodejs
-      #- npm
+    - npm
     - python3-pip
     - smartmontools
     - speedtest-cli
