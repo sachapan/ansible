@@ -30,3 +30,8 @@
         owner: root
         group: root
         mode: "0440"
+    - name: Ensure ansible public ssh key is in authoirized_keys
+      ansible.posix.authorized_key:
+        user: "{{ management_user.name }}"
+        state: present
+        key: "{{ lookup('file', './files/id_rsa_ansible.pub') }}"
