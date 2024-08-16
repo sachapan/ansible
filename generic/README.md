@@ -4,3 +4,8 @@
 
 Useful for client sites where I may or may not be granted a personal account.
 
+Run:
+
+`cp inventory-sample.ini inventory.ini`
+
+And edit with local site hosts.
