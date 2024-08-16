@@ -1,0 +1,80 @@
+---
+- name: install Docker
+  hosts: docker_hosts
+    #become: true
+  remote_user: root
+  vars_files:
+    vars/main.yml
+  tasks:
+    - name: Install apt-transport-https
+      ansible.builtin.apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - lsb-release
+          - gnupg
+        state: latest
+        update_cache: true
+
+    - name: Add signing key and repository
+      ansible.builtin.apt_key:
+        url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+        state: present
+          #      ansible.builtin.deb822_repository:
+          #        name: docker
+          #        types: [deb]
+          #        uris: "https://download.docker.com/linux/"
+          #        components: [binary]
+          #        state: present
+          #        enabled: true
+          #          #  "{{ ansible_distribution | lower }}/gpg"
+          #dest: /etc/apt/trusted.gpg.d/docker.asc
+          #mode: '0644'
+    - name: Remove default docker repository
+      ansible.builtin.file:
+        path: /etc/apt/sources.d/docker.list
+        state: absent
+    - name: Add repository into sources list
+      ansible.builtin.apt_repository:
+        filename: docker
+        #repo: "deb [arch={{ ansible_architecture }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+        repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable"
+        state: present
+    - name: Install Docker
+      ansible.builtin.apt:
+        name:
+          #- docker
+          #- docker.io
+          - docker-ce
+          - docker-compose
+          - docker-registry
+        state: latest
+        update_cache: true
+
+    - name: Start Docker engine
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Add monitoring user to docker group
+      ansible.builtin.user:
+        name: "{{ monitoring_user.name }}"
+          # "{{ user.name }}"
+        groups: docker
+        append: true
+
+          #    - name: Clone my docker config from github
+          #      become_user: "{{ user.name }}"
+          #      ansible.builtin.git:
+          #        repo: "{{ docker_repo }}"
+          #        dest: $HOME/docker
+          #        update: true
+          #        accept_newhostkey: yes
+          #      tags: docker-git
+          #    - name: Copy my git config for the docker repo
+          #      become_user: "{{ user.name }}"
+          #      ansible.builtin.copy:
+          #        src: "files/docker_git_config"
+          #        dest: "$HOME/docker/.git/config"
+          #      tags: docker-git
