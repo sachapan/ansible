@@ -30,7 +30,7 @@
         owner: root
         group: root
         mode: "0440"
-    - name: Ensure ansible public ssh key is in authoirized_keys
+    - name: Ensure ansible public ssh key is in authorized_keys
       ansible.posix.authorized_key:
         user: "{{ management_user.name }}"
         state: present
