@@ -1,0 +1,11 @@
+---
+#- name: Enable epel-release repo on Rocky
+#  ansible.builtin.package:
+#    name: epel-release
+#    state: present
+#  when: ansible_os_family == "Rocky"
+- name: Install required system packages
+  ansible.builtin.package:
+    name: "{{ packages[ansible_os_family | lower] }}"
+    state: latest
+    update_cache: true
