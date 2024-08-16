@@ -1,0 +1,92 @@
+---
+time_zone: America/Toronto
+locale_name: en_US.UTF-8
+
+management_user:
+  name: simba
+  UID: 503
+  shell: /bin/bash
+  groups:
+    - users
+    - sudo
+
+monitoring_user:
+  name: roomba 
+  UID: 504
+  shell: /bin/bash
+  groups:
+    - users
+
+config_dirs:
+  - { dir: ".ssh", mode: "0700" }
+
+config_files:
+  - { src: "../files/ssh_config", dest: "$HOME/.ssh/config", mode: "0600" }
+  - { src: "~/.ssh/id_rsa", dest: "$HOME/.ssh/id_rsa", mode: "0600" }
+  - { src: "~/.ssh/known_hosts", dest: "$HOME/.ssh/known_hosts", mode: "0600" }
+  - { src: "~/.ssh/authorized_keys", dest: "$HOME/.ssh/authorized_keys", mode: "0600" }
+  - { src: "~/.vim/autoload", dest: "$HOME/.vim/", mode: "0600" }
+
+copy_local_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"
+
+packages:
+  debian:
+    - bat
+    - btop
+    - cmdtest
+    - curl
+    - etckeeper
+    - file
+    - fonts-powerline
+    - fzf
+    - git
+    - htop
+    - mailutils
+    - neofetch
+    - nodejs
+    - npm
+    - python3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - yarn
+    - zsh
+  alpine:
+    - curl
+    - etckeeper
+    - file
+    - fzf
+    - git
+    - htop
+    - neofetch
+    - npm
+    - perl
+    - py3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - yarn
+    - zsh
+  redhat:
+    - curl
+    - etckeeper
+    - file
+    - powerline-fonts
+    - git
+    - htop
+    - neofetch
+    - python3-pip
+    - smartmontools
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - zsh
+
+
