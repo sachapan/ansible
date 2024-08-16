@@ -8,7 +8,7 @@
   vars_files:
     vars/main.yml
   tasks:
-  - name: Configure ansible account - simba
+  - name: Configure ansible account
     block:
     - name: Create user
       ansible.builtin.user:
@@ -21,3 +21,12 @@
         append: true
         create_home: true
         shell: "{{ management_user.shell }}"
+    - name: Grant ansible account sudo privilege
+      ansible.builtin.lineinfile:
+        path: "/etc/sudoers.d/{{ management_user.name }}"
+        line: "{{ management_user.name }} ALL=(ALL) NOPASSWD: ALL"
+        state: present
+        create: "yes"
+        owner: root
+        group: root
+        mode: "0440"
