@@ -14,11 +14,11 @@
         state: latest
         update_cache: true
       when: ansible_facts['distribution'] == "Ubuntu"
-    - name: Set locale
-      ansible.builtin.import_tasks:
-        tasks/locale.yml
-      tags: locale
-      when: ansible_os_family != "Alpine"
+    #    - name: Set locale
+    #  ansible.builtin.import_tasks:
+    #    tasks/locale.yml
+    #  tags: locale
+    #   when: ansible_os_family != "Alpine"
     - name: Set timezone
       ansible.builtin.import_tasks:
         tasks/timezone.yml
