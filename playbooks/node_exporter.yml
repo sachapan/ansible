@@ -1,8 +1,7 @@
-- name: Deploy node_exporter service
-  hosts: node_exporter
+- hosts: all
+- name: Deploy node_exporter service 
+  hosts: node_exporter 
   gather_facts: true
   become: true
   roles:
-    - role: node_exporter
-      state: present
-      enabled: true
+    - role: geerlingguy.node_exporter
