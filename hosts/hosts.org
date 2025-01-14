@@ -8,6 +8,12 @@ debclone8
 [new_ones]
 impala
 
+[proxmox_backup]
+pbs
+
+[proxmox_backup:vars]
+ansible_ssh_user=root
+
 [proxmox_cluster]
 pve1
 pve2
@@ -28,12 +34,12 @@ proxmox_cluster
 [proxmox:vars]
 ansible_ssh_user=root
 
-[netdata]
-bravo
-mojave
+#[netdata]
+#bravo
+#mojave
 
-[netdata:children]
-proxmox
+#[netdata:children]
+#proxmox
 
 [node_exporter]
 gazelle
@@ -46,6 +52,7 @@ tuna
 #pve1
 #pve2
 #pve3
+pbs
 bravo
 eagle
 mojave
@@ -53,7 +60,19 @@ fred
 wilma
 barney
 betty
+hare
+lemur
+mule
+wolf
+vulture
 moose
+slave1
+jellyfin
+
+[smartctl_exporter]
+pve2
+pve1
+pve3
 
 [mysqld_nodes]
 eagle
@@ -64,10 +83,12 @@ proxmox
 [nfs_clients]
 docker1
 docker2
-docker3
-jellyfin
+#docker3
+#jellyfin
 gazelle
 impala
+#lemur
+wolf
 moose
 
 [jellies]
@@ -80,6 +101,9 @@ gazelle
 impala
 bravo
 mojave
+lemur
+mule
+wolf
 moose
 
 [docker_hosts]
@@ -89,6 +113,7 @@ docker3
 impala
 gazelle
 bravo
+wolf
 moose
 
 [ubuntu]
@@ -107,6 +132,7 @@ bravo
 #proxbackup
 mojave
 eagle
+wolf
 moose
 
 [containers]
@@ -119,6 +145,8 @@ fred
 wilma
 barney
 betty
+hare
+lemur
 
 [piholes_guest]
 fred
@@ -139,10 +167,16 @@ gazelle
 eagle
 betty
 barney
+hare
+lemur
+mule
+wolf
 moose
+slave1
 
 [postfixclients:children]
 proxmox
+proxmox_backup
 
 [guests:children]
 qemu_guests
@@ -167,8 +201,8 @@ trumpet
 
 [dmz]
 
-[mac]
-slave1
+#[mac]
+#slave1
 
 [rasps]
 vulture
@@ -195,7 +229,11 @@ mojave
 impala
 gazelle
 eagle
+hare
+lemur
+wolf
 moose
+slave1
 
 [debian:children]
 ubuntu

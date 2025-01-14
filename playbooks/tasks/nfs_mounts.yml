@@ -57,7 +57,8 @@
         dump: "0"
         passno: "0"
         state: mounted
-        src: "deathstar:/TV"
+          #src: "deathstar:/TV"
+        src: "mule:/mnt/big_one/TV"
         path: "/mnt/TV"
     - name: Ensure /mnt/archive exists
       #Archive TV exists
