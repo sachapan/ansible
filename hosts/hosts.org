@@ -68,6 +68,7 @@ vulture
 moose
 slave1
 jellyfin
+gitea
 
 [smartctl_exporter]
 pve2
@@ -109,7 +110,7 @@ moose
 [docker_hosts]
 docker1
 docker2
-docker3
+#docker3
 impala
 gazelle
 bravo
@@ -147,6 +148,7 @@ barney
 betty
 hare
 lemur
+gitea
 
 [piholes_guest]
 fred
@@ -173,6 +175,7 @@ mule
 wolf
 moose
 slave1
+gitea
 
 [postfixclients:children]
 proxmox
@@ -234,6 +237,7 @@ lemur
 wolf
 moose
 slave1
+gitea
 
 [debian:children]
 ubuntu
