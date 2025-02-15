@@ -46,7 +46,7 @@ gazelle
 impala
 docker1
 docker2
-docker3
+#docker3
 tuna
 #pvefw.databytes.me
 #pve1
@@ -60,7 +60,7 @@ fred
 wilma
 barney
 betty
-hare
+#hare
 lemur
 mule
 wolf
@@ -97,7 +97,7 @@ jellyfin
 tuna
 docker1
 docker2
-docker3
+#docker3
 gazelle
 impala
 bravo
@@ -141,12 +141,12 @@ tuna
 jellyfin
 docker1
 docker2
-docker3
+#docker3
 fred
 wilma
 barney
 betty
-hare
+#hare
 lemur
 gitea
 
@@ -163,13 +163,13 @@ tuna
 mojave
 docker1
 docker2
-docker3
+#docker3
 impala
 gazelle
 eagle
 betty
 barney
-hare
+#hare
 lemur
 mule
 wolf
@@ -192,7 +192,7 @@ sentry
 tuna
 docker1
 docker2
-docker3
+#docker3
 
 [dragon_motd]
 trumpet
@@ -227,17 +227,20 @@ bravo
 jellyfin
 docker1
 docker2
-docker3
+#docker3
 mojave
 impala
 gazelle
 eagle
-hare
+#hare
 lemur
 wolf
 moose
 slave1
 gitea
+
+[debian:vars]
+ansible_ssh_private_key_file=~/.ssh/id_rsa
 
 [debian:children]
 ubuntu
