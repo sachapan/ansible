@@ -34,6 +34,8 @@ config_files:
     }
   - { src: "../files/ssh_config", dest: "$HOME/.ssh/config", mode: "0600" }
   - { src: "~/.ssh/id_rsa_github2", dest: "$HOME/.ssh/id_rsa_github2", mode: "0600" }
+  - { src: "~/.ssh/id_rsa_gitea.pub", dest: "$HOME/.ssh/id_rsa_gitea.pub", mode: "0600" }
+  - { src: "~/.ssh/id_rsa_gitea", dest: "$HOME/.ssh/id_rsa_gitea", mode: "0600" }
   - { src: "~/.ssh/id_rsa", dest: "$HOME/.ssh/id_rsa", mode: "0600" }
   - { src: "~/.ssh/known_hosts", dest: "$HOME/.ssh/known_hosts", mode: "0600" }
   # - {src: "../files/.gitconfig", dest: "$HOME/.gitconfig", mode: "0600" }
@@ -42,6 +44,30 @@ config_files:
 
 copy_local_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"
 packages:
+  lmde:
+    - bat
+    - btop
+    - cmdtest
+    - curl
+    - etckeeper
+    - file
+    - fonts-powerline
+    - fzf
+    - git
+    - htop
+    - mailutils
+    - neofetch
+    - nodejs
+    - npm
+    - python3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - yarn
+    - zsh
   debian:
     - bat
     - btop
@@ -117,7 +143,8 @@ remove_files:
   - .xscreensaver
   - .zshrc
 zsh_repo: "https://github.com/ohmyzsh/ohmyzsh.git"
-docker_repo: "git@github.com:sachapan/docker.git"
+  #docker_repo: "git@github.com:sachapan/docker.git"
+docker_repo: "gitea@gitea:sachapan/docker.git"
 # Pull encrypted variables in
 pushbullet_access-token : "{{ vault_PUSHBULLET_ACCESS_TOKEN }}"
 pushbullet_recipient : "{{ vault_PUSHBULLET_RECIPIENT_PUSHBULLET }}"
