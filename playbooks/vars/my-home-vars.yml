@@ -9,6 +9,8 @@ user:
 config_files:
   - { src: "~/config/telegram-send.conf", dest: "$HOME/.config/telegram-send.conf", mode: "0600" }
   - { src: "../files/ssh_config", dest: "$HOME/.ssh/config", mode: "0600" }
+  - { src: "~/.ssh/id_rsa_gitea", dest: "$HOME/.ssh/id_rsa_gitea", mode: "0600" }
+  - { src: "~/.ssh/id_rsa_gitea.pub", dest: "$HOME/.ssh/id_rsa_gitea.pub", mode: "0600" }
   - { src: "~/.ssh/id_rsa_github2", dest: "$HOME/.ssh/id_rsa_github2", mode: "0600" }
   - { src: "../files/known_hosts", dest: "$HOME/.ssh/known_hosts", mode: "0600" }
   #- { src: "../files/.gitconfig", dest: "$HOME/.gitconfig", mode: "0600" }
