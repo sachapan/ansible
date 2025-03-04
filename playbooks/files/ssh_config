@@ -4,8 +4,15 @@ Host github.com
  IdentityFile ~/.ssh/id_rsa_github2
  User git
 
-Host razor
- HostName razor
+Host git
+ HostName gitea
+ Port 2222
+ User sachapan
+ IdentityFile ~/.ssh/id_rsa_gitea
+
+Host gitea
+ HostName gitea
+ Port 22
  User sacha
  IdentityFile ~/.ssh/id_rsa
 
@@ -14,7 +21,8 @@ Host hawk
  User sacha
  IdentityFile ~/.ssh/id_rsa
 
-Host bravo 
- HostName bravo 
+Host bravo
+ HostName bravo
  User sacha
  IdentityFile ~/.ssh/id_rsa
+

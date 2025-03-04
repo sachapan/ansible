@@ -62,17 +62,6 @@
         groups: docker
         append: true
 
-    - name: Clone my docker config from github
-      become_user: "{{ user.name }}"
-      ansible.builtin.git:
-        repo: "{{ docker_repo }}"
-        dest: $HOME/docker
-        update: true
-        accept_newhostkey: yes
-      tags: docker-git
-    - name: Copy my git config for the docker repo
-      become_user: "{{ user.name }}"
-      ansible.builtin.copy:
-        src: "files/docker_git_config"
-        dest: "$HOME/docker/.git/config"
-      tags: docker-git
+    - name: Do my docker things
+      ansible.builtin.import_tasks: tasks/my-docker.yml 
+      tags: my-docker
