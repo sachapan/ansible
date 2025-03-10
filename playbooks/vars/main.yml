@@ -4,8 +4,7 @@ jellyfin:
   name: jellyfin
   UID: 503
   shell: /bin/zsh
-  groups:
-    users
+  groups: users
 # monitoring user
 monitoring:
   name: monitor
@@ -30,16 +29,32 @@ config_files:
   - {
       src: "~/.config/telegram-send.conf",
       dest: "$HOME/.config/telegram-send.conf",
-      mode: "0600"
+      mode: "0600",
     }
   - { src: "../files/ssh_config", dest: "$HOME/.ssh/config", mode: "0600" }
-  - { src: "~/.ssh/id_rsa_github2", dest: "$HOME/.ssh/id_rsa_github2", mode: "0600" }
-  - { src: "~/.ssh/id_rsa_gitea.pub", dest: "$HOME/.ssh/id_rsa_gitea.pub", mode: "0600" }
-  - { src: "~/.ssh/id_rsa_gitea", dest: "$HOME/.ssh/id_rsa_gitea", mode: "0600" }
+  - {
+      src: "~/.ssh/id_rsa_github2",
+      dest: "$HOME/.ssh/id_rsa_github2",
+      mode: "0600",
+    }
+  - {
+      src: "~/.ssh/id_rsa_gitea.pub",
+      dest: "$HOME/.ssh/id_rsa_gitea.pub",
+      mode: "0600",
+    }
+  - {
+      src: "~/.ssh/id_rsa_gitea",
+      dest: "$HOME/.ssh/id_rsa_gitea",
+      mode: "0600",
+    }
   - { src: "~/.ssh/id_rsa", dest: "$HOME/.ssh/id_rsa", mode: "0600" }
   - { src: "~/.ssh/known_hosts", dest: "$HOME/.ssh/known_hosts", mode: "0600" }
   # - {src: "../files/.gitconfig", dest: "$HOME/.gitconfig", mode: "0600" }
-  - { src: "~/.ssh/authorized_keys", dest: "$HOME/.ssh/authorized_keys", mode: "0600" }
+  - {
+      src: "~/.ssh/authorized_keys",
+      dest: "$HOME/.ssh/authorized_keys",
+      mode: "0600",
+    }
   - { src: "~/.vim/autoload", dest: "$HOME/.vim/", mode: "0600" }
 
 copy_local_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"
@@ -138,18 +153,31 @@ remove_files:
   - .minttyrc
   - .profile
   - .tmux.conf
-#  - .vim
+  #  - .vim
   - .vimrc
   - .xscreensaver
   - .zshrc
-zsh_repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+zsh_repo:
+  "https://github.com/ohmyzsh/ohmyzsh.git"
   #docker_repo: "git@github.com:sachapan/docker.git"
 docker_repo: "gitea@gitea:sachapan/docker.git"
 # Pull encrypted variables in
-pushbullet_access-token : "{{ vault_PUSHBULLET_ACCESS_TOKEN }}"
-pushbullet_recipient : "{{ vault_PUSHBULLET_RECIPIENT_PUSHBULLET }}"
-netdata_claim-token : "{{ vault_netdata_claim_token }}"
-netdata_claim-rooms : "{{ vault_netdata_claim_rooms }}"
-netdata_claim-url : "{{vault_netdata_claim-url }}"
-telegram_token : "{{ vault_telegram_token }}"
-telegram_chatid : "{{ vault_telegram_chat_id }}"
+pushbullet_access-token: "{{ vault_PUSHBULLET_ACCESS_TOKEN }}"
+pushbullet_recipient: "{{ vault_PUSHBULLET_RECIPIENT_PUSHBULLET }}"
+netdata_claim-token: "{{ vault_netdata_claim_token }}"
+netdata_claim-rooms: "{{ vault_netdata_claim_rooms }}"
+netdata_claim-url: "{{vault_netdata_claim-url }}"
+telegram_token: "{{ vault_telegram_token }}"
+telegram_chatid: "{{ vault_telegram_chat_id }}"
+
+  #node_exporter_version: 1.9.0
+  #node_exporter_web_listen_address: "0.0.0.0:9100"
+  #node_exporter_web_telemetry_path: "/metrics"
+  #node_exporter_textfile_dir: "/var/lib/node_exporter"
+  #node_exporter_enabled_collectors:
+  #  - directory: "{{ node_exporter_textfile_dir }}"
+  #node_exporter_binary_install_dir: "/usr/local/bin"
+  #node_exporter_user: "node_exporter"
+  #node_exporter_group: "node_exporter"
+  #node_exporter_config_dir: "/etc/node_exporter"
+  #node_exporter_local_cache_path: "/tmp/node_exporter-{{ ansible_facts['system'] | lower }}-{{ _node_exporter_go_ansible_arch }}/{{ node_exporter_version }}"
