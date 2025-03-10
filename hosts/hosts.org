@@ -23,9 +23,6 @@ pve3
 ansible_ssh_user=root
 
 [proxmox]
-pve1
-pve2
-pve3
 pvefw
 
 [proxmox:children]
@@ -34,24 +31,12 @@ proxmox_cluster
 [proxmox:vars]
 ansible_ssh_user=root
 
-#[netdata]
-#bravo
-#mojave
-
-#[netdata:children]
-#proxmox
-
 [node_exporter]
 gazelle
 impala
 docker1
 docker2
-#docker3
 tuna
-#pvefw.databytes.me
-#pve1
-#pve2
-#pve3
 pbs
 bravo
 eagle
@@ -61,14 +46,17 @@ wilma
 barney
 betty
 #hare
-lemur
-mule
+#lemur
+#mule
 wolf
 vulture
 moose
 slave1
-jellyfin
+#jellyfin
 gitea
+
+[node_exporter:children]
+proxmox_cluster
 
 [smartctl_exporter]
 pve2
@@ -77,9 +65,6 @@ pve3
 
 [mysqld_nodes]
 eagle
-
-[node_exporter:children]
-proxmox
 
 [nfs_clients]
 docker1
