@@ -1,7 +1,7 @@
-- hosts: all
-- name: Deploy node_exporter service 
-  hosts: node_exporter 
-  gather_facts: true
+---
+- hosts: node_exporter
   become: true
+  vars_files:
+    vars/node_exporter.yml
   roles:
-    - role: geerlingguy.node_exporter
+    - prometheus.prometheus.node_exporter
