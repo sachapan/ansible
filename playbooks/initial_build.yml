@@ -35,6 +35,9 @@
       #  name: "{{ packages[ansible_os_family | lower] }}"
       #  state: latest
       #  update_cache: true
+    - name: Update packages
+      ansible.builtin.import_tasks:
+        tasks/debian-patch.yml
     - name: Call notifiers task book
       ansible.builtin.import_tasks: tasks/notifiers.yml
       tags: notifiers
