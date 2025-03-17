@@ -1,12 +1,5 @@
 # TODO Currently assumes node_exporter has already been installed - BAD
-# install required packages
-# moreutils, update-notifier-common
-# install node-exporter
-# copy apt-metrics.sh to /usr/share/
-# install apt hook to /etc/apt/apt.conf.d
-#  to send output to /var/lib/node_exporter/textfile_collector
-# configure node-exporter systemd startup file to query file /var/lib/node_exporter/textfile_collector
-#
+
 ---
 - name: Install apt package status monitoring for node_exporter ingestion
   hosts: node_exporter
@@ -14,7 +7,7 @@
   vars_files:
     vars/main.yml
   handlers:
-    - name: restart_node_exporter
+    - name: Restart_node_exporter
       ansible.builtin.service:
         name: node_exporter
         state: restarted
@@ -32,36 +25,47 @@
           #    name: 
           #      - python3-pip
           #    update_cache: true
-      when: ansible_distribution == 'Debian' 
+      when: ansible_facts['distribution'] == 'Debian' 
     - name: Install required packages on Debian
       ansible.builtin.apt:
         name:
           - python3-pip
           - moreutils
           - apt-config-auto-update
+          - python3-prometheus-client
         update_cache: true
-      when: ansible_distribution == "Debian"
-    - name: Install required packages on Ubuntu
+      when: 
+        - ansible_facts['distribution'] == "Debian" or
+          ( ansible_facts['distribution'] == 'Ubuntu' and
+          ansible_facts['distribution_major_version'] < "24")
+    - name: Install required packages on Ubuntu 24
       ansible.builtin.apt:
         name:
           - moreutils
-            #- update-notifier-common
-          - apt-config-auto-update
-      when: ansible_distribution == "Ubuntu"
-    - name: Install prometheus_client with pip
-      ansible.builtin.pip:
-        name: 
-          - prometheus_client
+          - update-notifier-common
+          - python3-prometheus-client
+      when: 
+        - ansible_distribution == "Ubuntu"
+        - ansible_distribution_major_version == "24"
+#    - name: Install prometheus_client with pip on Debian
+#      ansible.builtin.pip:
+#        name: 
+#          - prometheus_client
+#      when: ansible_distribution == "Debian"
     - name: Install apt-info script
       ansible.builtin.copy:
         src: "files/apt-info"
         dest: "/usr/local/bin/apt-info"
         mode: '0755'
-    - name: Ensure stats collection directory exists
+#    - name: Ensure stats collection directory exists
+#      ansible.builtin.file:
+#        path: "{ node_exporter_textfile_dir }" 
+#        state: directory
+#        mode: '0755'
+    - name: Remove legacy stats collection directory /var/log/proms
       ansible.builtin.file:
-        path: /var/log/proms
-        state: directory
-        mode: '0755'
+        path: /var/log/proms/
+        state: absent
     - name: Custom auto-update config file
       ansible.builtin.copy:
         src: "files/apt.conf.d_10periodic"
@@ -70,12 +74,6 @@
       ansible.builtin.copy:
         src: "files/apt.conf.d_60prometheus-metrics"
         dest: "/etc/apt/apt.conf.d/60prometheus-metrics"
-    - name: Ensure node_exporter will monitor for apt info prom file
-      ansible.builtin.copy:
-        src: "files/node_exporter.service-filecollector"
-        dest: "/etc/systemd/system/node_exporter.service"
-          #notify:
-          #- restart_node_exporter
     - name: Restart node_exporter
       ansible.builtin.service:
         name: node_exporter
@@ -84,4 +82,3 @@
     - name: Update apt package listing
       ansible.builtin.apt:
         update_cache: true
-
