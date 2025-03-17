@@ -1,12 +1,10 @@
 ---
 - name: Upgrade debian hosts
-  hosts: debian
+  hosts: all
   become: yes
   tasks:
-  - name: Update cache and upgrade all installed packages
-    ansible.builtin.apt:
-      upgrade: yes
-      update_cache: yes
-      clean: yes
-      cache_valid_time: 86400 #one day
+  - name: Apply all patches, update cache and autoremove defunct packages
+    ansible.builtin.import_tasks:
+      tasks/debian-patch.yml
+    when: ansible_facts['distribution'] == 'Debian'
 
