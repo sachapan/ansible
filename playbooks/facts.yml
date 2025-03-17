@@ -1,7 +1,10 @@
 ---
 - hosts: all
+  gather_facts: yes
   tasks:
-
+  - name: Display all facts
+    debug:
+      var: ansible_facts
   - name: Gather facts about the OS
     #setup:
     #  filter: ansible_lsb.description
