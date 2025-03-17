@@ -8,7 +8,7 @@
         path: "$HOME/{{ item.dir }}"
         state: directory
         owner: "{{ user.name }}"
-        group: users
+          #        group: users
         mode: "{{ item.mode }}"
       loop: "{{ config_dirs }}"
 #    - name: Ensure HOME/.config exists
@@ -26,6 +26,7 @@
         mode: "{{ item.mode }}"
       loop: "{{ config_files }}"
       changed_when: false
+      tags: config_files
 #    - name: Remove github.com ssh server key since it changes often
 #      ansible.builtin.known_hosts:
 #        path: $HOME/.ssh/known_hosts
