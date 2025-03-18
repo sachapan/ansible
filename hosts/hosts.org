@@ -23,13 +23,22 @@ pve3
 ansible_ssh_user=root
 
 [proxmox]
-pvefw
+pvefw ansible_host=10.0.0.13 ansible_user=root
+
+[proxmox:vars]
+ansible_python_interpreter=/usr/bin/python3
 
 [proxmox:children]
 proxmox_cluster
 
 [proxmox:vars]
 ansible_ssh_user=root
+
+[dns]
+betty
+barney
+fred
+wilma
 
 [node_exporter]
 gazelle
@@ -101,6 +110,7 @@ gazelle
 bravo
 wolf
 moose
+vulture
 
 [ubuntu]
 tuna
@@ -232,6 +242,7 @@ ubuntu
 rasps
 piholes_guest
 piholes
+proxmox_cluster
 
 [debian:vars]
 ansible_python_interpreter=/usr/bin/python3
