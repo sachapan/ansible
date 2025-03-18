@@ -1,0 +1,83 @@
+---
+# tasks file for initial-build
+
+- name: Set time zone
+  ansible.builtin.import_tasks: timezone.yml
+
+- name: Install required system packages "{{ packages[ansible_os_family | lower] }}"
+  ansible.builtin.import_tasks: packages.yml
+
+- name: Check if ipv6 settings are disabled in /etc/sysctl.conf
+  ansible.builtin.lineinfile:
+    path: "/etc/sysctl.conf"
+    state: present
+    line: "{{ item }}"
+  with_items:
+    - "net.ipv6.conf.all.disable_ipv6=1"
+    - "net.ipv6.conf.default.disable_ipv6=1"
+    - "net.ipv6.conf.lo.disable_ipv6=1"
+
+- name: Apply ipv6 disabled configuration
+  ansible.builtin.shell: sysctl -p
+
+- name: Set journald max to "{{ journal_max }}"
+  ansible.builtin.import_tasks: journald_limit.yml
+
+#  ansible.builtin.lineinfile:
+#    path: "/etc/systemd/journald.conf"
+#    state: present
+#    line: "{{ item }}"
+#  with_items:
+#    - "SystemMaxUse= {{ journal_max }}"
+#- name: Apply configuration
+#  ansible.builtin.systemd:
+#    state: restarted
+#    name: systemd-journald
+
+  # ansible.builtin.package:
+  #  name: "{{ packages[ansible_os_family | lower] }}"
+  #  state: latest
+  #  update_cache: true
+  #- name: Update packages
+  #ansible.builtin.import_tasks:
+  #  tasks/debian-patch.yml
+  #- name: Call notifiers task book
+  #ansible.builtin.import_tasks: tasks/notifiers.yml
+  #tags: notifiers
+    #- name: Setup my user
+    #ansible.builtin.import_tasks: tasks/my-user.yml
+    #- name: Setup my home sweet HOME
+    #ansible.builtin.import_tasks: tasks/my-home.yml
+    #become_user: "{{ user.name }}"
+    #tags: home
+    #- name: Change some root defaults
+    #ansible.builtin.import_tasks: tasks/fix_root.yml
+    #tags: root
+    #- name: Fix ping permission on lxc containers.
+    #ansible.builtin.import_tasks: 
+    #tasks/fix_ping.yml
+    #when: ansible_virtualization_type == "lxc"
+    #- name: Disable motd on select hosts.
+    #ansible.builtin.import_tasks: tasks/no-motd.yml
+    #when: inventory_hostname in groups["no_motd"]
+    #- name: Enable dragon motd on select hosts.
+    #ansible.builtin.import_tasks: tasks/dragon_motd.yml
+    #when: inventory_hostname in groups["dragon_motd"]
+    #- name: adjust journald config
+    #ansible.builtin.import_tasks: tasks/journald_limit.yml
+    #when: ansible_os_family != "Alpine"
+#    - name: Disable ssh password login for root
+#      ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
+#    - name: Configure ssh
+#      ansible.builtin.import_playbook: ssh.yml 
+#  handlers:
+#    - name: Restart sshd
+#      ansible.builtin.service:
+#        name: sshd
+#        state: reloaded
+#- name: Enable epel-release repo on Rocky
+#  ansible.builtin.package:
+#    name: epel-release
+#    state: present
+#  when: ansible_os_family == "Rocky"
+

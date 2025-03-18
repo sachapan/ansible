@@ -1,0 +1,7 @@
+- name: Set vi as default editor.
+  ansible.builtin.import_tasks: tasks/editor-vi.yml
+- name: Set some .bashrc stuff for root user
+  ansible.builtin.import_tasks: tasks/root_bashrc.yml
+- name: Disable ssh password login for root
+  ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
+

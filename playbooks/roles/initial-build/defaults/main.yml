@@ -1,0 +1,96 @@
+---
+# defaults file for initial-build
+time_zone: America/Toronto
+user:
+  name: sacha
+  ID: 501
+  shell: /bin/zsh
+  groups:
+    - users
+packages:
+  lmde:
+    - bat
+    - btop
+    - cmdtest
+    - curl
+    - etckeeper
+    - file
+    - fonts-powerline
+    - fzf
+    - git
+    - htop
+    - mailutils
+    - neofetch
+    - nodejs
+    - npm
+    - python3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - yarn
+    - zsh
+  debian:
+    - bat
+    - btop
+    - cmdtest
+    - curl
+    - etckeeper
+    - file
+    - fonts-powerline
+    - fzf
+    - git
+    - htop
+    - mailutils
+    - neofetch
+    - nodejs
+    - npm
+    - python3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - yarn
+    - zsh
+  alpine:
+    - curl
+    - etckeeper
+    - file
+    - fzf
+    - git
+    - htop
+    - neofetch
+    - npm
+    - perl
+    - py3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - yarn
+    - zsh
+  redhat:
+    - curl
+    - etckeeper
+    - file
+    - powerline-fonts
+    - git
+    - htop
+    - neofetch
+    - python3-pip
+    - smartmontools
+    # - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - zsh
+locale_name: en_US.UTF-8
+journal_max: 500M
+

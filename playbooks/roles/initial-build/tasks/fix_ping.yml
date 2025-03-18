@@ -1,0 +1,20 @@
+---
+- name: Is this an lxc container
+  remote_user: sacha
+  ignore_errors: true
+  #when: ansible_virtualization_type == "lxc"
+  block:
+    - name: Check if ping fails for my user
+      ansible.builtin.shell: ping -c 1 localhost
+      ignore_errors: true
+      changed_when: false
+      register: pingperm
+        #- debug: var=pingperm.stderr_lines
+        #- debug: var=pingperm.stdout_lines
+    - name: Change permissions if needed
+      become: true
+      become_user: root
+      ansible.builtin.shell: setcap cap_net_raw+p /bin/ping
+      when: pingperm.stderr_lines is search("Operation not permitted")
+  when: ansible_virtualization_type is search("lxc")
+
