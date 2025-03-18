@@ -1,56 +1,89 @@
 ---
-# provision a new debian clone
 - hosts: pve2
+  name: Provision a new debian clone
   vars_files:
-    vars/proxmox.yml
+    vars/main.yml
   vars_prompt:
     - name: vmname
       prompt: Name of new vm
-      private: no
+      private: false
   user: root
   serial: 1
   tasks:
-  - name: Clone new instance from debian-template
-    community.general.proxmox_kvm:
-      api_user: "{{ proxmox_api_user }}"
-      api_host: "{{ proxmox_api_host }}"
-      api_token_id: "{{ proxmox_api_token_id }}"
-      api_token_secret: "{{ proxmox_api_token_secret }}"
-      clone: "debian-template"
-      name: "{{ vmname }}"
-      node: pve2
-      #storage: zpool1
-      #format: qcow2
-      onboot: true
-      #clone_type: full
-      tags: cloned
-      #reboot: true
-  - name: Starting "{{ vmname }}"
-    community.general.proxmox_kvm:
-      api_user: "{{ proxmox_api_user }}"
-      api_host: "{{ proxmox_api_host }}"
-      api_token_id: "{{ proxmox_api_token_id }}"
-      api_token_secret: "{{ proxmox_api_token_secret }}"
-      name: "{{ vmname }}"
-      node: pve2
-      state: started
-  # Wait and then reboot vm since that seems to be required for DHCP to pick up hostname.
-  - name: Wait for vm to provision
-    ansible.builtin.wait_for:
-      timeout: 12
-    delegate_to: localhost
-  - name: Restart "{{ vmname }}" - Needed for DHCP to properly register hostname.
-    community.general.proxmox_kvm:
-      api_user: "{{ proxmox_api_user }}"
-      api_host: "{{ proxmox_api_host }}"
-      api_token_id: "{{ proxmox_api_token_id }}"
-      api_token_secret: "{{ proxmox_api_token_secret }}"
-      name: "{{ vmname }}"
-      node: pve2
-      state: restarted
-  - name: Wait for vm to restart.
-    ansible.builtin.wait_for:
-      timeout: 12
-    delegate_to: localhost
- 
-
+    - name: Clone new instance from debian-template
+      community.general.proxmox_kvm:
+        api_user: "{{ proxmox_api_user }}"
+        api_host: "{{ proxmox_api_host }}"
+        api_token_id: "{{ proxmox_api_token_id }}"
+        api_token_secret: "{{ proxmox_api_token_secret }}"
+        clone: "debian-template"
+        name: "{{ vmname }}"
+        node: pve2
+        # storage: zpool1
+        # format: qcow2
+        onboot: true
+        # clone_type: full
+        tags: cloned
+        # reboot: true
+    - name: Starting "{{ vmname }}"
+      community.general.proxmox_kvm:
+        api_user: "{{ proxmox_api_user }}"
+        api_host: "{{ proxmox_api_host }}"
+        api_token_id: "{{ proxmox_api_token_id }}"
+        api_token_secret: "{{ proxmox_api_token_secret }}"
+        name: "{{ vmname }}"
+        node: pve2
+        state: started
+    # Wait and then reboot vm since that seems to be required for DHCP to pick up hostname.
+    - name: Wait for vm to provision
+      ansible.builtin.wait_for:
+        timeout: 12
+      delegate_to: localhost
+    - name: Restart {{ vmname }} - Needed for DHCP to properly register hostname.
+      community.general.proxmox_kvm:
+        api_user: "{{ proxmox_api_user }}"
+        api_host: "{{ proxmox_api_host }}"
+        api_token_id: "{{ proxmox_api_token_id }}"
+        api_token_secret: "{{ proxmox_api_token_secret }}"
+        name: "{{ vmname }}"
+        node: pve2
+        state: restarted
+    - name: Wait for vm to restart.
+      ansible.builtin.wait_for:
+        timeout: 12
+      delegate_to: localhost
+#- name: Initial build.
+#  ansible.builtin.import_playbook: initial_build.yml
+#    - name: Change some root defaults
+#      ansible.builtin.import_tasks: tasks/fix_root.yml
+#      tags: root
+#    - name: Fix ping permission on lxc containers.
+#      ansible.builtin.import_tasks:
+#        tasks/fix_ping.yml
+#      when: ansible_virtualization_type == "lxc"
+  post_tasks:
+    - name: Perform initial build
+      ansible.builtin.import_tasks: tasks/prox-initial-build.yml
+      delegate_to: "{{ vmname }}"
+    #block:
+  #  - name: Perform initial build
+  #    ansible.builtin.include_role: initial-build
+  #    apply: 
+  #      delegate_to: "{{ vmname }}"
+  #  - name: Install notifiers
+  #    ansible.builtin.include_role: notifiers
+  #    apply: 
+  #      delegate_to: "{{ vmname }}"
+  #  - name: Create my user
+  #    ansible.builtin.include_role: my-user
+  #    apply: 
+  #      delegate_to: "{{ vmname }}"
+  #  - name: Setup my home
+  #    ansible.builtin.include_role: my-home
+  #    apply: 
+  #      delegate_to: "{{ vmname }}"
+#  handlers:
+#  - name: Restart sshd
+#    ansible.builtin.service:
+#      name: sshd
+#      state: reloaded

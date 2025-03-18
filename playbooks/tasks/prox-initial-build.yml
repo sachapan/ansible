@@ -1,0 +1,13 @@
+---
+- name: Perform initial build
+  ansible.builtin.include_role:
+    name: initial-build
+- name: Install notifiers
+  ansible.builtin.include_role:
+    name: notifiers
+- name: Create my user
+  ansible.builtin.include_role:
+    name: my-user
+- name: Setup my home
+  ansible.builtin.include_role:
+    name: my-home
