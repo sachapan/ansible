@@ -1,0 +1,19 @@
+---
+- hosts: all
+  tasks:
+    - name: Perform initial build
+      ansible.builtin.include_role: initial-build
+      apply: 
+        delegate_to: "{{ vmname }}"
+    - name: Install notifiers
+      ansible.builtin.include_role: notifiers
+      apply: 
+        delegate_to: "{{ vmname }}"
+    - name: Create my user
+      ansible.builtin.include_role: my-user
+      apply: 
+        delegate_to: "{{ vmname }}"
+    - name: Setup my home
+      ansible.builtin.include_role: my-home
+      apply: 
+        delegate_to: "{{ vmname }}"
