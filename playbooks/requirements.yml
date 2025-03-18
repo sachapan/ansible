@@ -2,5 +2,5 @@ collections:
   - ansible.posix
   - community.general
   - community.docker
-  - community.geerlingguy.node_exporter
+    #  - community.geerlingguy.node_exporter
 
