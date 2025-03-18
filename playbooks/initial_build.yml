@@ -41,12 +41,12 @@
     - name: Call notifiers task book
       ansible.builtin.import_tasks: tasks/notifiers.yml
       tags: notifiers
-    - name: Setup my user
-      ansible.builtin.import_tasks: tasks/my-user.yml
-    - name: Setup my home sweet HOME
-      ansible.builtin.import_tasks: tasks/my-home.yml
-      become_user: "{{ user.name }}"
-      tags: home
+        #- name: Setup my user
+        #ansible.builtin.import_tasks: tasks/my-user.yml
+        #- name: Setup my home sweet HOME
+        #ansible.builtin.import_tasks: tasks/my-home.yml
+        #become_user: "{{ user.name }}"
+        #tags: home
     - name: Change some root defaults
       ansible.builtin.import_tasks: tasks/fix_root.yml
       tags: root
@@ -67,6 +67,9 @@
 #      ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
 #    - name: Configure ssh
 #      ansible.builtin.import_playbook: ssh.yml 
+  roles:
+    - my-user
+    - my-home
   handlers:
     - name: Restart sshd
       ansible.builtin.service:
