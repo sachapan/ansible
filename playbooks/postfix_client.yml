@@ -1,31 +1,33 @@
 ---
 - hosts: postfixclients
   become: true
-  vars_files:
-    vars/main.yml
-  tasks:
-    - name: Install apps
-      ansible.builtin.package:
-        name: postfix
-        state: latest
-        update_cache: true
-    - name: Remove default blank relay
-      ansible.builtin.lineinfile:
-        path: "/etc/postfix/main.cf"
-        state: absent
-        line: "{{ item }}"
-      with_items:
-        - "relayhost ="
-        - "relayhost = razor"
-        - "relayhost = razor.lan"
-    - name: set relay to vulture
-      ansible.builtin.lineinfile:
-        path: "/etc/postfix/main.cf"
-        state: present
-        line: "{{ item }}"
-      with_items:
-        - "relayhost = vulture.databytes.me"
-    - name: restart postfix
-      ansible.builtin.service:
-        name: postfix
-        state: restarted 
+    #vars_files:
+    #vars/main.yml
+  roles:
+    - postfix_relay
+      #  tasks:
+      #    - name: Install apps
+      #      ansible.builtin.package:
+      #        name: postfix
+      #        state: latest
+      #        update_cache: true
+      #    - name: Remove default blank relay
+      #      ansible.builtin.lineinfile:
+      #        path: "/etc/postfix/main.cf"
+      #        state: absent
+      #        line: "{{ item }}"
+      #      with_items:
+      #        - "relayhost ="
+      #        - "relayhost = razor"
+      #        - "relayhost = razor.lan"
+      #    - name: set relay to vulture
+      #      ansible.builtin.lineinfile:
+      #        path: "/etc/postfix/main.cf"
+      #        state: present
+      #        line: "{{ item }}"
+      #      with_items:
+      #        - "relayhost = vulture.databytes.me"
+      #    - name: restart postfix
+      #      ansible.builtin.service:
+      #        name: postfix
+      #        state: restarted 
