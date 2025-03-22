@@ -27,8 +27,8 @@ groups:
   proxmox_usable: (proxmox_status == "running") and ('linux' in (proxmox_tags|split(';'))) and (( proxmox_vmtype == "lxc" ) or ( proxmox_vmtype == "qemu" and proxmox_agent == "1" ))
 #  webservers: "'web' in (proxmox_tags_parsed|list)"
 #  mailservers: "'mail' in (proxmox_tags_parsed|list)"
-compose:
-  ansible_host: proxmox_net0["ip"].split('/')[0] if 'ip' in proxmox_net0 else proxmox_agent_interfaces[1]["ip-addresses"][0].split('/')[0] #
+#compose:
+#  ansible_host: proxmox_net0["ip"].split('/')[0] if 'ip' in proxmox_net0 else proxmox_agent_interfaces[1]["ip-addresses"][0].split('/')[0] #
   # ansible_port: 2222
 want_proxmox_nodes_ansible_host: true
 
