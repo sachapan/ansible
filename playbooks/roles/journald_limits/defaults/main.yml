@@ -1,0 +1,3 @@
+---
+# defaults file for journald-limits
+journal_max: 500M

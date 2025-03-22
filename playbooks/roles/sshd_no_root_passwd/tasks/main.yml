@@ -1,0 +1,10 @@
+---
+# tasks file for sshd_no_root_passwd
+- name: Disable ssh password authentication for root
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regexp: "^#?PermitRootLogin"
+    line: "PermitRootLogin prohibit-password"
+  notify:
+    - Restart sshd

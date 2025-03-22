@@ -1,0 +1,86 @@
+---
+# defaults file for std-packages
+packages:
+  lmde:
+    - bat
+    - btop
+    - cmdtest
+    - curl
+    - etckeeper
+    - file
+    - fonts-powerline
+    - fzf
+    - git
+    - htop
+    - mailutils
+    - neofetch
+    - nodejs
+    - npm
+    - python3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - yarn
+    - zsh
+  debian:
+    - bat
+    - btop
+    - cmdtest
+    - curl
+    - etckeeper
+    - file
+    - fonts-powerline
+    - fzf
+    - git
+    - htop
+    - mailutils
+    - neofetch
+    - nodejs
+    - npm
+    - python3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - yarn
+    - zsh
+  alpine:
+    - curl
+    - etckeeper
+    - file
+    - fzf
+    - git
+    - htop
+    - neofetch
+    - npm
+    - perl
+    - py3-pip
+    - smartmontools
+    - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - yarn
+    - zsh
+  redhat:
+    - curl
+    - etckeeper
+    - file
+    - powerline-fonts
+    - git
+    - htop
+    - neofetch
+    - python3-pip
+    - smartmontools
+    # - speedtest-cli
+    - sudo
+    - tmux
+    - vim
+    - yamllint
+    - zsh

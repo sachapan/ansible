@@ -1,0 +1,6 @@
+---
+# handlers file for sshd_no_root_passwd
+- name: Restart sshd
+  ansible.builtin.service:
+    name: sshd
+    state: reloaded

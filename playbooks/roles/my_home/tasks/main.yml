@@ -1,0 +1,109 @@
+---
+- name: Apply my home settings and config files.
+  become: true
+  become_user: "{{ user.name }}"
+  block:
+    - name: Ensure some home sub-directories are present
+      ansible.builtin.file:
+        path: "$HOME/{{ item.dir }}"
+        state: directory
+        owner: "{{ user.name }}"
+          #        group: users
+        mode: "{{ item.mode }}"
+      loop: "{{ config_dirs }}"
+#    - name: Ensure HOME/.config exists
+#      ansible.builtin.file:
+#        path: $HOME/.config
+#        state: directory
+#        owner: "{{ user.name }}"
+#        group: users
+#        mode: "0700"
+#        # changed_when: false
+    - name: Copy $HOME files not under version control
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode }}"
+      loop: "{{ config_files }}"
+      changed_when: false
+      tags: config_files
+#    - name: Remove github.com ssh server key since it changes often
+#      ansible.builtin.known_hosts:
+#        path: $HOME/.ssh/known_hosts
+#        name: github.com
+#        state: absent
+#    - name: Obtain latest github.com ssh host key
+#      ansible.builtin.shell:
+#        cmd: ssh-keyscan github.com 2>/dev/null
+#      register: github_key
+#    - name: And stick it into known_hosts
+#      ansible.builtin.known_hosts:
+#        key: "{{ github_key }}"
+#        name: "github.com"
+    - name: Clone oh-my-zsh
+      ansible.builtin.git:
+        repo: "{{ zsh_repo }}"
+        # "https://github.com/ohmyzsh/ohmyzsh.git"
+        dest: $HOME/.oh-my-zsh
+        update: true
+        accept_newhostkey: yes
+        force: true
+    - name: Add zsh-autosuggestions to oh-my-zsh customizations
+      ansible.builtin.git:
+        repo: "https://github.com/zsh-users/zsh-autosuggestions"
+        dest: $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        accept_newhostkey: yes
+    - name: Add zsh-syntax-highlighting to oh-my-zsh customizations
+      ansible.builtin.git:
+        repo: "https://github.com/zsh-users/zsh-syntax-highlighting"
+        dest: $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+        accept_newhostkey: yes
+    - name: Clone my scripts
+      ansible.builtin.git:
+        repo: "git@github.com:sachapan/scripts.git"
+        # version: main
+        update: true
+        force: true
+        dest: $HOME/bin
+        accept_newhostkey: yes
+      tags: scripts
+      changed_when: false
+    - name: Clone my dotfiles from git - First purge clone
+      ansible.builtin.file:
+        path: $HOME/.dotfiles.git
+        state: absent
+    - name: Clone my dotfiles into a bare repo
+      ansible.builtin.git:
+        repo: "https://github.com/sachapan/dotfiles.git"
+        dest: "$HOME/.dotfiles.git"
+        version: main
+        bare: true
+        clone: true
+        update: true
+        force: true
+        accept_newhostkey: yes
+    # - name: Don't show untracked files in this repo
+    #  ansible.builtin.command: "{
+    #    { dotfiles }} config --local status.showUntrackedFiles no"
+    - name: Copy my git config for dotfiles.
+      ansible.builtin.copy:
+        src: "dotfiles.config"
+        dest: "$HOME/.dotfiles.git/config"
+        mode: "0600"
+      tags: dotfiles_config
+    - name: Remove default dotfiles
+      ansible.builtin.file:
+        path: "$HOME/{{ item }}"
+        state: absent
+      loop: "{{ remove_files }}"
+    - name: Drop in my preferred dotfiles from git
+      ansible.builtin.command: "{{ dotfiles }} checkout -f"
+      changed_when: false
+    - name: Clone vim-plug
+      get_url:
+        dest: "$HOME/.vim/autoload/"
+        url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+#    - name: Clone tmux.conf from https://github.com/gpakosz/.tmux/
+#      ansible.builtin.git:
+#        repo: "https://github.com/gpakosz/.tmux.git"
+#        dest: "$HOME/.tmux"
