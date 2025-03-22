@@ -1,13 +1,26 @@
 ---
-- name: Perform initial build
+- name: Set TimeZone
   ansible.builtin.include_role:
-    name: initial-build
+    name: timezone
+- name: Install standard packages
+  ansible.builtin.include_role:
+    name: std_packages
+- name: Disable ipv6
+  ansible.builtin.include_role:
+    name:
+      disable_ipv6
+      #- name: Perform initial build
+      #ansible.builtin.include_role:
+      #name: initial-build
 - name: Install notifiers
   ansible.builtin.include_role:
     name: notifiers
 - name: Create my user
   ansible.builtin.include_role:
-    name: my-user
+    name: my_user
 - name: Setup my home
   ansible.builtin.include_role:
-    name: my-home
+    name: my_home
+- name: Disable root ssh login with password
+  ansible.builtin.include_role:
+    name: sshd_no_root_passwd
