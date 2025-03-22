@@ -204,30 +204,20 @@ trumpet
 
 [rasps]
 vulture
-#[arch]
-#arch1
 
 [alpine]
-#alpine1
-#alpine2
 alpine3
-#alpine5
-#aptest1
 sentry
 trumpet
 
 [debian]
-#atat
 bravo
-jellyfin
 docker1
 docker2
-#docker3
 mojave
 impala
 gazelle
 eagle
-#hare
 lemur
 wolf
 moose
