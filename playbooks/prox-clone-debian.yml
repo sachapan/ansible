@@ -48,9 +48,26 @@
         name: "{{ vmname }}"
         node: pve2
         state: restarted
+#    - name: Wait for VM to be running after restart
+#      community.general.proxmox_kvm:
+#        api_user: "{{ proxmox_api_user }}"
+#        api_host: "{{ proxmox_api_host }}"
+#        api_token_id: "{{ proxmox_api_token_id }}"
+#        api_token_secret: "{{ proxmox_api_token_secret }}"
+#        name: "{{ vmname }}"
+#        node: pve2
+#        state: current
+#      register: vm_state
+#      until: vm_state.status == "running"
+#      retries: 10
+#      delay: 10
     - name: Wait for vm to restart.
       ansible.builtin.wait_for:
-        timeout: 12
+        port: 22
+        host: '{{ vmname }}'
+        search_regex: OpenSSH
+        delay: 8
+        #timeout: 12
       delegate_to: localhost
 #- name: Initial build.
 #  ansible.builtin.import_playbook: initial_build.yml
@@ -62,7 +79,7 @@
 #        tasks/fix_ping.yml
 #      when: ansible_virtualization_type == "lxc"
   post_tasks:
-    - name: Perform initial build
+    - name: Perform initial build on "{{ vmname }}"
       ansible.builtin.import_tasks: tasks/prox-initial-build.yml
       delegate_to: "{{ vmname }}"
     #block:
