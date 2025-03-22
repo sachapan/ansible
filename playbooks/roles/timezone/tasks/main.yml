@@ -1,0 +1,16 @@
+---
+# tasks file for timezone
+- name: Install locales package on Ubuntu
+  ansible.builtin.package:
+    name: "locales"
+    state: latest
+    update_cache: true
+  when: ansible_facts['distribution'] == "Ubuntu"
+- name: Install tzdata
+  ansible.builtin.package:
+    name: tzdata
+    state: latest
+    update_cache: true
+- name: Set TimeZone to "{{ time_zone }}"
+  community.general.timezone:
+    name: "{{ time_zone }}"

@@ -1,0 +1,4 @@
+---
+# defaults file for postfix_relay
+oldrelay: razor
+relay: vulture.databytes.me
