@@ -17,3 +17,18 @@ token_secret: !vault |
           6339343265376463320a396633313761343134663637633334366232303663306563626464393534
           65663831376334663965363733366164373437326135306666316237333732663165656231636365
           6132613164316237653537323039373232346563666533313430
+want_facts: true
+keyed_groups:
+  - key: proxmox_tags_parsed
+    separator: ""
+    prefix: prox_
+groups:
+  proxmox_use_agent: proxmox_agent == "1"
+  proxmox_usable: (proxmox_status == "running") and ('linux' in (proxmox_tags|split(';'))) and (( proxmox_vmtype == "lxc" ) or ( proxmox_vmtype == "qemu" and proxmox_agent == "1" ))
+#  webservers: "'web' in (proxmox_tags_parsed|list)"
+#  mailservers: "'mail' in (proxmox_tags_parsed|list)"
+compose:
+  ansible_host: proxmox_net0["ip"].split('/')[0] if 'ip' in proxmox_net0 else proxmox_agent_interfaces[1]["ip-addresses"][0].split('/')[0] #
+  # ansible_port: 2222
+want_proxmox_nodes_ansible_host: true
+
