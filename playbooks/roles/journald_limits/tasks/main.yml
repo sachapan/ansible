@@ -8,3 +8,4 @@
   with_items:
     - "SystemMaxUse= {{ journal_max }}"
   notify: Restart journald
+

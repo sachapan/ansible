@@ -1,6 +1,6 @@
 ---
 # handlers file for journald-limits
-- name: restart journald
+- name: Restart journald
   ansible.builtin.service:
-    name: journald
+    name: systemd-journald
     state: restarted
