@@ -1,8 +1,8 @@
 ---
 # tasks file for initial-build
 
-- name: Set time zone
-  ansible.builtin.import_tasks: timezone.yml
+#- name: Set time zone
+#  ansible.builtin.import_tasks: timezone.yml
 
 - name: Install required system packages "{{ packages[ansible_os_family | lower] }}"
   ansible.builtin.import_tasks: packages.yml
