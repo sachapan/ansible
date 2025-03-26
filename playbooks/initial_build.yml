@@ -8,39 +8,39 @@
   vars_files:
     vars/main.yml
   tasks:
-    - name: Install locales package
-      ansible.builtin.package:
-        name: "locales"
-        state: latest
-        update_cache: true
-      when: ansible_facts['distribution'] == "Ubuntu"
+    #    - name: Install locales package
+    #      ansible.builtin.package:
+    #        name: "locales"
+    #        state: latest
+    #        update_cache: true
+    #      when: ansible_facts['distribution'] == "Ubuntu"
     #    - name: Set locale
     #  ansible.builtin.import_tasks:
     #    tasks/locale.yml
     #  tags: locale
     #   when: ansible_os_family != "Alpine"
-    - name: Set timezone
-      ansible.builtin.import_tasks:
-        tasks/timezone.yml
+    #    - name: Set timezone
+    #      ansible.builtin.import_tasks:
+    #        tasks/timezone.yml
     #- name: Enable epel-release repo on Rocky
     #  ansible.builtin.package:
     #    name: epel-release
     #    state: present
     #  when: ansible_os_family == "Rocky"
-    - name: Install preferred packages on Debian, Alpine systems.
+    #- name: Install preferred packages on Debian, Alpine systems.
       #      and RedHat based systems.
-      ansible.builtin.import_tasks: tasks/install-packages.yml
-      tags: packages
+      #ansible.builtin.import_tasks: tasks/install-packages.yml
+      #tags: packages
       # ansible.builtin.package:
       #  name: "{{ packages[ansible_os_family | lower] }}"
       #  state: latest
       #  update_cache: true
-    - name: Update packages
-      ansible.builtin.import_tasks:
-        tasks/debian-patch.yml
-    - name: Call notifiers task book
-      ansible.builtin.import_tasks: tasks/notifiers.yml
-      tags: notifiers
+#    #- name: Update packages
+#    #  ansible.builtin.import_tasks:
+#    #    tasks/debian-patch.yml
+#    #- name: Call notifiers task book
+#    #  ansible.builtin.import_tasks: tasks/notifiers.yml
+#    #  tags: notifiers
         #- name: Setup my user
         #ansible.builtin.import_tasks: tasks/my-user.yml
         #- name: Setup my home sweet HOME
@@ -60,16 +60,20 @@
     - name: Enable dragon motd on select hosts.
       ansible.builtin.import_tasks: tasks/dragon_motd.yml
       when: inventory_hostname in groups["dragon_motd"]
-    - name: adjust journald config
-      ansible.builtin.import_tasks: tasks/journald_limit.yml
-      when: ansible_os_family != "Alpine"
+#    - name: adjust journald config
+#      ansible.builtin.import_tasks: tasks/journald_limit.yml
+#      when: ansible_os_family != "Alpine"
 #    - name: Disable ssh password login for root
 #      ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
 #    - name: Configure ssh
 #      ansible.builtin.import_playbook: ssh.yml 
   roles:
-    - my-user
-    - my-home
+    - timezone
+    - std_packages
+    - notifiers
+    - my_user
+    - my_home
+    - journald_limits
   handlers:
     - name: Restart sshd
       ansible.builtin.service:
