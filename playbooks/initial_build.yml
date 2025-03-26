@@ -73,6 +73,7 @@
     - notifiers
     - my_user
     - my_home
+    - vi_default
     - journald_limits
   handlers:
     - name: Restart sshd
