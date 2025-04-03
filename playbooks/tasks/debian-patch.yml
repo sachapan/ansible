@@ -5,4 +5,9 @@
     autoremove: yes
     clean: yes
     cache_valid_time: 86400 #one day
+  register: upgrade_output
+- name: Update output
+  debug:
+    msg: "{{ upgrade_output }}"
+
 
