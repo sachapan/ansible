@@ -3,4 +3,5 @@ collections:
   - community.general
   - community.docker
     #  - community.geerlingguy.node_exporter
-
+roles:
+  - hlovdal.etckeeper_actions
