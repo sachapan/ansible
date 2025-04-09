@@ -3,10 +3,8 @@
 
 ## Resources
 
+Obtain DHCP IP address assignment of a [newly deployed vm](https://www.reddit.com/r/ansible/comments/16fnyz2/get_dhcp_ip_address_of_a_new_proxmox_vm_in_ansible/)
 <details>
-<summary>[Obtain DHCP IP address assignment of a newly deployed vm] (https://www.reddit.com/r/ansible/comments/16fnyz2/get_dhcp_ip_address_of_a_new_proxmox_vm_in_ansible/)  
-</summary>
-
 ```
     - name: Create Container  
       delegate_to: localhost
