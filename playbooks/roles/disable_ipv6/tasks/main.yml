@@ -11,4 +11,6 @@
     - "net.ipv6.conf.lo.disable_ipv6=1"
 
 - name: Apply ipv6 disabled configuration
-  ansible.builtin.shell: sysctl -p
+  # ansible.builtin.shell: sysctl -p
+  ansible.builtin.command: sysctl -p
+  changed_when: false
