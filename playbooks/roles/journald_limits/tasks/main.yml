@@ -1,5 +1,4 @@
 ---
-# tasks file for journald-limits
 - name: Set journald max to "{{ journal_max }}"
   ansible.builtin.lineinfile:
     path: "/etc/systemd/journald.conf"
@@ -8,4 +7,3 @@
   with_items:
     - "SystemMaxUse= {{ journal_max }}"
   notify: Restart journald
-
