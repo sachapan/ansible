@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: std_packages
   author: Sacha Panasuik
   description: "Install standard packages." 
   license: MIT
