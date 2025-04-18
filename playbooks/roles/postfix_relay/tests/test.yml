@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: Tests for postfix_relay role.
+  hosts: localhost
   remote_user: root
   roles:
     - postfix_relay
