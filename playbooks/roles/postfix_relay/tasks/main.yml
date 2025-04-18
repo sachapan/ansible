@@ -13,7 +13,7 @@
   with_items:
     - "relayhost ="
     - 'relayhost = "{{ oldrelay }}"'
-- name: Set relay 
+- name: Set relay
   ansible.builtin.lineinfile:
     path: "/etc/postfix/main.cf"
     state: present
