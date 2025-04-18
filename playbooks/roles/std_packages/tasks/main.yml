@@ -3,5 +3,5 @@
 - name: Install required system packages
   ansible.builtin.package:
     name: "{{ packages[ansible_os_family | lower] }}"
-    state: latest
+    state: latest # noqa package-latest
     update_cache: true
