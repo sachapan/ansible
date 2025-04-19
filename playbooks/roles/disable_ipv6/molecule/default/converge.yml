@@ -3,6 +3,8 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Replace this task with one that validates your content
-      ansible.builtin.debug:
-        msg: "This is the effective test"
+    - name: Check sysctl for net.ipv6.conf.all.disable_ipv6
+      ansible.posix.sysctl:
+        name: net.ipv6.conf.all.disable_ipv6
+        value: '1'
+      # checkmode: true
