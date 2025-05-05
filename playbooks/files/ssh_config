@@ -1,3 +1,6 @@
+Host *
+    StrictHostKeyChecking accept-new
+
 Host github.com
  CheckHostIP = no
  HostName github.com
