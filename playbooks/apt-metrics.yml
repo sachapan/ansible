@@ -1,5 +1,4 @@
 # TODO Currently assumes node_exporter has already been installed - BAD
-
 ---
 - name: Install apt package status monitoring for node_exporter ingestion
   hosts: node_exporter
@@ -20,12 +19,12 @@
         - "/usr/lib/python3/EXTERNALLY-MANAGED"
         - "/usr/lib/python3.11/EXTERNALLY-MANAGED"
         - "/usr/lib/python3.12/EXTERNALLY-MANAGED"
-          #- name: Ensure pip is installed
-          #  ansible.builtin.apt:
-          #    name: 
-          #      - python3-pip
-          #    update_cache: true
-      when: ansible_facts['distribution'] == 'Debian' 
+          # - name: Ensure pip is installed
+          #   ansible.builtin.apt:
+          #     name:
+          #       - python3-pip
+          #     update_cache: true
+      when: (ansible_facts['distribution'] == 'Debian') or (ansible_facts['distribution'] == 'LMDE')
     - name: Install required packages on Debian
       ansible.builtin.apt:
         name:
@@ -34,8 +33,9 @@
           - apt-config-auto-update
           - python3-prometheus-client
         update_cache: true
-      when: 
-        - ansible_facts['distribution'] == "Debian" or
+      when:
+        - (ansible_facts['distribution'] == "Debian") or
+          (ansible_facts['distribution'] == 'LMDE') or
           ( ansible_facts['distribution'] == 'Ubuntu' and
           ansible_facts['distribution_major_version'] < "24")
     - name: Install required packages on Ubuntu 24
@@ -44,24 +44,20 @@
           - moreutils
           - update-notifier-common
           - python3-prometheus-client
-      when: 
+      when:
         - ansible_distribution == "Ubuntu"
         - ansible_distribution_major_version == "24"
 #    - name: Install prometheus_client with pip on Debian
 #      ansible.builtin.pip:
-#        name: 
+#        name:
 #          - prometheus_client
-#      when: ansible_distribution == "Debian"
+#      when: (ansible_distribution == "Debian") or
+#            (ansible_distribution == "LMDE")
     - name: Install apt-info script
       ansible.builtin.copy:
         src: "files/apt-info"
         dest: "/usr/local/bin/apt-info"
         mode: '0755'
-#    - name: Ensure stats collection directory exists
-#      ansible.builtin.file:
-#        path: "{ node_exporter_textfile_dir }" 
-#        state: directory
-#        mode: '0755'
     - name: Remove legacy stats collection directory /var/log/proms
       ansible.builtin.file:
         path: /var/log/proms/
@@ -70,10 +66,12 @@
       ansible.builtin.copy:
         src: "files/apt.conf.d_10periodic"
         dest: "/etc/apt/apt.conf.d/10periodic"
+        mode: '0755'
     - name: Export package list on apt update
       ansible.builtin.copy:
         src: "files/apt.conf.d_60prometheus-metrics"
         dest: "/etc/apt/apt.conf.d/60prometheus-metrics"
+        mode: '0755'
     - name: Restart node_exporter
       ansible.builtin.service:
         name: node_exporter
