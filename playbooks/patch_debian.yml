@@ -1,10 +1,11 @@
 ---
 - name: Upgrade debian hosts
-  hosts: all
+  hosts: debian
   become: yes
+  strategy: free
   tasks:
   - name: Apply all patches, update cache and autoremove defunct packages
     ansible.builtin.import_tasks:
       tasks/debian-patch.yml
-    when: ansible_facts['distribution'] == 'Debian'
+    when: ansible_facts['os_family'] == 'Debian'
 
