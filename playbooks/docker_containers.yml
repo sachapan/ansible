@@ -1,0 +1,14 @@
+---
+- name: Running docker containers
+  hosts: docker_hosts
+  become: true
+  vars_files:
+    vars/main.yml
+  tasks:
+    - name: Get running containers
+      pytoccaz.docker.docker_ps:
+      register: containers_list
+    - name: Show results
+      ansible.builtin.debug:
+        var: containers_list.stdout_lines
+          #verbosity: 2
