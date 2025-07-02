@@ -18,10 +18,11 @@
         api_token_secret: "{{ proxmox_api_token_secret }}"
         clone: "debian-template"
         name: "{{ vmname }}"
+        # node: pve2
         node: pve2
         # storage: zpool1
         # format: qcow2
-        onboot: true
+        onboot: yes
         # clone_type: full
         tags: cloned
         # reboot: true
