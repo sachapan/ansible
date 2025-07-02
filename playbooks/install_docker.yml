@@ -1,10 +1,22 @@
 ---
-- name: install Docker
+- name: Install Docker
   hosts: docker_hosts
   become: true
   vars_files:
     vars/main.yml
   tasks:
+    - name: Reset ansible_distribution on LMDE
+      ansible.builtin.set_fact:
+        ansible_distribution: "Debian"
+      when: ansible_distribution == "LMDE"
+    - name: Show new ansible_distribution
+      ansible.builtin.debug:
+        msg: "{{ ansible_distribution }}"
+    - name: Reset ansible_distribution_release on LMDE
+      ansible.builtin.set_fact:
+        ansible_distribution_release: "bookworm"
+      when: ansible_distribution_release == "faye"
+     
     - name: Install apt-transport-https
       ansible.builtin.apt:
         name:
@@ -36,14 +48,14 @@
     - name: Add repository into sources list
       ansible.builtin.apt_repository:
         filename: docker
-          #repo: "deb [arch={{ ansible_architecture }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+        # repo: "deb [arch={{ ansible_architecture }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
         repo: "deb [arch={{ docker_apt_arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable"
         state: present
     - name: Install Docker
       ansible.builtin.apt:
         name:
-          #- docker
-          #- docker.io
+          # - docker
+          # - docker.io
           - docker-ce
           - docker-compose
           - docker-registry
@@ -61,7 +73,6 @@
         name: "{{ user.name }}"
         groups: docker
         append: true
-
     - name: Do my docker things
-      ansible.builtin.import_tasks: tasks/my-docker.yml 
+      ansible.builtin.import_tasks: tasks/my-docker.yml
       tags: my-docker
