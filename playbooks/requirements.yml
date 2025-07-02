@@ -5,3 +5,4 @@ collections:
     #  - community.geerlingguy.node_exporter
 roles:
   - hlovdal.etckeeper_actions
+  - chriswayg.etckeeper
