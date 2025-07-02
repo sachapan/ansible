@@ -96,7 +96,7 @@ gazelle
 impala
 bravo
 mojave
-lemur
+#lemur
 mule
 wolf
 moose
@@ -111,6 +111,8 @@ bravo
 wolf
 moose
 vulture
+bolt
+slave1
 
 [ubuntu]
 tuna
@@ -143,7 +145,7 @@ wilma
 barney
 betty
 #hare
-lemur
+#lemur
 gitea
 
 [piholes_guest]
@@ -219,7 +221,6 @@ mojave
 impala
 gazelle
 eagle
-lemur
 wolf
 moose
 slave1
