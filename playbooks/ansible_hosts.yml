@@ -1,3 +1,4 @@
+---
 - name: Configure ansible management nodes
   hosts: ansible_hosts 
   gather_facts: true
@@ -10,8 +11,8 @@
     - name: Clone my ansible stuff
       ansible.builtin.include_tasks: tasks/clone_ansible.yml
     - name: Configure githooks
-      ansible.builtin.copy
+      ansible.builtin.copy:
         src: "files/ansible_git_config"
-        dest; "$HOME/ansible/git"
+        dest: "$HOME/ansible/git"
       tags: ansible-git
 
