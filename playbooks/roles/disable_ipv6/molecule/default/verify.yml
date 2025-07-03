@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Verify IPv6 is disabled
+      sysctl:
+        name: net.ipv6.conf.all.disable_ipv6
+        value: 1
+        state: present
+        reload: no
+      # register: sysctl_result
+
+    # - name: show result
+    #   debug:
+    #     msg:
+    #       - "sysctl_result"
+    # - name: Check if IPv6 is disabled
+    #   fail:
+    #     msg: "IPv6 is not disabled. net.ipv6.conf.all.disable_ipv6 is not set to 1."
+    #   when: not sysctl_result.changed and not sysctl_result.result.value | string == "1"
