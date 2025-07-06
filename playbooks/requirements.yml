@@ -7,3 +7,4 @@ roles:
   - hlovdal.etckeeper_actions
   - chriswayg.etckeeper
   - sachapan.journald
+  - sachapan.disableipv6
