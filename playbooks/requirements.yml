@@ -6,3 +6,4 @@ collections:
 roles:
   - hlovdal.etckeeper_actions
   - chriswayg.etckeeper
+  - sachapan.journald

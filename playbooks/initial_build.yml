@@ -60,9 +60,6 @@
     - name: Enable dragon motd on select hosts.
       ansible.builtin.import_tasks: tasks/dragon_motd.yml
       when: inventory_hostname in groups["dragon_motd"]
-#    - name: adjust journald config
-#      ansible.builtin.import_tasks: tasks/journald_limit.yml
-#      when: ansible_os_family != "Alpine"
 #    - name: Disable ssh password login for root
 #      ansible.builtin.include_tasks: tasks/disable_root_sshd_pass.yml
 #    - name: Configure ssh
@@ -74,7 +71,7 @@
     - my_user
     - my_home
     - vi_default
-    - journald_limits
+    - sachapan.journald
   handlers:
     - name: Restart sshd
       ansible.builtin.service:
