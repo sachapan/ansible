@@ -1,6 +1,7 @@
 collections:
   - ansible.posix
   - community.general
+  - community.proxmox
   - community.docker
     #  - community.geerlingguy.node_exporter
 roles:
@@ -8,3 +9,4 @@ roles:
   - chriswayg.etckeeper
   - sachapan.journald
   - sachapan.disableipv6
+  - sachapan.postfixrelay
