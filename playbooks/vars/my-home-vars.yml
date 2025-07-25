@@ -1,5 +1,4 @@
 ---
-# remote_user: sacha
 user:
   name: sacha
   ID: 501
@@ -13,10 +12,8 @@ config_files:
   - { src: "~/.ssh/id_rsa_gitea.pub", dest: "$HOME/.ssh/id_rsa_gitea.pub", mode: "0600" }
   - { src: "~/.ssh/id_rsa_github2", dest: "$HOME/.ssh/id_rsa_github2", mode: "0600" }
   - { src: "../files/known_hosts", dest: "$HOME/.ssh/known_hosts", mode: "0600" }
-  #- { src: "../files/.gitconfig", dest: "$HOME/.gitconfig", mode: "0600" }
   - { src: "../files/authorized_keys", dest: "$HOME/.ssh/authorized_keys", mode: "0600" }
 
-#
 #copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa_github.pub') }}"
 copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
 #copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa_github') }}"
