@@ -1,0 +1,31 @@
+# install and enable pwrstat-exporter for exposing CyberPower UPS stats to Prometheus
+#
+# Install pwrstat
+# Install pwrstat-exporter
+# # Enable pwrstat-exporter systemd service
+#
+---
+#- name: Deploy pwrstat-exporter service 
+- hosts: pwrstat_exporter 
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Copy pwrstat-exporter to /usr/local/bin/pwrstat-exporter
+      ansible.builtin.copy:
+        src: files/pwrstat-exporter
+        dest: /usr/local/bin/pwrstat-exporter
+        owner: root
+        group: root
+        mode: '0755'
+    - name: Drop in pwrstat systemd service.
+      ansible.builtin.copy:
+        src: files/pwrstat_exporter.service
+        dest: /etc/systemd/system/pwrstat_exporter.service
+        owner: root
+        group: root
+        mode: '0755'
+    - name: Enable and start service
+      ansible.builtin.service:
+        name: pwrstat_exporter
+        state: started
+        enabled: yes
