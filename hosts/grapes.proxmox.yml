@@ -1,4 +1,4 @@
-plugin: community.general.proxmox
+plugin: community.proxmox.proxmox
 url: https://pve1.databytes.me:8006
 user: root@pam
 token_id: !vault |
