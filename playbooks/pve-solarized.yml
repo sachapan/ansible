@@ -1,0 +1,9 @@
+---
+
+- name: Install solarized GUI on proxmox
+  hosts: all
+  gather_facts: true
+  become: true
+  remote_user: root
+  roles:
+    - sachapan.pve-solarized

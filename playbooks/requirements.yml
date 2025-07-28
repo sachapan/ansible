@@ -10,3 +10,4 @@ roles:
   - sachapan.journald
   - sachapan.disableipv6
   - sachapan.postfixrelay
+  - sachapan.pve-solarized
