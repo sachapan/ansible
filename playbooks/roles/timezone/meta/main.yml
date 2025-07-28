@@ -1,9 +1,0 @@
-galaxy_info:
-  namespace: sachapan
-  role-name: timezone
-  author: Sacha Panasuik 
-  description: "Set timezone."
-  license: MIT
-  min_ansible_version: 2.1
-  galaxy_tags: []
-dependencies: []
