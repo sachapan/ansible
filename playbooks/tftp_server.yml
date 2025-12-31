@@ -1,0 +1,101 @@
+---
+- name: Install tftp server
+  hosts: prox_tftpd
+  become: true
+  strategy: free
+  serial:
+    - "100%"
+  vars:
+    pxe_files:
+      - src: "/usr/lib/PXELINUX/pxelinux.0"
+        dest: "/srv/tftp"
+      - src: "/usr/lib/syslinux/modules/bios/vesamenu.c32"
+        dest: "/srv/tftp"
+      - src: "/usr/lib/syslinux/memdisk"
+        dest: "/srv/tftp"
+      - src: "/usr/lib/syslinux/modules/bios/vesamenu.c32"
+        dest: "/srv/tftp"
+      - src: "/usr/lib/syslinux/modules/bios/libcom32.c32"
+        dest: "/srv/tftp"
+      - src: "/usr/lib/syslinux/modules/bios/reboot.c32"
+        dest: "/srv/tftp"
+
+  roles:
+    - role: don_rumata.ansible_role_install_tftpd
+      tftpd_directory: /srv/tftp
+  tasks:
+    - name: Install pxelinux
+      ansible.builtin.package:
+        name: pxelinux
+        state: present
+        update-cache: true
+    - name: Copy pxelinux files
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        remote_src: true
+        mode: "0555"
+      tags: pxe_files
+      loop: "{{ pxe_files }}"
+        # src: /usr/lib/PXELINUX/pxelinux.0
+        # dest: /srv/tftp/pxelinux.0
+        # remote_src: true
+    - name: Install lighttpd
+      ansible.builtin.package:
+        name: lighttpd
+        state: present
+        update-cache: true
+    - name: Symlink tftp
+      ansible.builtin.file:
+        src: /srv/tftp
+        dest: /var/www/html/tftp
+        state: link
+    - name: Download checksum for Debian net-installer.
+      ansible.builtin.get_url:
+        url: https://deb.debian.org/debian/dists/stable/main/installer-amd64/current/images/SHA256SUMS
+        dest: /srv/tftp/SHA256SUMS
+        mode: "0644"
+    - name: Extract checksum for Debian net-installer.
+      ansible.builtin.shell: grep ./netboot/netboot.tar.gz /srv/tftp/SHA256SUMS | awk '{print $1}'
+      register: checksum_result
+      changed_when: false
+    - name: Download debian net-installer.
+      ansible.builtin.get_url:
+        url: https://deb.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/netboot.tar.gz
+        dest: /srv/tftp/netboot.tar.gz
+        mode: "0644"
+        checksum: "sha256:{{ checksum_result.stdout.split()[0] }}"
+    - name: Extract the net-installer.
+      ansible.builtin.unarchive:
+        src: /srv/tftp/netboot.tar.gz
+        dest: /srv/tftp/
+        remote_src: true
+    - name: Remove pxelinux.cfg Symlink
+      ansible.builtin.file:
+        path: /srv/tftp/pxelinux.cfg
+        state: absent
+    - name: Download netboot.xyz.kpxe loader
+      ansible.builtin.get_url:
+        url: https://boot.netboot.xyz/ipxe/netboot.xyz.kpxe
+        dest: /srv/tftp/netboot.xyz.kpxe
+        mode: "0644"
+    - name: Download netboot.xyz.lkrn loader
+      ansible.builtin.get_url:
+        url: https://boot.netboot.xyz/ipxe/netboot.xyz.lkrn
+        dest: /srv/tftp/netboot.xyz.lkrn
+        mode: "0644"
+    - name: Download PopOS checksums
+      ansible.builtin.get_url:
+        url: https://iso.pop-os.org/24.04/amd64/generic/22/SHA256SUMS
+        dest: /srv/tftp/popos_SHA256SUMS
+        mode: "0644"
+    - name: Extract checksum for PoP OS.
+      ansible.builtin.shell: cat /srv/tftp/popos_SHA256SUMS | awk '{print $1}'
+      register: popos_checksum_result
+      changed_when: false
+    - name: Download PopOS 
+      ansible.builtin.get_url:
+        url: https://iso.pop-os.org/24.04/amd64/generic/22/pop-os_24.04_amd64_generic_22.iso
+        dest: /srv/tftp/pop-os_24.04_amd64_generic_22.iso
+        mode: "0644"
+        checksum: "sha256:{{ popos_checksum_result.stdout.split()[0] }}"
