@@ -14,6 +14,7 @@
       - "popos"
       - "mnt"
       - "xubuntu"
+      - "mint"
     pxe_files:
       - src: "/usr/lib/PXELINUX/pxelinux.0"
         dest: "/srv/tftp"
@@ -98,6 +99,11 @@
         dest: /srv/tftp/debian/netboot.tar.gz
         mode: "0644"
         checksum: "sha256:{{ checksum_result.stdout.split()[0] }}"
+    - name: Symlink debian-installer
+      ansible.builtin.file:
+        src: /srv/tftp/debian/debian-installer
+        dest: /srv/tftp/debian-installer
+        state: link
     - name: Extract the net-installer.
       ansible.builtin.unarchive:
         src: /srv/tftp/debian/netboot.tar.gz
@@ -146,8 +152,7 @@
         path: /srv/tftp/mnt
         fstype: iso9660
         opts: ro
-        modify_fstab: false
-        state: mounted
+        state: ephemeral 
     - name: Copy Pop OS pxe boot files
       ansible.builtin.copy:
         src: "{{ item }}"
@@ -161,47 +166,81 @@
       ansible.posix.mount:
         path: /srv/tftp/mnt
         state: unmounted
-        modify_fstab: false
     - name: Download netboot.xyz.lkrn loader
       ansible.builtin.get_url:
         url: https://boot.netboot.xyz/ipxe/netboot.xyz.lkrn
         dest: /srv/tftp/netboot.xyz/netboot.xyz.lkrn
         mode: "0644"
   ## Xubuntu
-    - name: Download Xubuntu checksums
+    # - name: Download Xubuntu checksums
+    #   ansible.builtin.get_url:
+    #     url: https://mirror.csclub.uwaterloo.ca/xubuntu-releases/25.10/release/SHA256SUMS
+    #     dest: /srv/tftp/xubuntu/SHA256SUMS
+    #     mode: "0644"
+    # - name: Extract checksum for Xubuntu
+    #   ansible.builtin.shell: grep minimal-amd64 /srv/tftp/xubuntu/SHA256SUMS | awk '{print $1}'
+    #   register: xubuntu_checksum_result
+    #   changed_when: false
+    # - name: Download Xubuntu
+    #   ansible.builtin.get_url:
+    #     url: https://mirror.csclub.uwaterloo.ca/xubuntu-releases/25.10/release/xubuntu-25.10-minimal-amd64.iso
+    #     dest: /srv/tftp/xubuntu/xubuntu-25.10-minimal-amd64.iso
+    #     mode: "0644"
+    #     checksum: "sha256:{{ xubuntu_checksum_result.stdout.split()[0] }}"
+    # - name: Mount Xubuntu iso
+    #   ansible.posix.mount:
+    #     src: /srv/tftp/xubuntu-25.10-minimal-amd64.iso
+    #     path: /srv/tftp/mnt
+    #     fstype: iso9660
+    #     opts: ro
+    #     state: ephemeral  
+    # - name: Copy Xubuntu pxe boot files
+    #   ansible.builtin.copy:
+    #     src: "{{ item }}"
+    #     dest: /srv/tftp/xubuntu/
+    #     remote_src: true
+    #     mode: "0644"
+    #   loop: 
+    #     - "/srv/tftp/mnt/casper/vmlinuz.efi"
+    #     - "/srv/tftp/mnt/casper/initrd.gz"
+    # - name: Unmount Xubuntu iso
+    #   ansible.posix.mount:
+    #     path: /srv/tftp/mnt
+    #     state: unmounted
+
+  ## Mint 
+    - name: Download Mint checksums
       ansible.builtin.get_url:
-        url: https://mirror.csclub.uwaterloo.ca/xubuntu-releases/25.10/release/SHA256SUMS
-        dest: /srv/tftp/xubuntu/SHA256SUMS
+        url: https://mirror.csclub.uwaterloo.ca/linuxmint/stable/22.2/sha256sum.txt
+        dest: /srv/tftp/mint/SHA256SUMS
         mode: "0644"
-    - name: Extract checksum for Xubuntu
-      ansible.builtin.shell: grep minimal-amd64 /srv/tftp/xubuntu/SHA256SUMS | awk '{print $1}'
-      register: xubuntu_checksum_result
+    - name: Extract checksum for Mint
+      ansible.builtin.shell: grep xfce /srv/tftp/mint/SHA256SUMS | awk '{print $1}'
+      register: mint_checksum_result
       changed_when: false
-    - name: Download Xubuntu
+    - name: Download Mint
       ansible.builtin.get_url:
-        url: https://mirror.csclub.uwaterloo.ca/xubuntu-releases/25.10/release/xubuntu-25.10-minimal-amd64.iso
-        dest: /srv/tftp/xubuntu/xubuntu-25.10-minimal-amd64.iso
+        url: https://mirror.csclub.uwaterloo.ca/linuxmint/stable/22.2/linuxmint-22.2-xfce-64bit.iso
+        dest: /srv/tftp/mint/linuxmint-22.2-xfce-64bit.iso
         mode: "0644"
-        checksum: "sha256:{{ xubuntu_checksum_result.stdout.split()[0] }}"
+        checksum: "sha256:{{ mint_checksum_result.stdout.split()[0] }}"
     - name: Mount Xubuntu iso
       ansible.posix.mount:
-        src: /srv/tftp/xubuntu-25.10-minimal-amd64.iso
+        src: /srv/tftp/mint/linuxmint-22.2-xfce-64bit.iso
         path: /srv/tftp/mnt
         fstype: iso9660
-        modify_fstab: false
         opts: ro
-        state: mounted
-    - name: Copy Xubuntu pxe boot files
+        state: ephemeral
+    - name: Copy Mint pxe boot files
       ansible.builtin.copy:
         src: "{{ item }}"
-        dest: /srv/tftp/xubuntu/
+        dest: /srv/tftp/mint/
         remote_src: true
         mode: "0644"
-      loop: 
-        - "/srv/tftp/mnt/casper/vmlinuz.efi"
-        - "/srv/tftp/mnt/casper/initrd.gz"
-    - name: Unmount Xubuntu iso
+      loop:
+        - "/srv/tftp/mnt/casper/vmlinuz"
+        - "/srv/tftp/mnt/casper/initrd.lz"
+    - name: Unmount Mint iso
       ansible.posix.mount:
         path: /srv/tftp/mnt
         state: unmounted
-        modify_fstab: false
